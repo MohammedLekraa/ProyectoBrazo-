@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const onScroll = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%'; hint.classList.toggle('gone', scrollY > 80); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
   const links = $$('.side-in a');
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-20% 0px -50% 0px' });
   $$('section[id]').forEach(s => io.observe(s));
 
   /* Aparición escalonada */
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const renderPCB = () => Object.entries(PCB).forEach(([k, st]) => {
     const r = $('#pcb-' + k), pre = lang === 'es' ? 'Paso' : 'Step';
-    r.innerHTML = `<div class="st-nav">${st.map((s, i) => `<button>${i + 1} ${T(s[0])}</button>`).join('')}</div><div class="st-bar"><i></i></div>` +
+    r.innerHTML = `<div class="st-nav">${st.map((s, i) => `<button>${i + 1}${T(s[0])}</button>`).join('')}</div><div class="st-bar"><i></i></div>` +
       st.map((s, i) => `<div class="st-p"><div class="pcbs"><figure class="fig" style="margin:0"><img class="zoom" src="${s[2]}" alt="${T(s[0])}"></figure><div><h4>${pre} ${i + 1}: ${T(s[0])}</h4><p>${T(s[1])}</p></div></div></div>`).join('') +
       `<div class="st-ctl"><button class="btn st-prev">&larr; ${lang === 'es' ? 'Anterior' : 'Previous'}</button><button class="btn st-next">${lang === 'es' ? 'Siguiente' : 'Next'} &rarr;</button></div>`;
     $$('img', r).forEach(i => i.addEventListener('error', () => i.setAttribute('data-missing', ''))); stepper(r);
@@ -88,14 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
       '<p>Las piezas rediseñadas se imprimieron en 3D y después se hicieron ajustes manuales de encaje y alineación. Casi todo el brazo es de PLA, un material rígido, fácil de imprimir y estable. Las bisagras de los dedos se imprimieron en TPU, y los dedos se mueven con hilo de nailon de alta resistencia.</p><p>Las primeras bisagras de TPU eran demasiado rígidas y los dedos no se cerraban del todo. Filaflex era demasiado blando, y un TPU más duro era caro y seguía siendo rígido. El problema era el relleno: imprimiendo el TPU con poco relleno se consiguió cerrar los dedos y que vuelvan a la posición inicial.</p><p>Se usaron seis servos digitales DM996 de 15 kg·cm: cinco en la parte posterior del antebrazo para los dedos y uno en la muñeca, que acciona la rotación directamente con engranajes.</p><dl class="specs"><div><dt>Estructura</dt><dd>PLA</dd></div><div><dt>Bisagras</dt><dd>TPU, poco relleno</dd></div><div><dt>Tendones</dt><dd>Hilo de nailon</dd></div><div><dt>Servos</dt><dd>6 × DM996 (15 kg·cm)</dd></div><div><dt>Impresora</dt><dd>[Modelo de impresora]</dd></div></dl>'],
       im: [['img/brazo.jpg', ['Assembled arm', 'Brazo ensamblado']], ['img/bisagras.jpg', ['Flexible finger hinges', 'Bisagras flexibles de los dedos']]] }
   ];
-  let mi = 0; const mdet = $('#mdet');
-  const showMech = i => {
-    mi = i; $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); const d = MD[i];
+  let mi = 0; const mdet = $('#mdet');   const showMech = i => {     mi = i; $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); const d = MD[i];
     mdet.innerHTML = `<div><h3>${T(d.t)}</h3>${T(d.h)}</div><div class="mimgs">${d.im.map(m => `<figure class="fig" style="margin:0;padding:0"><img class="zoom" src="${m[0]}" alt="${T(m[1])}"><figcaption class="mono">${T(m[1])}</figcaption></figure>`).join('')}</div>`;
     mdet.classList.remove('sw'); void mdet.offsetWidth; mdet.classList.add('sw');
-    $$('img', mdet).forEach(im => im.addEventListener('error', () => im.setAttribute('data-missing', '')));
-  };
-  $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
+    $$('img', mdet).forEach(im => im.addEventListener('error', () => im.setAttribute('data-missing', '')));   };   $$
+('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
 
   /* Guante con flechas */
   const CO = [
@@ -106,14 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const g = $('#glove');
   g.insertAdjacentHTML('beforeend', `<svg viewBox="0 0 1000 520" aria-hidden="true"><defs><marker id="ah" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#a8a49a"/></marker></defs>${CO.map(c => `<path data-k="${c.k}" d="${c.d}" marker-end="url(#ah)"/>`).join('')}</svg>`);
   CO.forEach(c => g.insertAdjacentHTML('beforeend', `<button class="cb" data-k="${c.k}" style="left:${c.x}%;top:${c.y}%;width:${c.w}%"></button>`));
-  $$('path', g).forEach(p => p.style.setProperty('--l', Math.ceil(p.getTotalLength())));
-  const hl = (k, on) => $$('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));
-  $$('.cb', g).forEach(b => {
-    b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));
-    b.addEventListener('focus', () => hl(b.dataset.k, true)); b.addEventListener('blur', () => hl(b.dataset.k, false));
-    b.addEventListener('click', () => tabGo[0](b.dataset.k));
-  });
-  const labelCO = () => $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`);
+  $$('path', g).forEach(p => p.style.setProperty('--l', Math.ceil(p.getTotalLength())));   const hl = (k, on) => $$
+('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));
+  $$('.cb', g).forEach(b => {     b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));     b.addEventListener('focus', () => hl(b.dataset.k, true)); b.addEventListener('blur', () => hl(b.dataset.k, false));     b.addEventListener('click', () => tabGo[0](b.dataset.k));   });   const labelCO = () => $$
+('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`);
   const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
 
   /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
@@ -141,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     add('#c-cal', { type: 'bar', data: { labels: T([['Thumb', 'Index', 'Middle', 'Ring', 'Little'], ['Pulgar', 'Índice', 'Corazón', 'Anular', 'Meñique']]), datasets: [{ data: [[1530, 2100], [1530, 2100], [1700, 2300], [1650, 2100], [1730, 2000]], backgroundColor: c1, hoverBackgroundColor: ink, borderRadius: 6, borderSkipped: false }] },
       options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: tip({ title: i => i[0].label, label: i => `minFlex ${i.raw[0]} · maxFlex ${i.raw[1]}`, afterBody: i => [T(['Span: ', 'Recorrido: ']) + (i[0].raw[1] - i[0].raw[0]) + ' ADC'] }) }, scales: { x: { min: 1400, max: 2400, title: { display: true, text: T(['ADC reading (minFlex to maxFlex)', 'Lectura ADC (de minFlex a maxFlex)']) } } } } });
   };
-  $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
+  $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$
+('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
   const adc = $('#adc'), calc = () => { const x = +adc.value; $('#adc-v').textContent = x; $('#adc-a').textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180; };
   adc.addEventListener('input', calc); calc();
 
@@ -150,8 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const frame = $('#frame'); let fi = 0;
   frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
   const showF = i => {
-    fi = i; $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));
-    $('#fdet').innerHTML = i < 5
+    fi = i; $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));$('#fdet').innerHTML = i < 5
       ? (lang === 'es' ? `<h4>Dedo ${FN[i][1]}</h4><p>Lectura del ADC del sensor del ${FN[i][1]} (media de 8 muestras, válida entre 1000 y 3000; si no lo es se repite el último valor correcto). En el brazo se convierte en ángulo con los valores de calibración de ese dedo.</p>`
         : `<h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p>ADC reading of the ${FN[i][0]} sensor (average of 8 samples, valid between 1000 and 3000; if not, the last valid value is repeated). At the arm it is converted into an angle with that finger's calibration values.</p>`)
       : (lang === 'es' ? '<h4>Rotación de la muñeca</h4><p>Ángulo de la muñeca calculado con la IMU y el filtro complementario, con el unwrapping aplicado. Llega ya limitado y escalado al rango del servo (0–180°), así que el brazo solo tiene que aplicarlo.</p>'
@@ -181,8 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     upd();
   };
   function upd() {
-    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;
-    $$('tr[data-i]', tb).forEach(r => {
+    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;     $$('tr[data-i]', tb).forEach(r => {
       const i = +r.dataset.i, p = parts[i], sub = p[2] * (+prices[i] || 0); all += sub; $('.sb', r).textContent = eur(sub);
       const show = (cat === 'all' || p[1] === cat) && norm(parts[i][0].join(' ') + ' ' + T(CAT[p[1]])).includes(q);
       r.hidden = !show; if (show) { tot += sub; n++; }
@@ -195,20 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
   addEventListener('keydown', e => { if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); } });
 
   /* Idioma y tema */
-  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };
-  const applyLang = l => {
-    lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);
-    $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;
-    $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
-    $('#q').placeholder = T(UI.search); setTL(theme);
-    renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();
-  };
-  const applyTheme = t => {
-    theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts();
-  };
-  $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));
-  $('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-  $('.scrollhint').addEventListener('click', e => { e.preventDefault(); $('#start').scrollIntoView({ behavior: 'smooth' }); });
+  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };   const applyLang = l => {     lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);     $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;     $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
+    $('#q').placeholder = T(UI.search); setTL(theme);     renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();   };   const applyTheme = t => {     theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts();   };   $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));$('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+  $('.scrollhint').addEventListener('click', e => { e.preventDefault();$('#start').scrollIntoView({ behavior: 'smooth' }); });
   document.documentElement.dataset.theme = theme;
   applyLang(lang);
 
