@@ -26,8 +26,19 @@
 <header class="hero">
   <h1 data-es="Control de un brazo robótico mediante un guante sensorizado">Robotic Arm Control Using a Sensor Glove</h1>
   <p class="sub" data-es="Un brazo antropomórfico impreso en 3D que reproduce la flexión de los dedos y la rotación de la muñeca a partir de un guante con sensores de flexión y una IMU MPU6050, unidos por Bluetooth con dos ESP32.">A 3D-printed anthropomorphic arm that reproduces finger flexion and wrist rotation from a glove with flex sensors and an MPU6050 IMU, linked over Bluetooth by two ESP32 boards.</p>
+  
+  <!-- Tech Stack Tags -->
+  <div class="tech-tags">
+    <span class="tag">ESP32</span>
+    <span class="tag">C++ / Arduino</span>
+    <span class="tag">Bluetooth SPP</span>
+    <span class="tag">MPU6050 IMU</span>
+    <span class="tag">Flex Sensors</span>
+    <span class="tag">KiCad PCB</span>
+    <span class="tag">3D Printing</span>
+  </div>
+
   <div class="vid card">
-    <h2 class="vt" data-es="Vídeo de demostración del sistema">System demo video</h2>
     <div class="vwrap">
       <video controls preload="metadata" poster="img/sistema.jpg"><source src="demo.mp4" type="video/mp4"></video>
       <div class="vmiss" hidden data-es="Añade tu vídeo como <code>demo.mp4</code> junto a este archivo">Add your video as <code>demo.mp4</code> next to this file</div>
@@ -53,6 +64,26 @@
 </aside>
 
 <main class="main">
+
+  <!-- Quick Key Specs Section -->
+  <div class="hero-stats">
+    <div class="stat-card">
+      <span class="stat-val">6</span>
+      <span class="stat-lbl" data-es="Servomotors">Servomotors</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val">10 Hz</span>
+      <span class="stat-lbl" data-es="Tasa Bluetooth">BT Data Rate</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val">2</span>
+      <span class="stat-lbl" data-es="Nodos ESP32">ESP32 Nodes</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-val">5</span>
+      <span class="stat-lbl" data-es="Sensores Flex">Flex Sensors</span>
+    </div>
+  </div>
 
 <section id="objectius">
   <h2 data-es="01. Descripción y objetivos del proyecto">01. Project description and objectives</h2>
