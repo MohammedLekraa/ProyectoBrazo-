@@ -293,4 +293,53 @@
   <div class="acc"><button class="acc-h" data-es="Mejoras previstas">Planned improvements</button><div class="acc-b"><div><p data-es="Diseñar la placa para montarla desde una sola cara, con vías para pasar determinadas conexiones a la otra capa. En la PCB del brazo, lograr que las interferencias de los servos no afecten al microcontrolador permitiría usar una sola alimentación.">Design the board to be assembled from a single side, with vias to move some connections to the other layer. On the arm PCB, keeping the servo interference away from the microcontroller would allow a single power supply.</p></div></div></div>
 
   <h3 data-es="Alimentación del sistema">System power</h3>
-  <p data-es="El sistema usa fuentes de alimentación separadas para el microcontrolador y para los actuadores, para evitar caídas de tensión e interferencias causadas por el alto consumo de los servomotores. En las primeras pruebas, al mover varios servos a la vez, la Wemos se reiniciaba. Las masas (GND) de todas las partes se mantienen
+  <p data-es="El sistema usa fuentes de alimentación separadas para el microcontrolador y para los actuadores, para evitar caídas de tensión e interferencias causadas por el alto consumo de los servomotores. En las primeras pruebas, al mover varios servos a la vez, la Wemos se reiniciaba. Las masas (GND) de todas las partes se mantienen conectadas, porque las señales PWM necesitan una referencia eléctrica común.">The system uses separate power supplies for the microcontroller and for the actuators, to avoid voltage drops and interference caused by the high consumption of the servomotors. In the first tests, when several servos moved at once, the Wemos restarted. The grounds (GND) of all parts stay connected, because the PWM signals need a common electrical reference.</p>
+  <div class="pow">
+    <figure class="card fig"><img class="zoom" src="img/alim-guant.jpg" alt="Photo pending: glove power (img/alim-guant.jpg)"><figcaption data-es="<b>Placa del guante</b><br>Pila recargable de Li-ion de 5500 mAh, como fuente de 9 V."><b>Glove board</b><br>5500 mAh rechargeable Li-ion battery, as a 9 V source.</figcaption></figure>
+    <figure class="card fig"><img class="zoom" src="img/alim-brac.jpg" alt="Photo pending: arm board power (img/alim-brac.jpg)"><figcaption data-es="<b>Placa del brazo</b><br>Dos pilas Li-ion 18650 de 3,2 V en serie, unos 6,4 V nominales."><b>Arm board</b><br>Two 3.2 V 18650 Li-ion cells in series, about 6.4 V nominal.</figcaption></figure>
+    <figure class="card fig"><img class="zoom" src="img/alim-servos.jpg" alt="Photo pending: servo supply (img/alim-servos.jpg)"><figcaption data-es="<b>Servomotores</b><br>Fuente de laboratorio Promax FAC-363B a 6,5 V. Consumo máximo de unos 1,6 A con los seis servos."><b>Servomotors</b><br>Promax FAC-363B lab supply at 6.5 V. Peak consumption of about 1.6 A with the six servos.</figcaption></figure>
+  </div>
+  <p class="gnd mono" data-es="GND común entre las tres partes">Common GND across the three parts</p>
+</section>
+
+<section id="bluetooth">
+  <h2 data-es="08. Comunicación y protocolo Bluetooth">08. Bluetooth communication and protocol</h2>
+  <p class="lead" data-es="Los dos ESP32 se comunican con Bluetooth clásico en modo SPP (<i>Serial Port Profile</i>), un enlace serie transparente entre las dos placas. Es una solución sencilla, con latencia reducida y velocidad suficiente para estos datos.">The two ESP32 boards communicate over classic Bluetooth in SPP mode (<i>Serial Port Profile</i>), a transparent serial link between the two boards. It is a simple solution, with low latency and enough speed for this data.</p>
+  <div class="bt">
+    <div class="card"><h4 data-es="ESP32 del guante">Glove ESP32</h4><p data-es="<b>Cliente.</b> Lee los sensores, crea la trama y la envía. Se conecta al servidor con su dirección MAC y, una vez establecido el enlace, empieza la transmisión."><b>Client.</b> It reads the sensors, builds the frame and sends it. It connects to the server using its MAC address and, once the link is up, starts transmitting.</p></div>
+    <div class="arrow" aria-hidden="true">&rarr;</div>
+    <div class="card"><h4 data-es="ESP32 del brazo">Arm ESP32</h4><p data-es="<b>Servidor.</b> Espera la conexión, recibe la trama, extrae los valores y mueve los servos."><b>Server.</b> It waits for the connection, receives the frame, extracts the values and moves the servos.</p></div>
+  </div>
+  <h3 data-es="La trama de datos">The data frame</h3>
+  <p data-es="El guante envía una línea de texto cada 100 ms, es decir, a 10 Hz. Así no se satura el canal y se reduce la probabilidad de perder datos. Cada trama lleva seis valores separados por espacios y termina con un salto de línea. Haz clic en cada valor para ver qué significa.">The glove sends a line of text every 100 ms, that is, at 10 Hz. This avoids saturating the channel and lowers the chance of losing data. Each frame carries six space-separated values and ends with a line break. Click each value to see what it means.</p>
+  <div class="frame" id="frame"></div>
+  <div class="card" id="fdet" aria-live="polite"></div>
+  <p style="margin-top:1rem" data-es="El formato de texto simple facilita la depuración con el monitor serie y permite que el receptor interprete los datos de forma robusta: si una línea no se puede leer, simplemente se ignora.">The simple text format eases debugging with the serial monitor and lets the receiver interpret the data robustly: if a line cannot be read, it is simply ignored.</p>
+</section>
+
+<section id="material">
+  <h2 data-es="09. Lista de materiales y presupuesto">09. Bill of materials and budget</h2>
+  <p class="lead" data-es="Componentes y materiales utilizados en el proyecto. Se pueden buscar por nombre y los precios se pueden editar; el coste total se actualiza solo.">Components and materials used in the project. You can search them by name and edit the prices; the total cost updates by itself.</p>
+  <div class="total"><span class="mono" data-es="Coste estimado del proyecto">Estimated project cost</span><b id="grand"></b></div>
+  <div class="mat-bar">
+    <input id="q" type="search" aria-label="Search a component">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="tbl"><table id="mt">
+    <thead><tr><th data-es="Componente">Component</th><th data-es="Categoría">Category</th><th data-es="Cant.">Qty</th><th data-es="Precio unitario (€)">Unit price (€)</th><th>Subtotal</th></tr></thead>
+    <tbody></tbody>
+    <tfoot><tr><td colspan="4" data-es="Total de los resultados">Total of the results</td><td id="tot"></td></tr></tfoot>
+  </table></div>
+  <p class="mono" data-es="Precios orientativos. Los cambios se guardan en tu navegador.">Indicative prices. Changes are saved in your browser.</p>
+</section>
+
+</main>
+</div>
+
+<div id="lb" hidden>
+  <button id="lb-x" aria-label="Close">&times;</button>
+  <img id="lb-img" alt="">
+  <span class="mono" data-es="Rueda: zoom · Arrastrar: mover · Esc: cerrar">Wheel: zoom · Drag: move · Esc: close</span>
+</div>
+</body>
+</html>
