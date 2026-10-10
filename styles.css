@@ -26,7 +26,7 @@ body{background:var(--bg);color:var(--body);font:400 .95rem/1.75 var(--sans);-we
 section{padding:3rem 0 4rem;border-bottom:1px solid var(--line);scroll-margin-top:5rem}
 section:last-child{border:0}
 h4{font:600 .98rem var(--sans);color:var(--ink);margin:.6rem 0 .3rem}
-p{max-width:100%;margin-bottom:.9rem}
+p{max-width:100%;margin-bottom:.9rem;text-align: justify}
 p b{color:var(--ink);font-weight:600}
 .lead{font-size:1.04rem;color:#3f3d38;margin-bottom:1.3rem}
 code{font:500 .84em var(--mono);background:var(--code);border-radius:4px;padding:.1rem .35rem;color:var(--ink)}
@@ -40,18 +40,106 @@ code{font:500 .84em var(--mono);background:var(--code);border-radius:4px;padding
 img{max-width:100%;display:block;border-radius:6px}
 img[data-missing]{min-height:150px;padding:1rem;background:var(--bg);border:1px dashed #cfc9ba;font:400 .74rem var(--mono);color:var(--mute)}
 .zoom{cursor:zoom-in}
-.fig{margin:0;padding:1rem}.fig img{width:60%;max-height:100px;object-fit:contain}
-.fig figcaption{margin-top:.8rem;font-size:.8rem;color:var(--mute)}
-.fig figcaption.mono,.mono.fig figcaption{font:400 .7rem var(--mono)}
+/* Reemplaza o ajusta estas reglas en styles.css */
+.fig {
+  margin: 1.5rem auto;          /* Centra la figura y le da espacio vertical */
+  padding: 1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  width: fit-content;           /* <-- Hace que el marco se adapte al tamaño de la foto */
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;          /* <-- Centra todo lo de dentro (foto y texto) */
+}
+
+.fig img {
+  width: 100%;
+  max-height: 380px;            /* Altura controlada para que no sea gigante */
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.fig figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--mute);
+  text-align: center;           /* <-- Centra perfectamente el pie de foto */
+  width: 100%;
+}
 .wide{margin:1.4rem 0}.wide img{margin:0 auto;max-height:320px;width:auto}
 canvas{max-width:100%}
-.obj{list-style:none;counter-reset:o;display:grid;gap:.5rem;margin:0 0 1.5rem;max-width:72ch}
-.obj li{counter-increment:o;position:relative;padding:.7rem 1rem .7rem 3rem;background:var(--card);border:1px solid var(--line);border-radius:10px;transition:.25s}
-.obj li:hover{transform:translateX(6px);border-color:#c9c5b8}
-.obj li::before{content:counter(o,decimal-leading-zero);position:absolute;left:1rem;top:.75rem;font:500 .72rem var(--mono);color:var(--mute)}
-.acc{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;overflow:hidden;transition:border-color .3s}
-.acc:hover{border-color:#c9c5b8}
-.acc-h{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.2rem;font:600 .92rem var(--sans);background:none;border:0;cursor:pointer;color:var(--ink);text-align:left}
+.obj {
+  list-style: none;
+  counter-reset: o;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* <-- Crea las dos columnas */
+  gap: 0.8rem;                          /* <-- Espacio entre tarjetas */
+  margin: 0 0 1.5rem;
+  max-width: none;                      /* <-- Ocupa todo el ancho disponible */
+}
+
+.obj li {
+  counter-increment: o;
+  position: relative;
+  padding: .7rem 1rem .7rem 3rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  transition: .25s;
+  display: flex;
+  align-items: center;
+}
+
+.obj li:hover {
+  transform: translateY(-3px);          /* <-- Cambiado a movimiento vertical para que no choque entre columnas */
+  border-color: #c9c5b8;
+}
+
+.obj li::before {
+  content: counter(o, decimal-leading-zero);
+  position: absolute;
+  left: 1rem;
+  top: 50%;                             /* <-- Centrado vertical automático */
+  transform: translateY(-50%);          /* <-- Centrado vertical automático */
+  font: 500 .72rem var(--mono);
+  color: var(--mute);
+}
+/* Actualiza las reglas de los acordeones en styles.css */
+.acc {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.acc:hover {
+  border-color: var(--mute);
+}
+
+.acc-h {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  font: 600 0.92rem var(--sans);
+  background: transparent;      /* Evita saltos de color bruscos */
+  border: 0;
+  cursor: pointer;
+  color: var(--ink);
+  text-align: left;
+}
+
+/* Cuando el acordeón está abierto, le damos un toque sutil de distinción */
+.acc.open {
+  border-color: var(--ink);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
 .acc-h::after{content:"+";font:400 1.3rem var(--mono);transition:transform .35s}
 .acc.open .acc-h::after{transform:rotate(45deg)}
 .acc-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
