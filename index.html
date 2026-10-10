@@ -69,31 +69,34 @@
 <main class="main">
 
 <section id="objectius">
-  <h2 data-es="01. Descripción y objetivos del proyecto">01. Project description and objectives</h2>
-  <p class="lead" data-es="Este proyecto presenta el diseño, la construcción y el control de un brazo robótico antropomórfico accionado por un guante sensorizado. El sistema reproduce los movimientos de la mano humana, en concreto la flexión de los dedos y la rotación de la muñeca, con sensores de bajo coste y microcontroladores comerciales.">This project presents the design, construction and control of an anthropomorphic robotic arm driven by a sensor glove. The system reproduces the movements of the human hand, specifically finger flexion and wrist rotation, using low-cost sensors and off-the-shelf microcontrollers.</p>
-  <p data-es="Integra mecánica, electrónica y programación, y pone el acento en los problemas prácticos que aparecen al implementar un sistema real. Más que obtener un sistema que funcione, el trabajo analiza las decisiones de diseño, las limitaciones que han surgido y las soluciones adoptadas.">It combines mechanics, electronics and programming, and focuses on the practical problems that appear when a real system is built. Beyond a working system, the work analyses the design decisions, the limitations found and the solutions adopted.</p>
-  <p data-es="Se enmarca en las interfaces persona-máquina y la robótica asistencial. Es un prototipo experimental que puede servir de base para aplicaciones de rehabilitación motora, entrenamiento o teleoperación, donde una interfaz natural reduce la curva de aprendizaje.">It belongs to the field of human-machine interfaces and assistive robotics. It is an experimental prototype that can be the basis for motor rehabilitation, training or teleoperation, where a natural interface lowers the learning curve.</p>
-  <figure class="card fig wide"><img class="zoom" src="sistema.png" alt="Glove, robotic arm and power supply"><figcaption class="mono" data-es="El sistema completo: el guante a la izquierda y el brazo con su caja y la fuente a la derecha.">The complete system: the glove on the left and the arm with its box and power supply on the right.</figcaption></figure>
+  <h2 data-es="01. El proyecto en pocas palabras">01. Project overview</h2>
+  
+  <p class="lead" data-es="¿Y si pudieras controlar un brazo robótico impreso en 3D simplemente moviendo tu propia mano? Eso es exactamente lo que construí en este proyecto: una interfaz natural y de bajo coste que conecta la intención humana con el hardware.">
+    What if you could control a 3D-printed robotic arm just by moving your own hand? That's exactly what I built here: a natural, low-cost interface bridging human motion and hardware.
+  </p>
 
-  <h3 data-es="Objetivo general">General objective</h3>
-  <p data-es="Diseñar, implementar y validar un brazo robótico antropomórfico fabricado mediante impresión 3D, junto con su sistema de control mediante un guante sensorizado, para reproducir los movimientos básicos de la mano humana: la flexión y extensión de los dedos y la rotación de la muñeca.">Design, implement and validate a 3D-printed anthropomorphic robotic arm, together with its control system based on a sensor glove, to reproduce the basic movements of the human hand: finger flexion and extension, and wrist rotation.</p>
-  <h3 data-es="Objetivos específicos">Specific objectives</h3>
-  <ol class="obj">
-    <li data-es="Diseñar un guante sensorizado que capte la flexión de los dedos con sensores de flexión y la orientación de la muñeca con una unidad de medida inercial (IMU).">Design a sensor glove that captures finger flexion with flex sensors and wrist orientation with an inertial measurement unit (IMU).</li>
-    <li data-es="Implementar un sistema electrónico con microcontroladores comerciales que adquiera y procese las señales de los sensores.">Implement an electronic system with off-the-shelf microcontrollers that acquires and processes the sensor signals.</li>
-    <li data-es="Diseñar y controlar un brazo robótico accionado por servomotores, capaz de reproducir los movimientos captados por el guante.">Design and control a servo-driven robotic arm able to reproduce the movements captured by the glove.</li>
-    <li data-es="Desarrollar el software que lee, procesa y convierte las señales en órdenes para los actuadores, incluida la caracterización de los sensores de flexión.">Develop the software that reads, processes and converts the signals into commands for the actuators, including the characterisation of the flex sensors.</li>
-    <li data-es="Establecer una comunicación fiable entre el guante y el brazo.">Establish a reliable communication between the glove and the arm.</li>
-    <li data-es="Evaluar el funcionamiento global del sistema y analizar sus limitaciones.">Evaluate the overall behaviour of the system and analyse its limitations.</li>
-  </ol>
-  <h3 data-es="Alcance y limitaciones">Scope and limitations</h3>
-  <div class="acc open"><button class="acc-h" data-es="Qué incluye el proyecto">What the project includes</button><div class="acc-b"><div><p data-es="El brazo tiene los grados de libertad justos para flexionar los dedos y girar la muñeca. Las placas de circuito impreso se diseñaron, fabricaron y montaron durante el propio proyecto. El software se limita a algoritmos de control básicos.">The arm has just the degrees of freedom needed to flex the fingers and rotate the wrist. The printed circuit boards were designed, built and assembled during the project itself. The software is limited to basic control algorithms.</p></div></div></div>
-  <div class="acc"><button class="acc-h" data-es="Qué no incluye">What it does not include</button><div class="acc-b"><div><p data-es="No reproduce la abducción ni la aducción de los dedos, ni la rotación completa del antebrazo. Tampoco usa control adaptativo, aprendizaje automático ni procesamiento avanzado de señales biomédicas.">It does not reproduce finger abduction or adduction, nor full forearm rotation. It does not use adaptive control, machine learning or advanced biomedical signal processing either.</p></div></div></div>
-  <div class="acc"><button class="acc-h" data-es="Restricciones que han condicionado el diseño">Constraints that shaped the design</button><div class="acc-b"><div>
-    <p data-es="<b>Económicas:</b> el presupuesto limitó los materiales y componentes a soluciones comerciales de bajo coste."><b>Economic:</b> the budget limited materials and components to low-cost commercial solutions.</p>
-    <p data-es="<b>Mecánicas:</b> las piezas impresas ya tenían medidas y formas establecidas, con poco margen en el montaje."><b>Mechanical:</b> the printed parts already had fixed sizes and shapes, leaving little room during assembly.</p>
-    <p data-es="<b>De alimentación:</b> el alto consumo de los servos obligó a usar una fuente externa independiente de la del microcontrolador."><b>Power:</b> the high consumption of the servos required an external supply independent from the microcontroller's.</p>
-  </div></div></div>
+  <p data-es="La idea era montar un sistema completo desde cero, sin atajos. Por un lado, un guante con sensores de flexión en los dedos y una IMU en la muñeca capta cada movimiento. Por otro, dos microcontroladores ESP32 se comunican por Bluetooth de forma inalámbrica para darle órdenes al brazo robótico y que imite los gestos en tiempo real.">
+    The goal was to build a complete system from scratch. A custom glove tracks finger flexion and wrist orientation, sending data via Bluetooth across two ESP32 microcontrollers to mirror gestures in real time.
+  </p>
+
+  <p data-es="Más allá de que los motores se muevan, el verdadero reto estuvo en resolver los problemas del mundo real: calibrar la respuesta analógica de los sensores, eliminar el ruido de la IMU para que la muñeca no derive, y diseñar mis propias placas de circuito impreso (PCB) para que todo encajara sin cables sueltos.">
+    Beyond just making things move, the real challenge was tackling real-world engineering hurdles: handling analog sensor calibration, filtering IMU drift, and designing custom PCBs to keep wiring clean.
+  </p>
+
+  <figure class="card fig">
+    <img class="zoom" src="sistema.png" alt="Glove, robotic arm and power supply">
+    <figcaption class="mono" data-es="El sistema completo: el guante a la izquierda y el brazo con su caja y la fuente a la derecha.">
+      The complete system: the glove on the left and the arm with its box and power supply on the right.
+    </figcaption>
+  </figure>
+
+  <!-- El propósito principal en formato tarjeta limpia -->
+  <div class="card" style="margin-top: 2rem;">
+    <h3 data-es="El propósito principal" style="margin-top: 0;">The core mission</h3>
+    <p data-es="Diseñar y fabricar un prototipo funcional y robusto que demuestre que es posible crear tecnología robótica asistencial y de teleoperación eficiente utilizando componentes comerciales y diseño 3D, manteniendo una baja curva de aprendizaje para cualquier usuario." style="margin-bottom: 0;">
+      Design and build a functional, robust prototype proving that efficient assistive robotics and teleoperation are possible using off-the-shelf components and 3D printing, keeping a low learning curve for any user.
+    </p>
+  </div>
 </section>
 
 <section id="sistema">
