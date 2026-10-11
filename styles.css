@@ -41,30 +41,29 @@ img{max-width:100%;display:block;border-radius:6px}
 img[data-missing]{min-height:150px;padding:1rem;background:var(--bg);border:1px dashed #cfc9ba;font:400 .74rem var(--mono);color:var(--mute)}
 .zoom{cursor:zoom-in}
 
-/* Asegura que el contenedor de la figura se centre por completo */
+
 .fig {
-  margin: 1.5rem auto !important;   /* El 'auto' a los lados fuerza el centrado absoluto */
-  padding: 1.2rem;
+  margin: 1.5rem auto !important;
+  padding: 0.8rem;               /* Reducimos un poco el padding interno para que el marco esté más pegado a la foto */
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  width: fit-content;             /* Se ajusta al tamaño de la foto */
+  border-radius: 10px;
+  width: max-content;            /* Fuerza a que la caja se ajuste estrictamente al ancho de su contenido */
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;            /* Centra los elementos internos (imagen y texto) */
+  align-items: center;
   box-sizing: border-box;
 }
 
-/* Control de la imagen dentro de su marco centrado */
 .fig img {
   display: block;
-  margin: 0 auto;                 /* Centra la imagen dentro del flex */
+  margin: 0 auto;
   width: 100%;
-  max-width: 680px;               /* Ajusta este valor si la quieres un poco más grande o pequeña */
-  max-height: 380px;
+  max-width: 480px;              /* Reducimos el ancho máximo para que se vea más pequeña y elegante */
+  max-height: 280px;             /* Limitamos también la altura para que no ocupe tanto */
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* Centrado absoluto del texto del pie de foto */
