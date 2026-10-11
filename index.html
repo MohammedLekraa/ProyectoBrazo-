@@ -90,77 +90,70 @@
     </figcaption>
   </figure>
 
-  <!-- El propósito principal en formato tarjeta limpia -->
-  <div class="card" style="margin-top: 2rem;">
-    <h3 data-es="El propósito principal" style="margin-top: 0;">The core mission</h3>
-    <p data-es="Diseñar y fabricar un prototipo funcional y robusto que demuestre que es posible crear tecnología robótica asistencial y de teleoperación eficiente utilizando componentes comerciales y diseño 3D, manteniendo una baja curva de aprendizaje para cualquier usuario." style="margin-bottom: 0;">
-      Design and build a functional, robust prototype proving that efficient assistive robotics and teleoperation are possible using off-the-shelf components and 3D printing, keeping a low learning curve for any user.
-    </p>
+  <section id="planteamiento">
+  <h2 data-es="02. Planteamiento general del sistema">02. System Architecture</h2>
+  
+  <p data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.">
+    For the arm to copy my hand, we need sensors to capture motion, a wireless link to transmit data, and actuators to reproduce it.
+  </p>
+
+  <!-- BARRA DE FLUJO SUPERIOR (ARRIBA DEL TODO) -->
+  <div class="flow-bar">
+    <span data-es="CAPTURAR">CAPTURAR</span>
+    <span class="arrow-sm">→</span>
+    <span data-es="TRANSMITIR">TRANSMITIR</span>
+    <span class="arrow-sm">→</span>
+    <span data-es="REPRODUCIR">REPRODUCIR</span>
+  </div>
+
+  <!-- REJILLA DE TARJETAS -->
+  <div class="pipe">
+    <!-- COLUMNA 1: CAPTURA -->
+    <div class="col">
+      <div class="card card-visual">
+        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
+        <h4>Flex Sensor</h4>
+        <img src="flex-sensor.png" alt="Flex Sensor">
+      </div>
+
+      <div class="card card-visual">
+        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
+        <h4>IMU · MPU6050</h4>
+        <img src="mpu6050.png" alt="MPU6050">
+      </div>
+    </div>
+
+    <!-- FLECHA 1 -->
+    <div class="arrow">→</div>
+
+    <!-- COLUMNA 2: TRANSMISIÓN (TARJETA CENTRAL ALTA) -->
+    <div class="col col-mid">
+      <div class="card card-visual card-tall">
+        <h3>BLUETOOTH</h3>
+        <p class="desc-main" data-es="Comunicación inalámbrica">Comunicación inalámbrica</p>
+        <p class="desc-sub" data-es="Sin conexión física entre guante y brazo">Sin conexión física entre guante y brazo</p>
+      </div>
+    </div>
+
+    <!-- FLECHA 2 -->
+    <div class="arrow">→</div>
+
+    <!-- COLUMNA 3: REPRODUCCIÓN -->
+    <div class="col">
+      <div class="card card-visual">
+        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
+        <h4>Servo + hilo</h4>
+        <img src="servo-hilo.png" alt="Servo con hilo">
+      </div>
+
+      <div class="card card-visual">
+        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
+        <h4>Servo + engranajes</h4>
+        <img src="servo-engranajes.png" alt="Servo con engranajes">
+      </div>
+    </div>
   </div>
 </section>
-
-<section id="sistema">
-  <h2 data-es="02. Planteamiento general del sistema">02. General system overview</h2>
-  <p class="lead" data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.">For the arm to copy my hand we need sensors that capture the movements, a wireless link that sends the data and actuators that reproduce them. The system is split into two nodes: the glove, which captures, and the arm, which acts.</p>
- <div class="pipe">
-  <!-- COLUMNA 1: CAPTURA -->
-  <div class="col">
-    <div class="pillt-header" data-es="CAPTURA DEL MOVIMIENTO">CAPTURA DEL MOVIMIENTO</div>
-    
-    <div class="card card-visual">
-      <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
-      <h4>Flex Sensor</h4>
-      <img src="img/flex-sensor.png" alt="Flex Sensor">
-    </div>
-
-    <div class="card card-visual">
-      <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
-      <h4>IMU · MPU6050</h4>
-      <img src="img/mpu6050.png" alt="MPU6050">
-    </div>
-  </div>
-
-  <!-- FLECHA 1 -->
-  <div class="arrow">→</div>
-
-  <!-- COLUMNA 2: TRANSMISIÓN (TARJETA ALTA CENTRADA) -->
-  <div class="col col-mid">
-    <div class="card card-visual card-tall">
-      <h3>BLUETOOTH</h3>
-      <p class="desc-main" data-es="Comunicación inalámbrica">Comunicación inalámbrica</p>
-      <p class="desc-sub" data-es="Sin conexión física entre guante y brazo">Sin conexión física entre guante y brazo</p>
-    </div>
-  </div>
-
-  <!-- FLECHA 2 -->
-  <div class="arrow">→</div>
-
-  <!-- COLUMNA 3: REPRODUCCIÓN -->
-  <div class="col">
-    <div class="pillt-header" data-es="REPRODUCCIÓN DEL MOVIMIENTO">REPRODUCCIÓN DEL MOVIMIENTO</div>
-
-    <div class="card card-visual">
-      <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
-      <h4>Servo + hilo</h4>
-      <img src="img/servo-hilo.png" alt="Servo con hilo">
-    </div>
-
-    <div class="card card-visual">
-      <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
-      <h4>Servo + engranajes</h4>
-      <img src="img/servo-engranajes.png" alt="Servo con engranajes">
-    </div>
-  </div>
-</div>
-
-<!-- BARRA INFERIOR DE PASOS -->
-<div class="flow-bar">
-  <span data-es="CAPTURAR">CAPTURAR</span>
-  <span class="arrow-sm">→</span>
-  <span data-es="TRANSMITIR">TRANSMITIR</span>
-  <span class="arrow-sm">→</span>
-  <span data-es="REPRODUCIR">REPRODUCIR</span>
-</div>
 
 <section id="disseny">
   <h2 data-es="03. Diseño y estructura del brazo robótico">03. Robotic arm design and structure</h2>
