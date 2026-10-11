@@ -153,8 +153,12 @@ canvas{max-width:100%}
 .acc.open .acc-b{grid-template-rows:1fr}
 .acc-b>div{overflow:hidden;padding:0 1.2rem}
 .acc.open .acc-b>div{padding-bottom:.4rem}
-.pipe{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:1rem;align-items:stretch}
-.col{display:flex;flex-direction:column;gap:1rem}
+.pipe {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center; /* <-- Cambiado de 'stretch' a 'center' para que el bloque del medio quede alineado verticalmente */
+}.col{display:flex;flex-direction:column;gap:1rem}
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .col.mid{justify-content:center}
 .mini{margin:0;padding:1rem}.mini img{width:100%;aspect-ratio:4/3;object-fit:cover}
