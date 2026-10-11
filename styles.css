@@ -157,7 +157,14 @@ canvas{max-width:100%}
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
   gap: 1rem;
-  align-items: center; /* <-- Cambiado de 'stretch' a 'center' para que el bloque del medio quede alineado verticalmente */
+  align-items: stretch; /* Dejamos stretch para que las columnas midan lo mismo de alto */
+}
+
+/* Forzamos que la columna del medio (la tarjeta de Bluetooth) actúe como un contenedor flexible centrado */
+.pipe > div:nth-child(3), .col.mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra la tarjeta verticalmente en el medio exacto */
 }.col{display:flex;flex-direction:column;gap:1rem}
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .col.mid{justify-content:center}
