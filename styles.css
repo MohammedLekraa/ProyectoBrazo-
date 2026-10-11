@@ -152,14 +152,80 @@ canvas{max-width:100%}
 .acc-b>div{overflow:hidden;padding:0 1.2rem}
 .acc.open .acc-b>div{padding-bottom:.4rem}
 
-/* --- NUEVOS ESTILOS PARA LA SECCIÓN 02 (ESTILO VISUAL DE TARJETAS) --- */
-/* Rejilla alineada a la misma altura en todas sus columnas */
+/* Reduce un poco el padding vertical de la sección para que quepa en pantalla */
+#planteamiento {
+  padding: 2rem 0 2.5rem;
+}
+
+/* Compacta los márgenes y espaciados de la rejilla principal */
 .pipe {
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
-  gap: 1.2rem;
-  align-items: stretch; /* <-- Fuerza a que todas las columnas midan exactamente lo mismo de alto */
+  gap: 1rem;
+  align-items: stretch;
+  margin-bottom: 1rem;
 }
+
+/* Reduce el tamaño y padding de las tarjetas laterales individuales */
+.card-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.9rem 0.8rem; /* Menos relleno para que sean más compactas */
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+/* Ajusta el tamaño de las imágenes interiores para que no estiren la tarjeta */
+.card-visual img {
+  width: 100%;
+  max-width: 130px; /* Reducido de 150px a 130px */
+  height: 75px;   /* Altura más compacta */
+  object-fit: contain;
+  margin: 0.2rem auto 0;
+}
+
+/* Baja la altura de la tarjeta central de Bluetooth para que no sobresalga */
+.card-tall {
+  width: 100%;
+  height: 100%;
+  min-height: 260px; /* Reducido drásticamente de 380px a 260px para alinearse con los laterales */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--beige);
+  border: 1px solid var(--line);
+  text-align: center;
+  padding: 1.2rem 1rem;
+  box-sizing: border-box;
+}
+
+.card-tall h3 {
+  font: 800 1.2rem var(--head);
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+/* Compacta también la barra superior de flujo */
+.flow-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--beige);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font: 700 0.7rem var(--mono);
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+
 
 .col {
   display: flex;
@@ -216,40 +282,7 @@ canvas{max-width:100%}
   height: 100%;
 }
 
-.card-tall {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--beige);
-  border: 1px solid var(--line);
-  text-align: center;
-  padding: 2rem 1rem;
-  box-sizing: border-box;
-}
 
-.card-tall {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--beige);
-  border: 1px solid var(--line);
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.card-tall h3 {
-  font: 800 1.3rem var(--head);
-  letter-spacing: 0.05em;
-  color: var(--ink);
-  margin-bottom: 0.8rem;
-}
 
 .card-tall .desc-main {
   font-size: 0.82rem;
@@ -265,26 +298,6 @@ canvas{max-width:100%}
   text-align: center;
 }
 
-/* Barra superior de flujo */
-.flow-bar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: var(--beige);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 0.8rem 1.5rem;
-  font: 700 0.75rem var(--mono);
-  letter-spacing: 0.12em;
-  color: var(--ink);
-  margin-bottom: 1.5rem; /* Margen inferior para separarla de las tarjetas */
-}
-
-.flow-bar .arrow-sm {
-  color: var(--mute);
-  font-weight: normal;
-}
-/* ------------------------------------------------------------------ */
 
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 
