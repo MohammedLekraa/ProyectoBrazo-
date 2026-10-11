@@ -60,19 +60,20 @@ img[data-missing]{min-height:150px;padding:1rem;background:var(--bg);border:1px 
   display: block;
   margin: 0 auto;
   width: 100%;
-  max-width: 480px;              /* Reducimos el ancho máximo para que se vea más pequeña y elegante */
-  max-height: 280px;             /* Limitamos también la altura para que no ocupe tanto */
+  max-width: 330px;              /* Reducimos el ancho máximo para que se vea más pequeña y elegante */
+  max-height: 220px;             /* Limitamos también la altura para que no ocupe tanto */
   object-fit: contain;
   border-radius: 6px;
 }
-
-/* Centrado absoluto del texto del pie de foto */
-.fig figcaption {
-  margin-top: 0.8rem;
-  font-size: 0.8rem;
-  color: var(--mute);
-  text-align: center !important;  /* Fuerza el texto centrado */
+.fig img {
+  display: block;
+  margin: 0 auto;
   width: 100%;
+  max-width: 330px;              /* Reduce este número para hacerla más pequeña (ej: 280px o 320px) */
+  max-height: 220px;             /* Reduce este número para acortar su altura */
+  object-fit: contain;
+  text-align: center !important;  /* Fuerza el texto centrado */
+  border-radius: 6px;
 }
 
 
