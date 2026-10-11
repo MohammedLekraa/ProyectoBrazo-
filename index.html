@@ -114,13 +114,13 @@
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
         <h4>Flex Sensor</h4>
-        <img src="flex-sensor.png" alt="Flex Sensor">
+        <img src="img/flex.png" alt="Flex Sensor">
       </div>
 
       <div class="card card-visual">
         <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA" data-en="WRIST ROTATION">ROTACIÓN DE LA MUÑECA</span>
         <h4>IMU · MPU6050</h4>
-        <img src="mpu6050.png" alt="MPU6050">
+        <img src="img/mpu.png" alt="MPU6050">
       </div>
     </div>
 
@@ -144,27 +144,49 @@
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
         <h4 data-es="Servo + hilo" data-en="Servo + thread">Servo + hilo</h4>
-        <img src="servo-hilo.png" alt="Servo con hilo">
+        <img src="img/engranaje1.png" alt="Servo con hilo">
       </div>
 
       <div class="card card-visual">
         <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA" data-en="WRIST ROTATION">ROTACIÓN DE LA MUÑECA</span>
         <h4 data-es="Servo + engranajes" data-en="Servo + gears">Servo + engranajes</h4>
-        <img src="servo-engranajes.png" alt="Servo con engranajes">
+        <img src="img/engranaje2.png" alt="Servo con engranajes">
       </div>
     </div>
   </div>
 </section>
 
 <section id="disseny">
-  <h2 data-es="03. Diseño y estructura del brazo robótico">03. Robotic arm design and structure</h2>
-  <p class="lead" data-es="El brazo se construyó combinando dos proyectos abiertos de impresión 3D y rediseñando la pieza que los une. Haz clic en cada paso para ver los detalles.">The arm was built by combining two open 3D-printing projects and redesigning the part that joins them. Click each step to see the details.</p>
+  <h2 data-es="03. Diseño y estructura del brazo robótico" data-en="03. Robotic arm design and structure">03. Diseño y estructura del brazo robótico</h2>
+  <p class="lead" data-es="El brazo se construyó combinando dos proyectos abiertos de impresión 3D y rediseñando la pieza que los une. Haz clic en cada paso para ver los detalles." data-en="The arm was built by combining two open 3D-printing projects and redesigning the part that joins them. Click each step to see the details.">
+    El brazo se construyó combinando dos proyectos abiertos de impresión 3D y rediseñando la pieza que los une. Haz clic en cada paso para ver los detalles.
+  </p>
+  
+  <!-- Tarjetas limpias solo con etiqueta, título e imagen -->
   <div class="mech">
-    <button class="mc on" data-i="0"><span class="pillt" data-es="01. Base inicial">01. Initial base</span><h4 data-es="Antebrazo InMoov">InMoov forearm</h4><p data-es="Modelo elegido para la estructura del antebrazo. Trabajos anteriores advirtieron de que la <b>mano InMoov fallaba</b> con el uso continuado.">Model chosen for the forearm structure. Earlier works warned that the <b>InMoov hand failed</b> with continued use.</p><img src="img/mec-1.png" alt="InMoov forearm parts"></button>
-    <button class="mc" data-i="1"><span class="pillt" data-es="02. Selección de la mano">02. Hand selection</span><h4 data-es="Mano FlexyHand">FlexyHand hand</h4><p data-es="Búsqueda de una alternativa <b>menos compleja y más sólida</b>. FlexyHand ofrece mayor resistencia mecánica y durabilidad articular.">Search for a <b>simpler and sturdier</b> alternative. FlexyHand offers higher mechanical strength and joint durability.</p><img src="img/mec-2.png" alt="FlexyHand"></button>
-    <button class="mc" data-i="2"><span class="pillt" data-es="03. Rediseño CAD">03. CAD redesign</span><h4 data-es="Puntos de anclaje">Anchor points</h4><p data-es="Modelado 3D de piezas de acoplamiento a medida para <b>fusionar la mano</b> FlexyHand con la estructura del antebrazo InMoov.">Custom 3D-modelled coupling parts to <b>merge the FlexyHand</b> hand with the InMoov forearm structure.</p><img src="img/mec-3.png" alt="Fusion 360 redesign"></button>
-    <button class="mc" data-i="3"><span class="pillt" data-es="04. Resultado">04. Result</span><h4 data-es="Brazo ensamblado">Assembled arm</h4><p data-es="Impresión 3D e integración final del conjunto, logrando un <b>sistema robusto, funcional</b> y duradero para el proyecto.">3D printing and final integration of the assembly, achieving a <b>robust, functional</b> and durable system for the project.</p><img src="img/mec-4.png" alt="Assembled arm"></button>
+    <button class="mc on" data-i="0">
+      <span class="pillt" data-es="01. Base inicial" data-en="01. Initial base">01. Base inicial</span>
+      <h4 data-es="Antebrazo InMoov" data-en="InMoov forearm">Antebrazo InMoov</h4>
+      <img src="img/mec-1.png" alt="InMoov forearm parts">
+    </button>
+    <button class="mc" data-i="1">
+      <span class="pillt" data-es="02. Selección de la mano" data-en="02. Hand selection">02. Selección de la mano</span>
+      <h4 data-es="Mano FlexyHand" data-en="FlexyHand hand">Mano FlexyHand</h4>
+      <img src="img/mec-2.png" alt="FlexyHand">
+    </button>
+    <button class="mc" data-i="2">
+      <span class="pillt" data-es="03. Rediseño CAD" data-en="03. CAD redesign">03. Rediseño CAD</span>
+      <h4 data-es="Puntos de anclaje" data-en="Anchor points">Puntos de anclaje</h4>
+      <img src="img/mec-3.png" alt="Fusion 360 redesign">
+    </button>
+    <button class="mc" data-i="3">
+      <span class="pillt" data-es="04. Resultado" data-en="04. Result">04. Resultado</span>
+      <h4 data-es="Brazo ensamblado" data-en="Assembled arm">Brazo ensamblado</h4>
+      <img src="img/mec-4.png" alt="Assembled arm">
+    </button>
   </div>
+
+  <!-- Panel inferior donde se despliegan los detalles largos al hacer clic -->
   <div class="mdet card" id="mdet" aria-live="polite"></div>
 </section>
 
