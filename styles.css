@@ -173,13 +173,12 @@ canvas{max-width:100%}
   justify-content: center;
 }
 
-/* Tarjetas laterales de captura y reproducción */
 .card-visual {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 1.4rem 0.9rem;
+  padding: 1.2rem 1rem;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -201,14 +200,23 @@ canvas{max-width:100%}
   color: var(--ink);
   margin: 0.3rem 0 0.6rem;
 }
+/* Contenedor flexible dedicado para la imagen para que ocupe el espacio de forma uniforme */
+.card-visual .card-img-wrap {
+  width: 100%;
+  height: 135px; /* Altura generosa para toda el área de la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
 
-/* Tamaño perfecto para las imágenes de los sensores/servos */
+/* La imagen se adapta y llena el contenedor de forma limpia */
 .card-visual img {
   width: 100%;
-  max-width: 175px; /* Tamaño óptimo para que se vean bien sin romper la tarjeta */
-  height: 125px;    /* Altura equilibrada */
-  object-fit: contain;
-  margin: 0.2rem auto 0;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain; /* Mantiene la proporción sin recortar la foto */
+  border-radius: 4px;
 }
 
 /* Columna y tarjeta central de Bluetooth (Color beige y altura compensada) */
