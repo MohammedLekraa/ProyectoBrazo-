@@ -69,54 +69,55 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('img', r).forEach(i => i.addEventListener('error', () => i.setAttribute('data-missing', ''))); stepper(r);
   });
 
-  /* Diseño mecánico interactivo (Sección 03) */
+ 
+/* Diseño mecánico interactivo (Sección 03) - Orden corregido [Inglés, Español] y traducible */
   const MD = [
     { 
       t: ['InMoov Forearm Structure', 'Estructura del antebrazo InMoov'], 
       h: [
-        'Se partió de los modelos abiertos de InMoov por la solidez y los canales internos diseñados para los hilos. Aunque la estructura del antebrazo demostró ser sobresaliente, se descartó su diseño de mano original debido a su excesiva complejidad mecánica y fragilidad ante el uso continuado.',
-        'The open InMoov models were chosen for their robust forearm structure and internal tendon channels. While the forearm proved exceptional, the original hand design was discarded due to excessive mechanical complexity and wear over time.'
+        'The open InMoov models were chosen for their robust forearm structure and internal tendon channels. While the forearm proved exceptional, the original hand design was discarded due to excessive mechanical complexity and wear over time.',
+        'Se partió de los modelos abiertos de InMoov por la solidez y los canales internos diseñados para los hilos. Aunque la estructura del antebrazo demostró ser sobresaliente, se descartó su diseño de mano original debido a su excesiva complejidad mecánica y fragilidad ante el uso continuado.'
       ],
       specs: [
-        ['Origen', 'Thingiverse / Open Source'],
-        ['Material base', 'PLA Estructural'],
-        ['Ventaja', 'Canales internos integrados']
+        [['Origin', 'Origen'], ['Thingiverse / Open Source', 'Thingiverse / Open Source']],
+        [['Base material', 'Material base'], ['Structural PLA', 'PLA Estructural']],
+        [['Key advantage', 'Ventaja'], ['Integrated internal channels', 'Canales internos integrados']]
       ]
     },
     { 
       t: ['FlexyHand Alternative Integration', 'Integración alternativa FlexyHand'], 
       h: [
-        'Como alternativa se seleccionó una mano inspirada en FlexyHand, optimizada para reducir el número de piezas y facilitar el ensamblaje mediante bisagras flexibles (living hinges) de TPU. El principal reto técnico inicial era su incompatibilidad directa con la base cilíndrica del antebrazo.',
-        'As an alternative, a hand inspired by FlexyHand was selected, optimized to reduce part count and ease assembly using TPU living hinges. The main initial hurdle was its lack of direct compatibility with the forearm cylindrical base.'
+        'As an alternative, a hand inspired by FlexyHand was selected, optimized to reduce part count and ease assembly using TPU living hinges. The main initial hurdle was its lack of direct compatibility with the forearm cylindrical base.',
+        'Como alternativa se seleccionó una mano inspirada en FlexyHand, optimizada para reducir el número de piezas y facilitar el ensamblaje mediante bisagras flexibles (living hinges) de TPU. El principal reto técnico inicial era su incompatibilidad directa con la base cilíndrica del antebrazo.'
       ],
       specs: [
-        ['Arquitectura', 'Bisagras flexibles (Living hinges)'],
-        ['Material bisagras', 'TPU de bajo relleno'],
-        ['Ventaja', 'Montaje simplificado']
+        [['Architecture', 'Arquitectura'], ['Living hinges', 'Bisagras flexibles (Living hinges)']],
+        [['Hinges material', 'Material bisagras'], ['Low-infill TPU', 'TPU de bajo relleno']],
+        [['Key advantage', 'Ventaja'], ['Simplified assembly', 'Montaje simplificado']]
       ]
     },
     { 
       t: ['Custom CAD Redesign in Fusion 360', 'Rediseño CAD a medida en Fusion 360'], 
       h: [
-        'Para fusionar ambos mundos, se modeló en Fusion 360 una pieza de acoplamiento híbrida. Analizando las cotas del eje InMoov y la base plana de la mano, se diseñó un anclaje robusto que preserva intacta la rotación de la muñeca sin comprometer la ergonomía.',
-        'To merge both worlds, a custom hybrid coupling part was modelled in Fusion 360. Analyzing InMoov axis dimensions and the flat hand base, a robust anchor was designed to preserve wrist rotation without compromising ergonomics.'
+        'To merge both worlds, a custom hybrid coupling part was modelled in Fusion 360. Analyzing InMoov axis dimensions and the flat hand base, a robust anchor was designed to preserve wrist rotation without compromising ergonomics.',
+        'Para fusionar ambos mundos, se modeló en Fusion 360 una pieza de acoplamiento híbrida. Analizando las cotas del eje InMoov y la base plana de la mano, se diseñó un anclaje robusto que preserva intacta la rotación de la muñeca sin comprometer la ergonomía.'
       ],
       specs: [
-        ['Software', 'Autodesk Fusion 360'],
-        ['Pieza clave', 'Adaptador de muñeca híbrido'],
-        ['Resultado', 'Unión firme sin holguras']
+        [['Software', 'Software'], ['Autodesk Fusion 360', 'Autodesk Fusion 360']],
+        [['Key part', 'Pieza clave'], ['Hybrid wrist adapter', 'Adaptador de muñeca híbrido']],
+        [['Result', 'Resultado'], ['Firm joint without play', 'Unión firme sin holguras']]
       ]
     },
     { 
       t: ['Final Assembly & Servos Integration', 'Ensamblaje final e integración de servos'], 
       h: [
-        'El sistema final combina componentes impresos en PLA y TPU, accionados por seis servos digitales DM996 de 15 kg·cm controlados mediante tendones de hilo de nailon de alta resistencia. El resultado es un brazo robusto, preciso y preparado para replicar los gestos en tiempo real.',
-        'The final assembly combines PLA and TPU printed parts, actuated by six digital DM996 servos (15 kg·cm) controlled via high-strength nylon thread tendons. The result is a robust, precise arm ready for real-time gesture mirroring.'
+        'The final assembly combines PLA and TPU printed parts, actuated by six digital DM996 servos (15 kg·cm) controlled via high-strength nylon thread tendons. The result is a robust, precise arm ready for real-time gesture mirroring.',
+        'El sistema final combina componentes impresos en PLA y TPU, accionados por seis servos digitales DM996 de 15 kg·cm controlados mediante tendones de hilo de nailon de alta resistencia. El resultado es un brazo robusto, preciso y preparado para replicar los gestos en tiempo real.'
       ],
       specs: [
-        ['Actuadores', '6 × Servos DM996 (15 kg·cm)'],
-        ['Tendones', 'Hilo de nailon de alta resistencia'],
-        ['Estructura', 'PLA / TPU hibridado']
+        [['Actuators', 'Actuadores'], ['6 × DM996 Servos (15 kg·cm)', '6 × Servos DM996 (15 kg·cm)']],
+        [['Tendons', 'Tendones'], ['High-strength nylon thread', 'Hilo de nailon de alta resistencia']],
+        [['Structure', 'Estructura'], ['Hybridized PLA / TPU', 'PLA / TPU hibridado']]
       ]
     }
   ];
@@ -125,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const mdet = $('#mdet');    const showMech = i => {      mi = i;      $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); 
     const d = MD[i];
     
-    // Generador del diseño interactivo en 2 columnas (Texto + Ficha técnica)
     mdet.innerHTML = `
       <div class="mdet-text">
         <span class="mono" style="color:var(--mute); text-transform:uppercase; letter-spacing:.1em; font-size:.65rem;">Hito 0${i+1} // Mechanical Milestone</span>
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="specs-title" data-es="Especificaciones clave" data-en="Key Specifications">${lang === 'es' ? 'Especificaciones clave' : 'Key Specifications'}</div>
         ${d.specs.map(spec => `
           <div class="spec-row">
-            <span class="spec-k">${spec[0]}</span>
-            <span class="spec-v">${spec[1]}</span>
+            <span class="spec-k">${T(spec[0])}</span>
+            <span class="spec-v">${T(spec[1])}</span>
           </div>
         `).join('')}
       </div>
@@ -149,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
   showMech(0);
+    
   
 
   /* Guante con flechas */
