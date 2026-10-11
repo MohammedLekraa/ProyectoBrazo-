@@ -160,14 +160,30 @@ canvas{max-width:100%}
   align-items: stretch; /* Dejamos stretch para que las columnas midan lo mismo de alto */
 }
 
-/* Forzamos que la columna del medio (la tarjeta de Bluetooth) actúe como un contenedor flexible centrado */
-.pipe > div:nth-child(3), .col.mid {
+.pipe {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center; /* Centra automáticamente todos los elementos de las columnas verticalmente */
+}
+
+.col {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra la tarjeta verticalmente en el medio exacto */
-}.col{display:flex;flex-direction:column;gap:1rem}
+  gap: 1rem;
+  justify-content: center; /* Asegura que si hay varias tarjetas en una columna, se distribuyan bien */
+}
+
+/* Forzamos específicamente que la columna central (la de Bluetooth) se coloque en el medio exacto */
+.pipe > div:nth-child(3), 
+.col.mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center; /* Evita que se estire y la fuerza a ir al centro vertical */
+}
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.col.mid{justify-content:center}
+
 .mini{margin:0;padding:1rem}.mini img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .mini p{margin:0;font-size:.88rem}
 .arrow{align-self:center;color:#b9b5a8;font:400 1.6rem var(--mono)}
