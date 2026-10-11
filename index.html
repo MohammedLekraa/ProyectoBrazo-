@@ -90,20 +90,21 @@
     </figcaption>
   </figure>
 
-  <section id="planteamiento">
-  <h2 data-es="02. Planteamiento general del sistema">02. System Architecture</h2>
   
-  <p data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.">
-    For the arm to copy my hand, we need sensors to capture motion, a wireless link to transmit data, and actuators to reproduce it.
+  <section id="planteamiento">
+  <h2 data-es="02. Planteamiento general del sistema" data-en="02. System Architecture">02. Planteamiento general del sistema</h2>
+  
+  <p data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa." data-en="For the arm to copy my hand, we need sensors to capture motion, a wireless link to transmit data, and actuators to reproduce it. The system is divided into two nodes: the glove, which captures, and the arm, which acts.">
+    Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.
   </p>
 
-  <!-- BARRA DE FLUJO SUPERIOR (ARRIBA DEL TODO) -->
+  <!-- BARRA DE FLUJO SUPERIOR -->
   <div class="flow-bar">
-    <span data-es="CAPTURAR">CAPTURAR</span>
+    <span data-es="CAPTURAR" data-en="CAPTURE">CAPTURAR</span>
     <span class="arrow-sm">→</span>
-    <span data-es="TRANSMITIR">TRANSMITIR</span>
+    <span data-es="TRANSMITIR" data-en="TRANSMIT">TRANSMITIR</span>
     <span class="arrow-sm">→</span>
-    <span data-es="REPRODUCIR">REPRODUCIR</span>
+    <span data-es="REPRODUCIR" data-en="REPRODUCE">REPRODUCIR</span>
   </div>
 
   <!-- REJILLA DE TARJETAS -->
@@ -111,13 +112,13 @@
     <!-- COLUMNA 1: CAPTURA -->
     <div class="col">
       <div class="card card-visual">
-        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
+        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
         <h4>Flex Sensor</h4>
         <img src="flex-sensor.png" alt="Flex Sensor">
       </div>
 
       <div class="card card-visual">
-        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
+        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA" data-en="WRIST ROTATION">ROTACIÓN DE LA MUÑECA</span>
         <h4>IMU · MPU6050</h4>
         <img src="mpu6050.png" alt="MPU6050">
       </div>
@@ -130,8 +131,8 @@
     <div class="col col-mid">
       <div class="card card-visual card-tall">
         <h3>BLUETOOTH</h3>
-        <p class="desc-main" data-es="Comunicación inalámbrica">Comunicación inalámbrica</p>
-        <p class="desc-sub" data-es="Sin conexión física entre guante y brazo">Sin conexión física entre guante y brazo</p>
+        <p class="desc-main" data-es="Comunicación inalámbrica" data-en="Wireless communication">Comunicación inalámbrica</p>
+        <p class="desc-sub" data-es="Sin conexión física entre guante y brazo" data-en="No physical connection between glove and arm">Sin conexión física entre guante y brazo</p>
       </div>
     </div>
 
@@ -141,14 +142,14 @@
     <!-- COLUMNA 3: REPRODUCCIÓN -->
     <div class="col">
       <div class="card card-visual">
-        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
-        <h4>Servo + hilo</h4>
+        <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
+        <h4 data-es="Servo + hilo" data-en="Servo + thread">Servo + hilo</h4>
         <img src="servo-hilo.png" alt="Servo con hilo">
       </div>
 
       <div class="card card-visual">
-        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
-        <h4>Servo + engranajes</h4>
+        <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA" data-en="WRIST ROTATION">ROTACIÓN DE LA MUÑECA</span>
+        <h4 data-es="Servo + engranajes" data-en="Servo + gears">Servo + engranajes</h4>
         <img src="servo-engranajes.png" alt="Servo con engranajes">
       </div>
     </div>
