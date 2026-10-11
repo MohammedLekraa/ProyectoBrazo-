@@ -69,30 +69,87 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('img', r).forEach(i => i.addEventListener('error', () => i.setAttribute('data-missing', ''))); stepper(r);
   });
 
-  /* Diseño mecánico */
+  /* Diseño mecánico interactivo (Sección 03) */
   const MD = [
-    { t: ['InMoov forearm', 'Antebrazo InMoov'], h: [
-      '<p>Existing 3D models were used as a starting point, a common rapid-prototyping strategy that shortens development and lets the effort focus on integration. Among the open arm designs on repositories such as Thingiverse, InMoov stood out for its detail, documentation and a structure meant for experimental projects.</p><p>The forearm is solid, with housings for the servos, internal channels for the threads that move the fingers and a joint that allows wrist rotation. The original hand, however, is very complex: many parts and a delicate assembly. According to other students and the university association URBots, it is hard to assemble and loosens with prolonged use.</p>',
-      '<p>Se partió de modelos 3D ya existentes, una estrategia habitual en prototipado rápido que reduce el tiempo de desarrollo y permite centrar el esfuerzo en la integración. Entre los diseños de brazos de repositorios abiertos como Thingiverse, InMoov destacó por su detalle, su documentación y una estructura pensada para proyectos experimentales.</p><p>El antebrazo es sólido, con alojamientos para los servos, pasos internos para los hilos que mueven los dedos y una articulación que permite girar la muñeca. La mano original, en cambio, es muy compleja: muchas piezas y un montaje delicado. Según otros estudiantes y la asociación universitaria URBots, es difícil de montar y se desajusta con el uso prolongado.</p>'],
-      im: [['img/inmoov.jpg', ['InMoov parts', 'Piezas de InMoov']], ['img/muneca.jpg', ['InMoov wrist rotation mechanism', 'Mecanismo de rotación de la muñeca de InMoov']]] },
-    { t: ['FlexyHand hand', 'Mano FlexyHand'], h: [
-      '<p>As an alternative, a hand with simpler construction and fewer parts was chosen, easier to assemble and maintain. It is inspired by FlexyHand and relies on flexible hinges (<i>living hinges</i>) that let the fingers bend, plus a system that transmits the motion from the servos.</p><p>Its drawback: it has no working wrist rotation and is not designed to fit the InMoov forearm. Its base is flat, whereas InMoov uses a cylindrical joint with a through axis. They could not be joined without modifying the design.</p>',
-      '<p>Como alternativa se eligió una mano de construcción más sencilla, con menos piezas, que facilita el montaje y el mantenimiento. Está inspirada en FlexyHand y se basa en bisagras flexibles (<i>living hinges</i>) que permiten flexionar los dedos, junto con un sistema que transmite el movimiento desde los servos.</p><p>Tiene un inconveniente: no incorpora una rotación de muñeca funcional y no está pensada para integrarse con el antebrazo de InMoov. Su base es plana, mientras que InMoov usa una unión cilíndrica con un eje pasante. No se podían unir directamente sin modificar el diseño.</p>'],
-      im: [['img/brainyhand.jpg', ['FlexyHand printed', 'Mano FlexyHand impresa']]] },
-    { t: ['Redesign in Fusion 360', 'Rediseño en Fusion 360'], h: [
-      '<p>To solve the incompatibility, the joint was redesigned in Fusion 360 to integrate the hand with the forearm without losing wrist rotation.</p><ol><li>The size and geometry of the original InMoov wrist part were analysed: joining points, axis diameter and support spacing.</li><li>Those references were used as the basis to redesign the hand joining part.</li><li>A new base part for the hand was modelled, replicating distances, holes and volumes to fit the InMoov wrist.</li><li>The hand geometry was adapted to fit the new part, keeping orientation and ergonomics.</li></ol><p>The result is a hybrid part that joins both pieces robustly.</p>',
-      '<p>Para resolver la incompatibilidad se rediseñó la unión con Fusion 360, para integrar la mano con el antebrazo sin perder la rotación de la muñeca.</p><ol><li>Se analizaron las dimensiones y la geometría de la pieza de muñeca original de InMoov: puntos de unión, diámetro del eje y separación entre soportes.</li><li>Se tomaron esas referencias como base para rediseñar la pieza de unión de la mano.</li><li>Se modeló una nueva pieza base para la mano, replicando distancias, orificios y volúmenes para acoplarse a la muñeca de InMoov.</li><li>Se adaptó la geometría de la mano para que encajara con la pieza nueva, manteniendo la orientación y la ergonomía.</li></ol><p>El resultado es una pieza híbrida que une de forma robusta las dos partes.</p>'],
-      im: [['img/fusion.jpg', ['Original design (left) and modified with anchor (right)', 'Diseño original (izquierda) y modificado con anclaje (derecha)']]] },
-    { t: ['Assembled arm', 'Brazo ensamblado'], h: [
-      '<p>The redesigned parts were 3D printed and then adjusted by hand for fit and alignment. Almost the whole arm is PLA, a rigid, easy-to-print and stable material. The finger hinges were printed in TPU, and the fingers move with high-strength nylon thread.</p><p>The first TPU hinges were too stiff and the fingers did not close fully. Filaflex was too soft, and a harder TPU was expensive and still stiff. The problem was the infill: printing the TPU with low infill let the fingers close and return to their initial position.</p><p>Six DM996 digital servos of 15 kg·cm were used: five at the back of the forearm for the fingers and one at the wrist, which drives the rotation directly through gears.</p><dl class="specs"><div><dt>Structure</dt><dd>PLA</dd></div><div><dt>Hinges</dt><dd>TPU, low infill</dd></div><div><dt>Tendons</dt><dd>Nylon thread</dd></div><div><dt>Servos</dt><dd>6 × DM996 (15 kg·cm)</dd></div><div><dt>Printer</dt><dd>[Printer model]</dd></div></dl>',
-      '<p>Las piezas rediseñadas se imprimieron en 3D y después se hicieron ajustes manuales de encaje y alineación. Casi todo el brazo es de PLA, un material rígido, fácil de imprimir y estable. Las bisagras de los dedos se imprimieron en TPU, y los dedos se mueven con hilo de nailon de alta resistencia.</p><p>Las primeras bisagras de TPU eran demasiado rígidas y los dedos no se cerraban del todo. Filaflex era demasiado blando, y un TPU más duro era caro y seguía siendo rígido. El problema era el relleno: imprimiendo el TPU con poco relleno se consiguió cerrar los dedos y que vuelvan a la posición inicial.</p><p>Se usaron seis servos digitales DM996 de 15 kg·cm: cinco en la parte posterior del antebrazo para los dedos y uno en la muñeca, que acciona la rotación directamente con engranajes.</p><dl class="specs"><div><dt>Estructura</dt><dd>PLA</dd></div><div><dt>Bisagras</dt><dd>TPU, poco relleno</dd></div><div><dt>Tendones</dt><dd>Hilo de nailon</dd></div><div><dt>Servos</dt><dd>6 × DM996 (15 kg·cm)</dd></div><div><dt>Impresora</dt><dd>[Modelo de impresora]</dd></div></dl>'],
-      im: [['img/brazo.jpg', ['Assembled arm', 'Brazo ensamblado']], ['img/bisagras.jpg', ['Flexible finger hinges', 'Bisagras flexibles de los dedos']]] }
+    { 
+      t: ['InMoov Forearm Structure', 'Estructura del antebrazo InMoov'], 
+      h: [
+        'Se partió de los modelos abiertos de InMoov por la solidez y los canales internos diseñados para los hilos. Aunque la estructura del antebrazo demostró ser sobresaliente, se descartó su diseño de mano original debido a su excesiva complejidad mecánica y fragilidad ante el uso continuado.',
+        'The open InMoov models were chosen for their robust forearm structure and internal tendon channels. While the forearm proved exceptional, the original hand design was discarded due to excessive mechanical complexity and wear over time.'
+      ],
+      specs: [
+        ['Origen', 'Thingiverse / Open Source'],
+        ['Material base', 'PLA Estructural'],
+        ['Ventaja', 'Canales internos integrados']
+      ]
+    },
+    { 
+      t: ['FlexyHand Alternative Integration', 'Integración alternativa FlexyHand'], 
+      h: [
+        'Como alternativa se seleccionó una mano inspirada en FlexyHand, optimizada para reducir el número de piezas y facilitar el ensamblaje mediante bisagras flexibles (living hinges) de TPU. El principal reto técnico inicial era su incompatibilidad directa con la base cilíndrica del antebrazo.',
+        'As an alternative, a hand inspired by FlexyHand was selected, optimized to reduce part count and ease assembly using TPU living hinges. The main initial hurdle was its lack of direct compatibility with the forearm cylindrical base.'
+      ],
+      specs: [
+        ['Arquitectura', 'Bisagras flexibles (Living hinges)'],
+        ['Material bisagras', 'TPU de bajo relleno'],
+        ['Ventaja', 'Montaje simplificado']
+      ]
+    },
+    { 
+      t: ['Custom CAD Redesign in Fusion 360', 'Rediseño CAD a medida en Fusion 360'], 
+      h: [
+        'Para fusionar ambos mundos, se modeló en Fusion 360 una pieza de acoplamiento híbrida. Analizando las cotas del eje InMoov y la base plana de la mano, se diseñó un anclaje robusto que preserva intacta la rotación de la muñeca sin comprometer la ergonomía.',
+        'To merge both worlds, a custom hybrid coupling part was modelled in Fusion 360. Analyzing InMoov axis dimensions and the flat hand base, a robust anchor was designed to preserve wrist rotation without compromising ergonomics.'
+      ],
+      specs: [
+        ['Software', 'Autodesk Fusion 360'],
+        ['Pieza clave', 'Adaptador de muñeca híbrido'],
+        ['Resultado', 'Unión firme sin holguras']
+      ]
+    },
+    { 
+      t: ['Final Assembly & Servos Integration', 'Ensamblaje final e integración de servos'], 
+      h: [
+        'El sistema final combina componentes impresos en PLA y TPU, accionados por seis servos digitales DM996 de 15 kg·cm controlados mediante tendones de hilo de nailon de alta resistencia. El resultado es un brazo robusto, preciso y preparado para replicar los gestos en tiempo real.',
+        'The final assembly combines PLA and TPU printed parts, actuated by six digital DM996 servos (15 kg·cm) controlled via high-strength nylon thread tendons. The result is a robust, precise arm ready for real-time gesture mirroring.'
+      ],
+      specs: [
+        ['Actuadores', '6 × Servos DM996 (15 kg·cm)'],
+        ['Tendones', 'Hilo de nailon de alta resistencia'],
+        ['Estructura', 'PLA / TPU hibridado']
+      ]
+    }
   ];
-  let mi = 0; const mdet = $('#mdet');   const showMech = i => {     mi = i; $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); const d = MD[i];
-    mdet.innerHTML = `<div><h3>${T(d.t)}</h3>${T(d.h)}</div><div class="mimgs">${d.im.map(m => `<figure class="fig" style="margin:0;padding:0"><img class="zoom" src="${m[0]}" alt="${T(m[1])}"><figcaption class="mono">${T(m[1])}</figcaption></figure>`).join('')}</div>`;
-    mdet.classList.remove('sw'); void mdet.offsetWidth; mdet.classList.add('sw');
-    $$('img', mdet).forEach(im => im.addEventListener('error', () => im.setAttribute('data-missing', '')));   };   $$
-('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
+
+  let mi = 0; 
+  const mdet = $('#mdet');    const showMech = i => {      mi = i;      $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); 
+    const d = MD[i];
+    
+    // Generador del diseño interactivo en 2 columnas (Texto + Ficha técnica)
+    mdet.innerHTML = `
+      <div class="mdet-text">
+        <span class="mono" style="color:var(--mute); text-transform:uppercase; letter-spacing:.1em; font-size:.65rem;">Hito 0${i+1} // Mechanical Milestone</span>
+        <h3>${T(d.t)}</h3>
+        <p>${T(d.h)}</p>
+      </div>
+      <div class="mdet-specs">
+        <div class="specs-title" data-es="Especificaciones clave" data-en="Key Specifications">${lang === 'es' ? 'Especificaciones clave' : 'Key Specifications'}</div>
+        ${d.specs.map(spec => `
+          <div class="spec-row">
+            <span class="spec-k">${spec[0]}</span>
+            <span class="spec-v">${spec[1]}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    mdet.classList.remove('sw'); 
+    void mdet.offsetWidth; 
+    mdet.classList.add('sw');
+  }; 
+  
+  $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
+  showMech(0);
+  
 
   /* Guante con flechas */
   const CO = [
