@@ -57,21 +57,21 @@ img[data-missing]{min-height:150px;padding:1rem;background:var(--bg);border:1px 
 
 .fig img {
   display: block;
-  width: 360px;                  /* Ancho fijo exacto para que la foto no varíe */
+  width: 390px;                  /* Ancho fijo exacto para que la foto no varíe */
   max-width: 100%;
   height: auto;                  /* Mantiene la proporción de la imagen */
-  max-height: 260px;
+  max-height: 280px;
   object-fit: contain;
   border-radius: 6px;
 }
 
 .fig figcaption {
   margin-top: 0.6rem;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--mute);
   text-align: center;
   width: 100%;
-  max-width: 360px;              /* Obliga al texto a medir exactamente lo mismo que la imagen */
+  max-width: 390px;              /* Obliga al texto a medir exactamente lo mismo que la imagen */
 }
 
 
