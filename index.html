@@ -102,32 +102,65 @@
 <section id="sistema">
   <h2 data-es="02. Planteamiento general del sistema">02. General system overview</h2>
   <p class="lead" data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.">For the arm to copy my hand we need sensors that capture the movements, a wireless link that sends the data and actuators that reproduce them. The system is split into two nodes: the glove, which captures, and the arm, which acts.</p>
-  <div class="pipe">
-    <div class="col">
-      <h3 data-es="Captura en el guante">Capture at the glove</h3>
-      <figure class="card mini"><img class="zoom" src="img/flex.jpg" alt="Flex sensor"><h4 data-es="Sensores de flexión">Flex sensors</h4><p data-es="Uno por dedo. Miden la flexión y la extensión.">One per finger. They measure flexion and extension.</p></figure>
-      <figure class="card mini"><img class="zoom" src="img/imu.jpg" alt="MPU6050 IMU"><h4>IMU MPU6050</h4><p data-es="Mide la rotación de la muñeca.">Measures the wrist rotation.</p></figure>
+ <div class="pipe">
+  <!-- COLUMNA 1: CAPTURA -->
+  <div class="col">
+    <div class="pillt-header" data-es="CAPTURA DEL MOVIMIENTO">CAPTURA DEL MOVIMIENTO</div>
+    
+    <div class="card card-visual">
+      <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
+      <h4>Flex Sensor</h4>
+      <img src="img/flex-sensor.png" alt="Flex Sensor">
     </div>
-    <div class="arrow" aria-hidden="true">&rarr;</div>
-    <div class="col mid">
-      <h3 data-es="Transmisión">Transmission</h3>
-      <div class="card"><h4>Bluetooth</h4><p data-es="Un microcontrolador ESP32 procesa las lecturas y las envía. Un segundo ESP32 las recibe en el brazo. No hay ningún cable entre el guante y el brazo.">An ESP32 microcontroller processes the readings and sends them. A second ESP32 receives them at the arm. There is no cable between glove and arm.</p></div>
-    </div>
-    <div class="arrow" aria-hidden="true">&rarr;</div>
-    <div class="col">
-      <h3 data-es="Reproducción en el brazo">Reproduction at the arm</h3>
-      <figure class="card mini"><img class="zoom" src="img/servo-hilo.jpg" alt="Servos with thread"><h4 data-es="5 servos con hilo">5 servos with thread</h4><p data-es="Cada servo va atado a un hilo conectado a la articulación de un dedo. Al girar, recoge el hilo y el dedo se pliega.">Each servo is tied to a thread connected to a finger joint. When it turns it reels in the thread and the finger bends.</p></figure>
-      <figure class="card mini"><img class="zoom" src="img/servo-engranajes.jpg" alt="Wrist servo with gears"><h4 data-es="1 servo con engranajes">1 servo with gears</h4><p data-es="El sexto servo transmite su giro a la muñeca mediante engranajes.">The sixth servo transmits its rotation to the wrist through gears.</p></figure>
+
+    <div class="card card-visual">
+      <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
+      <h4>IMU · MPU6050</h4>
+      <img src="img/mpu6050.png" alt="MPU6050">
     </div>
   </div>
-  <h3 data-es="Funcionamiento global">Overall operation</h3>
-  <ol class="obj">
-    <li data-es="El guante lee los sensores de flexión y la IMU, y filtra las señales.">The glove reads the flex sensors and the IMU, and filters the signals.</li>
-    <li data-es="Los valores resultantes se empaquetan en una sola trama y se envían por Bluetooth al brazo.">The resulting values are packed in a single frame and sent over Bluetooth to the arm.</li>
-    <li data-es="El brazo recibe la trama, extrae los valores y actualiza la consigna del servo de cada dedo y de la muñeca.">The arm receives the frame, extracts the values and updates the setpoint of each finger servo and of the wrist.</li>
-  </ol>
-  <p data-es="Esta arquitectura modular separa responsabilidades y facilita la depuración, porque cada nodo se puede comprobar por separado. También permite añadir sensores o cambiar el método de comunicación sin tocar el resto.">This modular architecture separates responsibilities and eases debugging, since each node can be tested on its own. It also allows adding sensors or changing the communication method without touching the rest.</p>
-</section>
+
+  <!-- FLECHA 1 -->
+  <div class="arrow">→</div>
+
+  <!-- COLUMNA 2: TRANSMISIÓN (TARJETA ALTA CENTRADA) -->
+  <div class="col col-mid">
+    <div class="card card-visual card-tall">
+      <h3>BLUETOOTH</h3>
+      <p class="desc-main" data-es="Comunicación inalámbrica">Comunicación inalámbrica</p>
+      <p class="desc-sub" data-es="Sin conexión física entre guante y brazo">Sin conexión física entre guante y brazo</p>
+    </div>
+  </div>
+
+  <!-- FLECHA 2 -->
+  <div class="arrow">→</div>
+
+  <!-- COLUMNA 3: REPRODUCCIÓN -->
+  <div class="col">
+    <div class="pillt-header" data-es="REPRODUCCIÓN DEL MOVIMIENTO">REPRODUCCIÓN DEL MOVIMIENTO</div>
+
+    <div class="card card-visual">
+      <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS">FLEXIÓN DE LOS DEDOS</span>
+      <h4>Servo + hilo</h4>
+      <img src="img/servo-hilo.png" alt="Servo con hilo">
+    </div>
+
+    <div class="card card-visual">
+      <span class="card-sub" data-es="ROTACIÓN DE LA MUÑECA">ROTACIÓN DE LA MUÑECA</span>
+      <h4>Servo + engranajes</h4>
+      <img src="img/servo-engranajes.png" alt="Servo con engranajes">
+    </div>
+  </div>
+</div>
+
+<!-- BARRA INFERIOR DE PASOS -->
+<div class="flow-bar">
+  <span data-es="CAPTURAR">CAPTURAR</span>
+  <span class="arrow-sm">→</span>
+  <span data-es="TRANSMITIR">TRANSMITIR</span>
+  <span class="arrow-sm">→</span>
+  <span data-es="REPRODUCIR">REPRODUCIR</span>
+</div>
 
 <section id="disseny">
   <h2 data-es="03. Diseño y estructura del brazo robótico">03. Robotic arm design and structure</h2>
