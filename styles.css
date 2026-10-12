@@ -179,7 +179,7 @@ canvas{max-width:100%}
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 230px; /* Se queda en la altura que tú quieras */
+  height: 260px; /* Se queda en la altura que tú quieras */
   padding: 0.8rem;
   background: var(--card);
   border: 1px solid var(--line);
@@ -247,7 +247,7 @@ canvas{max-width:100%}
 /* Tarjeta central de Bluetooth con el texto arreglado y sin romperse */
 .card-tall {
   width: 100%;
-  height: 206px; /* <--- Debe ser exactamente: (Altura lateral × 2) + el gap (1rem / 16px) */
+  height: 106px; /* <--- Debe ser exactamente: (Altura lateral × 2) + el gap (1rem / 16px) */
   display: flex;
   flex-direction: column;
   justify-content: center;
