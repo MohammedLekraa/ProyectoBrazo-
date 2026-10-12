@@ -301,7 +301,7 @@ canvas{max-width:100%}
   color: #b9b5a8;
   font: 400 1.4rem var(--mono);
 }
-}
+
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 
 .mini{margin:0;padding:1rem}.mini img{width:100%;aspect-ratio:4/3;object-fit:cover}
