@@ -218,63 +218,58 @@
   <h2 data-es="05. Sensor de flexión: flexión-extensión de los dedos">05. Flex sensor: finger flexion-extension</h2>
   <p class="lead" data-es="Para medir cómo se pliega cada dedo se usa un sensor de flexión resistivo. El microcontrolador no puede leer resistencias, así que hay que convertirla en una tensión y, después, en un número.">To measure how each finger bends we use a resistive flex sensor. The microcontroller cannot read resistances, so it has to be converted into a voltage and then into a number.</p>
 
-  <h3 data-es="Cómo funciona el sensor">How the sensor works</h3>
-  <div class="grid2">
-    <figure class="card fig"><img class="zoom" src="img/flex-doblar.jpg" alt="Flex sensor resistance when bent"><figcaption class="mono" data-es="Al plegarse, la resistencia sube: entre 17,5 y 32,5 kΩ en plano y, a 180°, al menos el doble.">When bent, the resistance rises: 17.5 to 32.5 kΩ when flat and, at 180°, at least double.</figcaption></figure>
-    <figure class="card fig"><img class="zoom" src="img/flex.jpg" alt="Flex sensor"><figcaption class="mono" data-es="Spectra Symbol FS-L-0055-253-ST: 25 kΩ en plano, 55 mm activos.">Spectra Symbol FS-L-0055-253-ST: 25 kΩ flat, 55 mm active length.</figcaption></figure>
-  </div>
-  <p data-es="Cuanto más se dobla, más aumenta su resistencia, y por eso indica el grado de flexión del dedo. Tiene limitaciones: el comportamiento difiere entre sensores, depende de cómo se sujeta al guante y es sensible al ruido. Por eso cada sensor se caracteriza por separado.">The more it bends, the more its resistance increases, so it indicates how much the finger is flexed. It has limitations: behaviour differs from sensor to sensor, depends on how it is attached to the glove and is sensitive to noise. That is why each sensor is characterised separately.</p>
-
-  <h3 data-es="De resistencia a tensión: el divisor de tensión">From resistance to voltage: the voltage divider</h3>
-  <div class="grid2 mid-al">
-    <div>
-      <p data-es="El ESP32 mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central.">The ESP32 measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor. The sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint.</p>
-      <p class="eq">Vout = Vin · Rfix / (Rfix + Rflex)</p>
-      <p data-es="Cuando el dedo se pliega, Rflex sube y Vout baja.">When the finger bends, Rflex rises and Vout drops.</p>
-    </div>
-    <figure class="card fig"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider with the flex sensor"></figure>
-  </div>
-
-  <h3 data-es="De tensión a número: el ADC">From voltage to number: the ADC</h3>
-  <p data-es="El ESP32 tiene un conversor analógico-digital (ADC) de 12 bits que transforma cada tensión entre 0 y 3,3 V en un número entre 0 y 4095. Ese número es el que lee el programa.">The ESP32 has a 12-bit analog-to-digital converter (ADC) that turns each voltage between 0 and 3.3 V into a number between 0 and 4095. That number is what the program reads.</p>
-  <p class="eq">ADC = Vout / 3.3 · 4095</p>
-
-  <h3 data-es="Qué resistencia fija elegir">Which fixed resistor to choose</h3>
-  <div class="grid2 mid-al">
-    <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.">At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.</p>
-    <div class="card"><canvas id="c-rf" aria-label="ADC range with 10 kΩ and 47 kΩ"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores.">Hover over the chart to see the values.</p></div>
-  </div>
-
-  <h3 data-es="Caracterización: la relación entre ángulo y lectura es una recta">Characterisation: angle and reading follow a straight line</h3>
-  <p data-es="Para cada sensor se fijó el dedo a 0°, 45°, 90°, 135° y 180° y se anotó la lectura del ADC. Los puntos se alinean aproximadamente en una recta, sin saltos ni saturaciones. Aunque físicamente el sensor no es perfectamente lineal, la dispersión es lo bastante pequeña para aproximarlo con una recta en el rango de trabajo.">For each sensor the finger was fixed at 0°, 45°, 90°, 135° and 180° and the ADC reading was recorded. The points line up roughly on a straight line, with no jumps or saturation. Although the sensor is not perfectly linear physically, the scatter is small enough to approximate it with a line within the working range.</p>
-  <div class="grid2">
-    <div class="card"><canvas id="chart" aria-label="ADC reading versus angle"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores.">Hover over the chart to see the values.</p></div>
-    <div class="card">
-      <div class="tabs" id="ctabs"><button class="tab on" data-k="r" data-es="Resistencia">Resistance</button><button class="tab" data-k="v" data-es="Tensión">Voltage</button></div>
-      <canvas id="c-multi" aria-label="Resistance and voltage versus angle"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores.">Hover over the chart to see the values.</p>
+  <!-- BLOQUE 1: FUNCIONAMIENTO Y FOTOS -->
+  <div class="flex-block">
+    <h3 data-es="Cómo funciona el sensor">How the sensor works</h3>
+    <p data-es="Cuanto más se dobla, más aumenta su resistencia, indicando el grado de flexión. Su comportamiento varía según el sensor y su fijación, por lo que requiere caracterización individual.">The more it bends, the more its resistance increases. Behaviour differs between sensors and how they are attached, requiring individual characterisation.</p>
+    <div class="grid2">
+      <figure class="card fig"><img class="zoom" src="img/flex-doblar.jpg" alt="Flex sensor resistance when bent"><figcaption class="mono" data-es="Resistencia al doblar: 17,5 a 32,5 kΩ en plano, el doble a 180°.">Resistance rises: 17.5 to 32.5 kΩ flat, double at 180°.</figcaption></figure>
+      <figure class="card fig"><img class="zoom" src="img/flex.jpg" alt="Flex sensor"><figcaption class="mono" data-es="Spectra Symbol FS-L-0055-253-ST: 25 kΩ en plano, 55 mm activos.">Spectra Symbol FS-L-0055-253-ST: 25 kΩ flat, 55 mm active.</figcaption></figure>
     </div>
   </div>
 
-  <h3 data-es="De lectura a ángulo: la función map()">From reading to angle: the map() function</h3>
-  <div class="grid2 mid-al">
-    <div>
-      <p data-es="Como la relación es una recta, el ángulo del servo se obtiene por interpolación lineal con la función <code>map()</code> de Arduino. Solo hay que conocer la lectura con el dedo extendido (maxFlex) y con la máxima flexión (minFlex). Para recaracterizar un sensor basta con cambiar esos dos valores.">Since the relation is a straight line, the servo angle is obtained by linear interpolation with Arduino's <code>map()</code> function. We only need the reading with the finger extended (maxFlex) and at maximum flexion (minFlex). To recalibrate a sensor it is enough to change those two values.</p>
-      <p class="eq">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
-    </div>
-    <div class="card">
-      <h4 data-es="Pruébalo con el dedo índice">Try it with the index finger</h4>
-      <p class="mono">minFlex 1530 · maxFlex 2100</p>
-      <input type="range" id="adc" min="1530" max="2100" value="2100" aria-label="ADC reading">
-      <p class="mono"><span data-es="Lectura ADC:">ADC reading:</span> <b id="adc-v"></b> &rarr; <span data-es="ángulo del servo:">servo angle:</span> <b id="adc-a"></b>°</p>
+  <!-- BLOQUE 2: DIVISOR DE TENSIÓN Y ADC -->
+  <div class="flex-block">
+    <h3 data-es="Acondicionamiento: Divisor de tensión y ADC">Signal conditioning: Voltage divider & ADC</h3>
+    <div class="grid2 mid-al">
+      <div>
+        <p data-es="El ESP32 mide tensiones (0–3,3 V), no resistencias. Se usa un divisor con resistencia fija de 47 kΩ. El conversor ADC de 12 bits transforma la tensión en un valor numérico de 0 a 4095.">The ESP32 measures voltages (0–3.3 V). A divider with a 47 kΩ fixed resistor converts resistance to voltage, and the 12-bit ADC turns it into a 0–4095 value.</p>
+        <p class="eq">Vout = Vin · Rfix / (Rfix + Rflex)</p>
+        <p class="eq">ADC = Vout / 3.3 · 4095</p>
+      </div>
+      <figure class="card fig"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider"></figure>
     </div>
   </div>
 
-  <h3 data-es="Calibración de los cinco sensores">Calibration of the five sensors</h3>
-  <p data-es="Los cinco sensores se caracterizaron uno a uno, por las diferencias entre ellos y por su posición en el guante. Cada uno tiene su rango de ADC, de la máxima flexión al dedo extendido, y esos valores son los límites del mapeo.">The five sensors were characterised one by one, because of the differences between them and their position on the glove. Each has its own ADC range, from maximum flexion to the extended finger, and those values are the limits of the mapping.</p>
-  <div class="card"><canvas id="c-cal" aria-label="Calibration range of each finger"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores.">Hover over the chart to see the values.</p></div>
+  <!-- BLOQUE 3: SELECCIÓN DE RESISTENCIA Y GRÁFICO -->
+  <div class="flex-block">
+    <h3 data-es="Elección de la resistencia fija (47 kΩ vs 10 kΩ)">Choosing the fixed resistor</h3>
+    <div class="grid2 mid-al">
+      <p data-es="Con 10 kΩ el rango útil era pequeño (310 puntos ADC). SparkFun recomienda 47 kΩ, ampliando el rango a ~700 puntos, lo que permite un control del servo mucho más suave y preciso.">With 10 kΩ the range was small (~310 ADC units). SparkFun recommends 47 kΩ, widening the range to ~700 points for smoother servo control.</p>
+      <div class="card chart-sm"><canvas id="c-rf" aria-label="ADC range comparison"></canvas></div>
+    </div>
+  </div>
 
-  <h3 data-es="Filtrado y seguridad">Filtering and safety</h3>
-  <p data-es="Cada lectura es la media de 8 muestras consecutivas, para reducir el ruido. Las lecturas fuera del intervalo de 1000 a 3000 se consideran no válidas y se mantiene el último valor correcto. En el brazo, el servo no salta a la nueva posición: en cada trama avanza solo una cuarta parte de la diferencia con el objetivo, y el movimiento resulta más suave.">Each reading is the average of 8 consecutive samples to reduce noise. Readings outside the 1000 to 3000 range are considered invalid and the last valid value is kept. At the arm, the servo does not jump to the new position: in each frame it moves only a quarter of the difference to the target, which makes the movement smoother.</p>
+  <!-- BLOQUE 4: CARACTERIZACIÓN Y MAPEO (INTEGRADO) -->
+  <div class="flex-block">
+    <h3 data-es="Caracterización y conversión a ángulo (map())">Characterisation & angle mapping</h3>
+    <p data-es="La relación entre ángulo y lectura es lineal en el rango de trabajo. Mediante la función <code>map()</code> y los valores de calibración (minFlex y maxFlex) de cada dedo, se obtiene directamente el ángulo del servo (0–180°).">Angle and reading follow a straight line in the working range. Using Arduino's <code>map()</code> function with each finger's calibration limits, we map ADC values directly to servo angles.</p>
+    <p class="eq">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
+    <div class="grid2">
+      <div class="card chart-sm"><canvas id="chart" aria-label="ADC vs angle"></canvas></div>
+      <div class="card chart-sm">
+        <div class="tabs" id="ctabs"><button class="tab on" data-k="r" data-es="Resistencia">Resistance</button><button class="tab" data-k="v" data-es="Tensión">Voltage</button></div>
+        <canvas id="c-multi" aria-label="Resistance/Voltage vs angle"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOQUE 5: CALIBRACIÓN Y FILTRADO -->
+  <div class="flex-block">
+    <h3 data-es="Calibración de los 5 sensores y filtrado">5-Sensor calibration & filtering</h3>
+    <p data-es="Cada dedo tiene rangos únicos. Las lecturas promedian 8 muestras para eliminar ruido, descartando valores fuera de rango para garantizar un movimiento estable.">Each finger has unique ranges. Readings average 8 samples to filter noise and ensure stable movement.</p>
+    <div class="card chart-med"><canvas id="c-cal" aria-label="Calibration range"></canvas></div>
+  </div>
 </section>
 
 <section id="imu">
