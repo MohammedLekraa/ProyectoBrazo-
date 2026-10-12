@@ -254,7 +254,7 @@
   </div>
 
   <h3 data-es="De resistencia a número: el divisor de tensión y el ADC" data-en="From resistance to number: voltage divider and ADC">De resistencia a número: el divisor de tensión y el ADC</h3>
-  <div class="grid2 mid-al">
+  <div class="grid2 mid-al" >
     <div>
       <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor (the sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint). When the finger bends, Rflex rises and Vout drops." style="margin-bottom: 0.8rem;">
         El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja.
@@ -270,7 +270,7 @@
   </div>
 
   <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
-  <div class="grid2 mid-al" style="margin-top: 2">
+  <div class="grid2 mid-al" style="margin-top: -2.2rem;">
     <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
       Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
     </p>
@@ -279,20 +279,21 @@
   
 <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
   
-<div class="grid2 mid-al" style="margin-top: -2.2rem;">
+<div class="grid2" style="align-items: flex-start; margin-top: 0.5rem;">
   <div>
-    <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600)." style="margin-top: 0;">
+    <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
       Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
     </p>
     <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range." style="margin-top: 1rem;">
-      Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil.
+      Los puntos registrados se alistan aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil.
     </p>
     <p data-es="Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°)." data-en="To translate this reading to servo movement, Arduino's native <code>map()</code> function is used, which linearly maps the experimentally obtained ADC range to motor degrees (from 180° to 0°)." style="margin-top: 1rem;">
       Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°).
     </p>
     <p class="eq" style="margin-top: 0.8rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
   </div>
-  <div class="card" style="margin-top: 0;">
+  
+  <div class="card">
     <canvas id="chart" aria-label="ADC reading versus angle"></canvas>
     <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
   </div>
