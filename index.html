@@ -248,19 +248,23 @@
     </div>
 
     <figure class="card fig" style="margin: 0 auto;">
-      <img class="zoom" src="img/flex-doblar.jpg" alt="Flex sensor resistance when bent">
+      <img class="zoom" src="img/feextension.png" alt="Flex sensor resistance when bent">
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
     </figure>
   </div>
   
-  <h3 data-es="De resistencia a tensión: el divisor de tensión">From resistance to voltage: the voltage divider</h3>
+  <h3 data-es="De resistencia a tensión: el divisor de tensión" data-en="From resistance to voltage: the voltage divider" style="margin-top: 1.5rem;">De resistencia a tensión: el divisor de tensión</h3>
   <div class="grid2 mid-al">
     <div>
-      <p data-es="El ESP32 mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central.">The ESP32 measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor. The sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint.</p>
-      <p class="eq">Vout = Vin · Rfix / (Rfix + Rflex)</p>
-      <p data-es="Cuando el dedo se pliega, Rflex sube y Vout baja.">When the finger bends, Rflex rises and Vout drops.</p>
+      <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor. The sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint." style="margin-bottom: 0.8rem;">
+        El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central.
+      </p>
+      <p class="eq" style="margin: 0.6rem 0;">Vout = Vin · Rfix / (Rfix + Rflex)</p>
+      <p data-es="Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="When the finger bends, Rflex rises and Vout drops." style="margin-top: 0.8rem; margin-bottom: 0;">
+        Cuando el dedo se pliega, Rflex sube y Vout baja.
+      </p>
     </div>
-    <figure class="card fig"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider with the flex sensor"></figure>
+    <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisortension.png" alt="Voltage divider with the flex sensor"></figure>
   </div>
 
   <h3 data-es="De tensión a número: el ADC">From voltage to number: the ADC</h3>
