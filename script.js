@@ -236,8 +236,19 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$
 ('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
-  const adc = $('#adc'), calc = () => { const x = +adc.value; $('#adc-v').textContent = x; $('#adc-a').textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180; };
-  adc.addEventListener('input', calc); calc();
+  // El control de calibración ADC no existe en el HTML actual.
+  // Inicializarlo solo si están presentes los tres elementos evita que un null
+  // detenga la ejecución del resto del script (idioma, tema y tabla de materiales).
+  const adc = $('#adc'), adcV = $('#adc-v'), adcA = $('#adc-a');
+  if (adc && adcV && adcA) {
+    const calc = () => {
+      const x = Number(adc.value);
+      adcV.textContent = x;
+      adcA.textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180;
+    };
+    adc.addEventListener('input', calc);
+    calc();
+  }
 
   /* Trama Bluetooth */
   const FN = [['thumb', 'pulgar'], ['index finger', 'índice'], ['middle finger', 'corazón'], ['ring finger', 'anular'], ['little finger', 'meñique']];
