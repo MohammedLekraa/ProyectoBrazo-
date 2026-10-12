@@ -180,7 +180,7 @@ canvas{max-width:100%}
   align-items: center !important;
   text-align: center !important;
   width: 100% !important;
-  height: 280px !important; /* <--- Canvia aquest valor lliurement i t'farà cas */
+  height: 260px !important; /* <--- Canvia aquest valor lliurement i t'farà cas */
   padding: 0.6rem !important;
   background: var(--card) !important;
   border: 1px solid var(--line) !important;
@@ -236,7 +236,7 @@ canvas{max-width:100%}
 /* Targeta central de Bluetooth: dóna-li l'alçada que vulguis sense dependre de res */
 .card-tall {
   width: 100% !important;
-  height: 600px !important; /* <--- Canvia aquest valor lliurement */
+  height: 520px !important; /* <--- Canvia aquest valor lliurement */
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
