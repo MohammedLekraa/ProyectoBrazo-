@@ -89,9 +89,9 @@
       The complete system: the glove on the left and the arm with its box and power supply on the right.
     </figcaption>
   </figure>
+</section>
 
-  
- <section id="planteamiento">
+<section id="sistema">
   <h2 data-es="02. Planteamiento general del sistema" data-en="02. System Architecture">02. Planteamiento general del sistema</h2>
   
   <p data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa." data-en="For the arm to copy my hand, we need sensors to capture motion, a wireless link to transmit data, and actuators to reproduce it. The system is divided into two nodes: the glove, which captures, and the arm, which acts.">
@@ -101,9 +101,9 @@
   <!-- BARRA DE FLUJO SUPERIOR -->
   <div class="flow-bar">
     <span data-es="CAPTURAR" data-en="CAPTURE">CAPTURAR</span>
-    <span class="arrow-sm">→</span>
+    <span class="arrow-sm">&rarr;</span>
     <span data-es="TRANSMITIR" data-en="TRANSMIT">TRANSMITIR</span>
-    <span class="arrow-sm">→</span>
+    <span class="arrow-sm">&rarr;</span>
     <span data-es="REPRODUCIR" data-en="REPRODUCE">REPRODUCIR</span>
   </div>
 
@@ -129,7 +129,7 @@
     </div>
 
     <!-- FLECHA 1 -->
-    <div class="arrow">→</div>
+    <div class="arrow">&rarr;</div>
 
     <!-- COLUMNA 2: TRANSMISIÓN (TARJETA CENTRAL ALTA) -->
     <div class="col col-mid">
@@ -141,7 +141,7 @@
     </div>
 
     <!-- FLECHA 2 -->
-    <div class="arrow">→</div>
+    <div class="arrow">&rarr;</div>
 
     <!-- COLUMNA 3: REPRODUCCIÓN -->
     <div class="col">
@@ -252,6 +252,7 @@
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
     </figure>
   </div>
+
   <h3 data-es="De resistencia a número: el divisor de tensión y el ADC" data-en="From resistance to number: voltage divider and ADC">De resistencia a número: el divisor de tensión y el ADC</h3>
   <div class="grid2 mid-al">
     <div>
@@ -268,7 +269,7 @@
     <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider with the flex sensor"></figure>
   </div>
 
-<h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
+  <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
   <div class="grid2 mid-al" style="margin-top: -0.5rem;">
     <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
       Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
@@ -276,7 +277,7 @@
     <div class="card"><canvas id="c-rf" aria-label="ADC range with 10 kΩ and 47 kΩ"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p></div>
   </div>
   
-<h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
+  <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
   
   <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
     Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
@@ -332,8 +333,7 @@
     <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
   </div>
   
-<h3 data-es="Filtrado, suavizado y seguridad" data-en="Filtering, smoothing and safety">Filtrado, suavizado y seguridad</h3>
-  
+  <h3 data-es="Filtrado, suavizado y seguridad" data-en="Filtering, smoothing and safety">Filtrado, suavizado y seguridad</h3>
   <p data-es="Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores." data-en="To make the robotic arm's movement natural and jerk-free, the system implements a dual protection mechanism: noise filtering in the reading and gradual approximation in the actuators." style="margin-bottom: 1.2rem;">
     Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores.
   </p>
@@ -353,6 +353,7 @@
       </p>
     </div>
   </div>
+</section>
 
 <section id="imu">
   <h2 data-es="06. IMU MPU6050: rotación de la muñeca">06. MPU6050 IMU: wrist rotation</h2>
@@ -369,12 +370,12 @@
 
     <div class="st-p">
       <h3 data-es="1. Cómo obtengo los grados con el giroscopio">1. How I get degrees from the gyroscope</h3>
-      <p data-es="El giroscopio no mide el ángulo, sino la <b>velocidad angular</b>: lo rápido que gira el sensor. Se configuró en el rango de ±250 °/s, porque la muñeca humana no supera esa velocidad y así se obtiene la máxima resolución: 131 unidades por cada °/s. Para llegar a los grados se siguen cuatro pasos: leer el valor crudo <code>gx</code>, restarle el sesgo medido en reposo, dividir entre 131 para tener °/s e <b>integrar</b> la velocidad en el tiempo, es decir, sumar ω·dt al ángulo anterior en cada paso.">The gyroscope does not measure the angle but the <b>angular velocity</b>: how fast the sensor turns. It was set to the ±250 °/s range, because the human wrist does not exceed that speed and this gives the highest resolution: 131 units per °/s. To get degrees there are four steps: read the raw value <code>gx</code>, subtract the bias measured at rest, divide by 131 to get °/s, and <b>integrate</b> the velocity over time, that is, add ω·dt to the previous angle at every step.</p>
-      <p class="eq">ω = (gx − offset) / 131 &nbsp;&nbsp; roll_gyro = roll + ω · dt</p>
+      <p data-es="El giroscopio no mide el ángulo, sino la <b>velocidad angular</b>: lo rápido que gira el sensor. Se configuró en el rango de ±250 °/s, porque la muñeca humana no supera esa velocidad y así se obtiene la máxima resolución: 131 unidades por cada °/s. Para llegar a los grados se siguen cuatro pasos: leer el valor crudo <code>gx</code>, restarle el sesgo medido en reposo, dividir entre 131 para tener °/s e <b>integrar</b> la velocidad en el tiempo, es decir, sumar ·dt al ángulo anterior en cada paso.">The gyroscope does not measure the angle but the <b>angular velocity</b>: how fast the sensor turns. It was set to the ±250 °/s range, because the human wrist does not exceed that speed and this gives the highest resolution: 131 units per °/s. To get degrees there are four steps: read the raw value <code>gx</code>, subtract the bias measured at rest, divide by 131 to get °/s, and <b>integrate</b> the velocity over time, that is, add ·dt to the previous angle at every step.</p>
+      <p class="eq"> = (gx  offset) / 131 &nbsp;&nbsp; roll_gyro = roll +  · dt</p>
       <div class="gal">
         <figure class="fig"><img class="zoom" src="img/gyro-raw.png" alt="Raw gyroscope reading"><figcaption class="mono" data-es="1. Lectura cruda gx (LSB)">1. Raw reading gx (LSB)</figcaption></figure>
-        <figure class="fig"><img class="zoom" src="img/gyro-omega.png" alt="Angular velocity"><figcaption class="mono" data-es="2. Velocidad angular ω (°/s)">2. Angular velocity ω (°/s)</figcaption></figure>
-        <figure class="fig"><img class="zoom" src="img/gyro-angle.png" alt="Angle after integration"><figcaption class="mono" data-es="3. Ángulo al integrar ω">3. Angle after integrating ω</figcaption></figure>
+        <figure class="fig"><img class="zoom" src="img/gyro-omega.png" alt="Angular velocity"><figcaption class="mono" data-es="2. Velocidad angular  (°/s)">2. Angular velocity  (°/s)</figcaption></figure>
+        <figure class="fig"><img class="zoom" src="img/gyro-angle.png" alt="Angle after integration"><figcaption class="mono" data-es="3. Ángulo al integrar ">3. Angle after integrating </figcaption></figure>
       </div>
     </div>
 
@@ -392,15 +393,15 @@
     </div>
 
     <div class="st-p">
-      <h3 data-es="4. Un nuevo problema: el salto de 180° a −179°">4. A new problem: the jump from 180° to −179°</h3>
-      <p data-es="Al probar el sistema con el servo apareció un comportamiento extraño: al llegar a unos 179°, el ángulo pasaba de golpe a −179° y el servo daba un movimiento brusco en sentido contrario al giro real. No era un error de medida, sino que cada sensor representa el ángulo con un rango distinto. El giroscopio se integra de forma continua y puede pasar de 180°, mientras que el acelerómetro, al usar <code>atan2</code>, queda siempre entre −180° y 180°. Una misma posición puede ser 181° para un sensor y −179° para el otro.">When testing the system with the servo, a strange behaviour appeared: on reaching about 179°, the angle suddenly became −179° and the servo made an abrupt move opposite to the real rotation. It was not a measurement error: each sensor represents the angle with a different range. The gyroscope is integrated continuously and can go past 180°, while the accelerometer, using <code>atan2</code>, always stays between −180° and 180°. The same position can be 181° for one sensor and −179° for the other.</p>
+      <h3 data-es="4. Un nuevo problema: el salto de 180° a 179°">4. A new problem: the jump from 180° to 179°</h3>
+      <p data-es="Al probar el sistema con el servo apareció un comportamiento extraño: al llegar a unos 179°, el ángulo pasaba de golpe a 179° y el servo daba un movimiento brusco en sentido contrario al giro real. No era un error de medida, sino que cada sensor representa el ángulo con un rango distinto. El giroscopio se integra de forma continua y puede pasar de 180°, mientras que el acelerómetro, al usar <code>atan2</code>, queda siempre entre 180° y 180°. Una misma posición puede ser 181° para un sensor y 179° para el otro.">When testing the system with the servo, a strange behaviour appeared: on reaching about 179°, the angle suddenly became 179° and the servo made an abrupt move opposite to the real rotation. It was not a measurement error: each sensor represents the angle with a different range. The gyroscope is integrated continuously and can go past 180°, while the accelerometer, using <code>atan2</code>, always stays between 180° and 180°. The same position can be 181° for one sensor and 179° for the other.</p>
       <figure class="fig"><img class="zoom" src="img/salto-roll.png" alt="Accelerometer angle and filtered angle with the jump at ±180°"><figcaption class="mono" data-es="El ángulo del acelerómetro (azul) cambia de signo al cruzar ±180° mientras el filtrado (naranja) sigue creciendo.">The accelerometer angle (blue) changes sign when crossing ±180° while the filtered one (orange) keeps growing.</figcaption></figure>
     </div>
 
     <div class="st-p">
       <h3 data-es="5. La solución: angle unwrapping antes del filtro">5. The fix: angle unwrapping before the filter</h3>
       <p data-es="Antes de aplicar el filtro se compara el ángulo del acelerómetro con el del giroscopio. Si la diferencia supera ±180°, los dos representan la misma orientación en vueltas distintas, y se suma o resta una vuelta completa (360°) para alinearlos.">Before applying the filter, the accelerometer angle is compared with the gyroscope angle. If the difference exceeds ±180°, both represent the same orientation on different turns, and a full turn (360°) is added or subtracted to align them.</p>
-      <p class="eq">Δ = roll_acc − roll_gyro &nbsp;&nbsp; Δ &gt; 180° → roll_acc − 360° &nbsp;&nbsp; Δ &lt; −180° → roll_acc + 360°</p>
+      <p class="eq"> = roll_acc  roll_gyro &nbsp;&nbsp;  &gt; 180°  roll_acc  360° &nbsp;&nbsp;  &lt; 180°  roll_acc + 360°</p>
       <p data-es="Así el ángulo es continuo y estable incluso al pasar de ±180°. Antes de enviarlo al servo se limita entre 0° y 180° y se escala con un factor de 1,82 para adaptar el rango detectado por la IMU al recorrido del servo. Cuando el giro real supera los 180° el valor se satura en el máximo, y lo mismo por debajo de 0°. El servo nunca hace movimientos bruscos ni inversiones.">This way the angle is continuous and stable even when passing ±180°. Before sending it to the servo it is limited between 0° and 180° and scaled by a factor of 1.82 to fit the range detected by the IMU to the servo travel. When the real rotation exceeds 180° the value saturates at the maximum, and likewise below 0°. The servo never makes abrupt moves or reversals.</p>
       <figure class="fig"><img class="zoom" src="img/roll-correcte.png" alt="Final roll angle between 0° and 180°"><figcaption class="mono" data-es="Ángulo final tras el filtro y la corrección: limitado entre 0° y 180°, sin saltos.">Final angle after the filter and the correction: limited between 0° and 180°, no jumps.</figcaption></figure>
     </div>
@@ -413,7 +414,7 @@
   <p class="lead" data-es="Para organizar las conexiones se diseñaron y fabricaron dos placas de circuito impreso (PCB) a medida, una para el guante y otra para el brazo. El diseño se hizo con KiCad.">To organise the connections, two custom printed circuit boards (PCBs) were designed and built, one for the glove and one for the arm. The design was done with KiCad.</p>
   <h3 data-es="Qué hace cada placa">What each board does</h3>
   <div class="grid2">
-    <div class="card"><h4 data-es="PCB del guante: acondicionamiento de señales">Glove PCB: signal conditioning</h4><p data-es="Agrupa las conexiones de los cinco sensores de flexión y las cinco resistencias de 47 kΩ de los divisores de tensión, que adaptan la resistencia variable del sensor a la entrada analógica de la Wemos. Lleva un conector por sensor y uno de nueve pines hacia la Wemos D1 R32, con dos pines de GND y dos de 3,3 V.">It groups the connections of the five flex sensors and the five 47 kΩ resistors of the voltage dividers, which adapt the variable resistance of the sensor to the analog input of the Wemos. It has one connector per sensor and a nine-pin connector to the Wemos D1 R32, with two GND and two 3.3 V pins.</p></div>
+    <div class="card"><h4 data-es="PCB del guante: acondicionamiento de señales">Glove PCB: signal conditioning</h4><p data-es="Agrupa las conexiones de los cinco sensores de flexión y las cinco resistencias de 47 k de los divisores de tensión, que adaptan la resistencia variable del sensor a la entrada analógica de la Wemos. Lleva un conector por sensor y uno de nueve pines hacia la Wemos D1 R32, con dos pines de GND y dos de 3,3 V.">It groups the connections of the five flex sensors and the five 47 k resistors of the voltage dividers, which adapt the variable resistance of the sensor to the analog input of the Wemos. It has one connector per sensor and a nine-pin connector to the Wemos D1 R32, with two GND and two 3.3 V pins.</p></div>
     <div class="card"><h4 data-es="PCB del brazo: interfaz de potencia">Arm PCB: power interface</h4><p data-es="Centraliza en un solo punto las conexiones de los seis servomotores con la Wemos. Los servos comparten alimentación y masa, y la señal PWM de cada uno va a una salida de la Wemos. Incluye un condensador de desacoplo en la línea de alimentación para absorber los picos de corriente de los servos.">It centralises in one place the connections of the six servomotors with the Wemos. The servos share power and ground, and each one's PWM signal goes to a Wemos output. It includes a decoupling capacitor on the supply line to absorb the current peaks of the servos.</p></div>
   </div>
 
