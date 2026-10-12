@@ -665,3 +665,21 @@ section{padding:4rem 0 5rem}
 .co2.edit .cb { cursor: move; outline: 2px dashed var(--mute); touch-action: none; }
 .co2.edit path { stroke-dashoffset: 0; transition: none; }
 #co-out { white-space: pre; font-size: .74rem; }
+
+/* --- ESTILO COMPACTO PARA LA TABLA DE ESPECIFICACIONES DE LA SECCIÓN 5 --- */
+#flex .tbl {
+  width: 100%;
+  margin-top: 0.8rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#flex .tbl table {
+  font-size: 0.78rem;
+}
+
+#flex .tbl th, 
+#flex .tbl td {
+  padding: 0.45rem 0.7rem;
+  white-space: normal; /* Permite que el texto se ajuste si la columna es estrecha */
+}
