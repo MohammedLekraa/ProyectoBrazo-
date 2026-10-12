@@ -153,6 +153,7 @@ canvas{max-width:100%}
 .acc.open .acc-b>div{padding-bottom:.4rem}
 
 /* --- SECCIÓN 02: PLANTEAMIENTO GENERAL LIBRE DE ALTURAS --- */
+/* --- SECCIÓ 02: PLANTEAMIENTO GENERAL LLIURE --- */
 
 #planteamiento {
   padding: 1.5rem 0 2rem;
@@ -162,7 +163,7 @@ canvas{max-width:100%}
   display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr;
   gap: 1rem;
-  align-items: start; /* <--- Clave: evita que se forcen alturas cruzadas entre columnas */
+  align-items: start;
   margin-bottom: 1rem;
 }
 
@@ -171,35 +172,22 @@ canvas{max-width:100%}
   flex-direction: column;
   gap: 1rem;
 }
-.card-visual {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  height: 280px !important; /* <--- Prova de pujar-ho aquí i t'farà cas al moment */
-  padding: 0.8rem !important; /* Evita que el padding general de .card ho trenqui */
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  box-sizing: border-box;
-  justify-content: space-between;
-  overflow: hidden;
-}
 
-.card-tall {
-  width: 100%;
-  height: 600px !important; /* <--- Dona-li aquí l'alçada lliure que vulguis */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--beige);
-  border: 1px solid var(--line);
-  text-align: center;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  border-radius: 12px;
+/* Targetes laterals: modifica l'alçada aquí lliurement */
+.card-visual {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  height: 280px !important; /* <--- Canvia aquest valor lliurement i t'farà cas */
+  padding: 0.6rem !important;
+  background: var(--card) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 12px !important;
+  box-sizing: border-box !important;
+  justify-content: space-between !important;
+  overflow: hidden !important;
 }
 
 .card-sub {
@@ -208,20 +196,20 @@ canvas{max-width:100%}
   color: var(--mute);
   text-transform: uppercase;
   width: 100%;
-  padding-bottom: 0.2rem;
+  padding-bottom: 0.15rem;
   border-bottom: 1px solid var(--line);
 }
 
 .card-visual h4 {
   font: 700 0.9rem var(--head);
   color: var(--ink);
-  margin: 0.2rem 0;
+  margin: 0.1rem 0;
 }
 
-/* Contenedor de la imagen sin restricciones de flex forzadas */
+/* Contenidor de la imatge interior */
 .card-visual .card-img-wrap {
   width: 100%;
-  height: 120px; /* <--- Altura fija o máxima para la foto dentro de la tarjeta */
+  height: 120px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -245,6 +233,21 @@ canvas{max-width:100%}
   justify-content: flex-start;
 }
 
+/* Targeta central de Bluetooth: dóna-li l'alçada que vulguis sense dependre de res */
+.card-tall {
+  width: 100% !important;
+  height: 600px !important; /* <--- Canvia aquest valor lliurement */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: var(--beige) !important;
+  border: 1px solid var(--line) !important;
+  text-align: center !important;
+  padding: 1.5rem !important;
+  box-sizing: border-box !important;
+  border-radius: 12px !important;
+}
 
 .card-tall h3 {
   font: 800 1.2rem var(--head);
@@ -287,6 +290,7 @@ canvas{max-width:100%}
   color: #b9b5a8;
   font: 400 1.4rem var(--mono);
 }
+ 
 
 .col>h3{margin:0;font:700 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 
