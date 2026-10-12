@@ -270,7 +270,7 @@
   </div>
 
   <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
-  <div class="grid2 mid-al" style="margin-top: -0.5rem;">
+  <div class="grid2 mid-al" style="margin-top: -0.1rem;">
     <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
       Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
     </p>
@@ -279,82 +279,25 @@
   
   <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
   
-  <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
-    Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
-  </p>
-
-  <!-- Fila 1: Texto explicativo a la izquierda, Gráfico ADC a la derecha -->
   <div class="grid2 mid-al" style="margin-top: 1.5rem;">
     <div>
-      <h4 data-es="Relación entre el ángulo y la lectura del ADC" data-en="Relationship between angle and ADC reading">Relación entre el ángulo y la lectura del ADC</h4>
-      <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range.">
+      <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
+        Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
+      </p>
+      <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range." style="margin-top: 1rem;">
         Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil.
       </p>
+      <p data-es="Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°)." data-en="To translate this reading to servo movement, Arduino's native <code>map()</code> function is used, which linearly maps the experimentally obtained ADC range to motor degrees (from 180° to 0°)." style="margin-top: 1rem;">
+        Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°).
+      </p>
+      <p class="eq" style="margin-top: 0.8rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
     </div>
     <div class="card">
       <canvas id="chart" aria-label="ADC reading versus angle"></canvas>
       <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
     </div>
   </div>
-
-  <!-- Fila 2: Texto explicativo a la izquierda, Gráficos de Resistencia/Tensión a la derecha -->
-  <div class="grid2 mid-al" style="margin-top: 2rem;">
-    <div>
-      <h4 data-es="Evolución de la resistencia y la tensión" data-en="Evolution of resistance and voltage">Evolución de la resistencia y la tensión</h4>
-      <p data-es="Mediante las pestañas interactivas se puede comprobar cómo evoluciona directamente la resistencia interna del flex sensor (en ohmios) y la tensión resultante en el divisor frente al ángulo de flexión. Esto confirma que el comportamiento eléctrico acompaña de forma predecible el movimiento mecánico del dedo." data-en="Using the interactive tabs, you can check how the internal resistance of the flex sensor (in ohms) and the resulting voltage in the divider evolve against the bend angle. This confirms that the electrical behavior predictably tracks the mechanical movement of the finger.">
-        Mediante las pestañas interactivas se puede comprobar cómo evoluciona directamente la resistencia interna del flex sensor (en ohmios) y la tensión resultante en el divisor frente al ángulo de flexión. Esto confirma que el comportamiento eléctrico acompaña de forma predecible el movimiento mecánico del dedo.
-      </p>
-    </div>
-    <div class="card">
-      <div class="tabs" id="ctabs">
-        <button class="tab on" data-k="r" data-es="Resistencia" data-en="Resistance">Resistencia</button>
-        <button class="tab" data-k="v" data-es="Tensión" data-en="Voltage">Tensión</button>
-      </div>
-      <canvas id="c-multi" aria-label="Resistance and voltage versus angle"></canvas>
-      <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
-    </div>
-  </div>
-
-  <!-- Bloque Central: Explicación detallada de la función map() -->
-  <div class="card" style="margin-top: 2.5rem; background: var(--card-sub, var(--card));">
-    <h4 data-es="Conversión a ángulo: la función map()" data-en="Angle conversion: the map() function">Conversión a ángulo: la función map()</h4>
-    <p data-es="Gracias a que la respuesta del sensor se aproxima mediante una línea recta, el ángulo exacto que debe adoptar el servomotor se calcula de manera directa mediante interpolación lineal. Para ello se utiliza la función nativa <code>map()</code> de Arduino. El sistema toma la lectura ADC actual (afectada por los límites calibrados de extensión máxima <code>maxFlex</code> y flexión máxima <code>minFlex</code>) y la traduce al rango de grados del servo (de 180° a 0°). Para recalibrar un sensor ante cualquier cambio físico, basta con actualizar únicamente esos dos valores límite en el código." data-en="Since the sensor response is approximated by a straight line, the exact angle the servomotor should adopt is calculated directly via linear interpolation. This uses Arduino's native <code>map()</code> function. The system takes the current ADC reading (bounded by calibrated limits of maximum extension <code>maxFlex</code> and maximum flexion <code>minFlex</code>) and translates it to the servo degree range (from 180° to 0°). To recalibrate a sensor against any physical change, it is enough to update only those two limit values in the code.">
-      Gracias a que la respuesta del sensor se aproxima mediante una línea recta, el ángulo exacto que debe adoptar el servomotor se calcula de manera directa mediante interpolación lineal. Para ello se utiliza la función nativa <code>map()</code> de Arduino. El sistema toma la lectura ADC actual (afectada por los límites calibrados de extensión máxima <code>maxFlex</code> y flexión máxima <code>minFlex</code>) y la traduce al rango de grados del servo (de 180° a 0°). Para recalibrar un sensor ante cualquier cambio físico, basta con actualizar únicamente esos dos valores límite en el código.
-    </p>
-    <p class="eq" style="margin-top: 1rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
-  </div>
-
-  <h3 data-es="Calibración de los cinco sensores" data-en="Calibration of the five sensors">Calibración de los cinco sensores</h3>
-  <p data-es="Los cinco sensores se caracterizaron uno a uno, por las diferencias entre ellos y por su posición en el guante. Cada uno tiene su rango de ADC, de la máxima flexión al dedo extendido, y esos valores son los límites del mapeo." data-en="The five sensors were characterised one by one, because of the differences between them and their position on the glove. Each has its own ADC range, from maximum flexion to the extended finger, and those values are the limits of the mapping.">
-    Los cinco sensores se caracterizaron uno a uno, por las diferencias entre ellos y por su posición en el guante. Cada uno tiene su rango de ADC, de la máxima flexión al dedo extendido, y esos valores son los límites del mapeo.
-  </p>
-  <div class="card" style="max-width: 700px; margin: 0 auto;">
-    <canvas id="c-cal" aria-label="Calibration range of each finger"></canvas>
-    <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
-  </div>
-  
-  <h3 data-es="Filtrado, suavizado y seguridad" data-en="Filtering, smoothing and safety">Filtrado, suavizado y seguridad</h3>
-  <p data-es="Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores." data-en="To make the robotic arm's movement natural and jerk-free, the system implements a dual protection mechanism: noise filtering in the reading and gradual approximation in the actuators." style="margin-bottom: 1.2rem;">
-    Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores.
-  </p>
-
-  <div class="grid2" style="gap: 1.5rem;">
-    <div>
-      <h4 style="font-size: 0.95rem; margin-bottom: 0.4rem;" data-es="1. Filtrado de ruido y validación" data-en="1. Noise filtering and validation">1. Filtrado de ruido y validación</h4>
-      <p style="font-size: 0.88rem; line-height: 1.5;" data-es="Cada lectura promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico. Los valores fuera del rango seguro (1000 a 3000) se descartan, manteniendo el último valor válido para evitar picos erráticos." data-en="Each reading averages <b>8 consecutive samples</b> to remove electrical noise. Values outside the safe range (1000 to 3000) are discarded, keeping the last valid value to prevent erratic spikes.">
-        Cada lectura promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico. Los valores fuera del rango seguro (1000 a 3000) se descartan, manteniendo el último valor válido para evitar picos erráticos.
-      </p>
-    </div>
-
-    <div>
-      <h4 style="font-size: 0.95rem; margin-bottom: 0.4rem;" data-es="2. Movimiento gradual del servo" data-en="2. Gradual servo movement">2. Movimiento gradual del servo</h4>
-      <p style="font-size: 0.88rem; line-height: 1.5;" data-es="Para evitar tirones e inercias bruscas que dañen la mecánica, <b>el servo nunca salta de golpe</b>: en cada ciclo avanza solo una fracción de la distancia restante hacia el objetivo, logrando una transición fluida." data-en="To prevent sudden jerks and inertia that could damage the mechanics, <b>the servo never jumps abruptly</b>: in each cycle it moves only a fraction of the remaining distance toward the target, achieving a smooth transition.">
-        Para evitar tirones e inercias bruscas que dañen la mecánica, <b>el servo nunca salta de golpe</b>: en cada ciclo avanza solo una fracción de la distancia restante hacia el objetivo, logrando una transición fluida.
-      </p>
-    </div>
-  </div>
-</section> <!-- AQUÍ SE CIERRA CORRECTAMENTE LA SECCIÓN 5 Y TODO RECUPERA SU ORDEN -->
-
+</section>
   
 
 <section id="imu">
