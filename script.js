@@ -156,20 +156,59 @@ document.addEventListener('DOMContentLoaded', () => {
  /* Guante con flechas corregido y bien posicionado */
 /* Guante con flechas ordenado: Caja a la izquierda, IMU en centro, Flex a la derecha */
 /* Guante con flechas: Flex sensors arriba-izquierda, Caja abajo-izquierda */
+/* Guante con flechas interactivo */
   const CO = [
-    { k: 'flex', b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 2, y: 2, w: 35, d: 'M190 98 C250 140 280 180 300 200' },
-    { k: 'imu', b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 33, d: 'M590 428 C530 380 560 320 580 262' },
-    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 63, y: 83, w: 33, d: 'M815 428 C750 395 725 360 690 336' }
+    { k: 'flex',  b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 2,  y: 2,  w: 33, tx: 33, ty: 63 },
+    { k: 'imu',   b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 28, tx: 46, ty: 54 },
+    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 68, y: 83, w: 30, tx: 72, ty: 60 }
   ];
   const g = $('#glove');
-  g.insertAdjacentHTML('beforeend', `<svg viewBox="0 0 1000 520" aria-hidden="true"><defs><marker id="ah" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#a8a49a"/></marker></defs>${CO.map(c => `<path data-k="${c.k}" d="${c.d}" marker-end="url(#ah)"/>`).join('')}</svg>`);
-  CO.forEach(c => g.insertAdjacentHTML('beforeend', `<button class="cb" data-k="${c.k}" style="left:${c.x}%;top:${c.y}%;width:${c.w}%"></button>`));
-  $$('path', g).forEach(p => p.style.setProperty('--l', Math.ceil(p.getTotalLength())));   const hl = (k, on) => $$
-('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));
-  $$('.cb', g).forEach(b => {     b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));     b.addEventListener('focus', () => hl(b.dataset.k, true)); b.addEventListener('blur', () => hl(b.dataset.k, false));     b.addEventListener('click', () => tabGo[0](b.dataset.k));   });   const labelCO = () => $$
-('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`);
+  g.insertAdjacentHTML('beforeend', '<svg aria-hidden="true"><defs><marker id="ah" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#a8a49a"/></marker></defs></svg>');
+  const svg = $('svg', g);
+  CO.forEach(c => {
+    svg.insertAdjacentHTML('beforeend', `<path data-k="${c.k}" marker-end="url(#ah)"/>`);
+    g.insertAdjacentHTML('beforeend', `<button class="cb" data-k="${c.k}"></button><i class="tg" data-k="${c.k}"></i>`);
+  });
+  g.insertAdjacentHTML('afterend', '<pre id="co-out" class="eq" hidden></pre>');
+  const out = $('#co-out');
+  const drawCO = () => {
+    const W = g.clientWidth, H = g.clientHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    CO.forEach(c => {
+      const b = $(`.cb[data-k=${c.k}]`, g), t = $(`.tg[data-k=${c.k}]`, g), p = $(`path[data-k=${c.k}]`, svg);
+      b.style.left = c.x + '%'; b.style.top = c.y + '%'; b.style.width = c.w + '%'; t.style.left = c.tx + '%'; t.style.top = c.ty + '%';
+      const bx = b.offsetLeft, by = b.offsetTop, bw = b.offsetWidth, bh = b.offsetHeight, tx = c.tx / 100 * W, ty = c.ty / 100 * H;
+      const sx = Math.min(Math.max(tx, bx + 18), bx + bw - 18);
+      const [x0, y0] = ty < by ? [sx, by] : ty > by + bh ? [sx, by + bh] : [tx < bx ? bx : bx + bw, ty];
+      const vert = y0 === by || y0 === by + bh;
+      const cx = vert ? x0 : (x0 + tx) / 2, cy = vert ? y0 + (ty - y0) * .6 : y0;
+      p.setAttribute('d', `M${x0} ${y0} Q${cx} ${cy} ${tx} ${ty}`);
+      p.style.setProperty('--l', Math.ceil(p.getTotalLength()) + 2);
+    });
+    out.textContent = CO.map(c => `${c.k}:  x: ${c.x}, y: ${c.y}, w: ${c.w}, tx: ${c.tx}, ty: ${c.ty}`).join('\n');
+  };
+  const labelCO = () => { $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`); drawCO(); };
+  addEventListener('resize', drawCO);
+  const hl = (k, on) => $$('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));$$('.cb', g).forEach(b => {
+    b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));
+    b.addEventListener('focus', () => hl(b.dataset.k, true)); b.addEventListener('blur', () => hl(b.dataset.k, false));
+    b.addEventListener('click', () => { if (!g.classList.contains('edit')) tabGo[0](b.dataset.k); });
+  });
+  const setEdit = on => { g.classList.toggle('edit', on); out.hidden = !on; };
+  addEventListener('keydown', e => { if (e.key.toLowerCase() === 'e' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) setEdit(!g.classList.contains('edit')); });
+  if (location.hash === '#edit') setEdit(true);
+  let ed = null;
+  g.addEventListener('pointerdown', e => {
+    if (!g.classList.contains('edit')) return; const el = e.target.closest('.cb,.tg'); if (!el) return;
+    const c = CO.find(c => c.k === el.dataset.k);
+    ed = { c, tg: el.classList.contains('tg'), ox: e.clientX, oy: e.clientY, x: c.x, y: c.y, tx: c.tx, ty: c.ty, r: g.getBoundingClientRect() }; g.setPointerCapture(e.pointerId); e.preventDefault();
+  });
+  g.addEventListener('pointermove', e => {
+    if (!ed) return; const dx = (e.clientX - ed.ox) / ed.r.width * 100, dy = (e.clientY - ed.oy) / ed.r.height * 100, r1 = v => Math.round(v * 10) / 10;
+    if (ed.tg) { ed.c.tx = r1(ed.tx + dx); ed.c.ty = r1(ed.ty + dy); } else { ed.c.x = r1(ed.x + dx); ed.c.y = r1(ed.y + dy); }
+    drawCO();
+  });
+  g.addEventListener('pointerup', () => ed = null);
   const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
-
   /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
   let charts = [];
   const buildCharts = () => {
