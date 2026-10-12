@@ -216,54 +216,42 @@
 
 <section id="flex">
   <h2 data-es="05. Sensor de flexión: flexión-extensión de los dedos" data-en="05. Flex sensor: finger flexion-extension">05. Sensor de flexión: flexión-extensión de los dedos</h2>
-  <p class="lead" data-es="Para medir cómo se pliega cada dedo se usa un sensor de flexión resistivo. El microcontrolador no puede leer resistencias, así que hay que convertirla en una tensión y, después, en un número." data-en="To measure how each finger bends we use a resistive flex sensor. The microcontroller cannot read resistances, so it has to be converted into a voltage and then into a number.">
-    Para medir cómo se pliega cada dedo se usa un sensor de flexión resistivo. El microcontrolador no puede leer resistencias, así que hay que convertirla en una tensión y, después, en un número.
-  </p>
 
   <h3 data-es="Cómo funciona el sensor" data-en="How the sensor works">Cómo funciona el sensor</h3>
-  <p data-es="El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial." data-en="The sensor contains an internal resistor whose resistance increases as it bends. When flat, its resistance is within the range of 17.5 kΩ to 32.5 kΩ. When bent to the maximum (180°), its resistance is at least double the initial value.">
-    El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial.
-  </p>
+  <div class="grid2 mid-al">
+    <div>
+      <p data-es="El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial." data-en="The sensor contains an internal resistor whose resistance increases as it bends. When flat, its resistance is within the range of 17.5 kΩ to 32.5 kΩ. When bent to the maximum (180°), its resistance is at least double the initial value.">
+        El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial.
+      </p>
 
-  <div class="grid2">
-    <figure class="card fig">
+      <!-- Tabla resumida y compacta de especificaciones -->
+      <div class="tbl" style="margin-top: 1rem;">
+        <table style="font-size: 0.82rem;">
+          <thead>
+            <tr>
+              <th data-es="Característica" data-en="Characteristic">Característica</th>
+              <th data-es="Especificación" data-en="Specification">Especificación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Fabricante</td><td>Spectra Symbol</td></tr>
+            <tr><td>Serie</td><td>Flex Sensor (FS)</td></tr>
+            <tr><td>Modelo</td><td>FS-L-0055-253-ST</td></tr>
+            <tr><td>Longitud total</td><td>73,66 mm</td></tr>
+            <tr><td>Longitud activa</td><td>55,37 mm</td></tr>
+            <tr><td>Anchura</td><td>6,35 mm</td></tr>
+            <tr><td>Espesor</td><td>≤ 0,43 mm</td></tr>
+            <tr><td>Vida útil</td><td>> 1 millón de ciclos</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <figure class="card fig" style="margin: 0 auto;">
       <img class="zoom" src="img/flex-doblar.jpg" alt="Flex sensor resistance when bent">
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
     </figure>
-    <figure class="card fig">
-      <img class="zoom" src="img/flex.jpg" alt="Flex sensor">
-      <figcaption class="mono" data-es="Spectra Symbol FS-L-0055-253-ST: 25 kΩ en plano, 55 mm activos." data-en="Spectra Symbol FS-L-0055-253-ST: 25 kΩ flat, 55 mm active length.">Spectra Symbol FS-L-0055-253-ST: 25 kΩ en plano, 55 mm activos.</figcaption>
-    </figure>
   </div>
-
-  <h3 data-es="Características técnicas del sensor" data-en="Sensor technical specifications">Características técnicas del sensor</h3>
-  <div class="tbl">
-    <table>
-      <thead>
-        <tr>
-          <th data-es="Característica" data-en="Characteristic">Característica</th>
-          <th data-es="Especificación" data-en="Specification">Especificación</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Fabricante</td><td>Spectra Symbol</td></tr>
-        <tr><td>Serie</td><td>Flex Sensor (FS)</td></tr>
-        <tr><td>Modelo</td><td>FS-L-0055-253-ST</td></tr>
-        <tr><td>Tipo</td><td>Sensor de flexión resistivo lineal</td></tr>
-        <tr><td>Resistencia nominal en posición plana</td><td>25 kΩ ± 30 %</td></tr>
-        <tr><td>Rango de resistencia en posición plana</td><td>17,5–32,5 kΩ</td></tr>
-        <tr><td>Resistencia con flexión de 180°</td><td>≥ 2 × la resistencia en posición plana</td></tr>
-        <tr><td>Longitud total</td><td>73,66 mm</td></tr>
-        <tr><td>Longitud activa</td><td>55,37 mm</td></tr>
-        <tr><td>Anchura</td><td>6,35 mm</td></tr>
-        <tr><td>Espesor</td><td>≤ 0,43 mm</td></tr>
-        <tr><td>Temperatura de funcionamiento</td><td>−35 °C a +80 °C</td></tr>
-        <tr><td>Vida útil</td><td>> 1 millón de ciclos</td></tr>
-        <tr><td>Potencia nominal</td><td>0,5 W continua; 1 W pico</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
   
   <h3 data-es="De resistencia a tensión: el divisor de tensión">From resistance to voltage: the voltage divider</h3>
   <div class="grid2 mid-al">
