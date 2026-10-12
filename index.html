@@ -277,31 +277,50 @@
   </div>
   
 <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
-  <p data-es="Para cada sensor se fijó el dedo a 0°, 45°, 90°, 135° y 180° registrando la lectura del ADC. Los puntos se alinean aproximadamente en una recta, sin saltos ni saturaciones. Aunque físicamente el sensor no es perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo con una recta en su rango de trabajo. Gracias a esta relación lineal, el ángulo del servo se obtiene mediante interpolación lineal utilizando la función <code>map()</code> de Arduino a partir de los límites de lectura con el dedo extendido (maxFlex) y completamente doblado (minFlex)." data-en="For each sensor the finger was fixed at 0°, 45°, 90°, 135° and 180° and the ADC reading was recorded. The points line up roughly on a straight line, with no jumps or saturation. Although the sensor is not perfectly linear physically, the scatter is small enough to approximate it with a line within the working range. Since the relation is a straight line, the servo angle is obtained by linear interpolation with Arduino's <code>map()</code> function using the reading limits with the extended finger (maxFlex) and fully bent (minFlex).">
-    Para cada sensor se fijó el dedo a 0°, 45°, 90°, 135° y 180° registrando la lectura del ADC. Los puntos se alinean aproximadamente en una recta, sin saltos ni saturaciones. Aunque físicamente el sensor no es perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo con una recta en su rango de trabajo. Gracias a esta relación lineal, el ángulo del servo se obtiene mediante interpolación lineal utilizando la función <code>map()</code> de Arduino a partir de los límites de lectura con el dedo extendido (maxFlex) y completamente doblado (minFlex).
+  
+  <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
+    Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
   </p>
 
-  <div class="grid2">
-    <div class="card"><canvas id="chart" aria-label="ADC reading versus angle"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p></div>
+  <!-- Fila 1: Texto explicativo a la izquierda, Gráfico ADC a la derecha -->
+  <div class="grid2 mid-al" style="margin-top: 1.5rem;">
+    <div>
+      <h4 data-es="Relación entre el ángulo y la lectura del ADC" data-en="Relationship between angle and ADC reading">Relación entre el ángulo y la lectura del ADC</h4>
+      <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range.">
+        Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil.
+      </p>
+    </div>
     <div class="card">
-      <div class="tabs" id="ctabs"><button class="tab on" data-k="r" data-es="Resistencia" data-en="Resistance">Resistencia</button><button class="tab" data-k="v" data-es="Tensión" data-en="Voltage">Tensión</button></div>
-      <canvas id="c-multi" aria-label="Resistance and voltage versus angle"></canvas><p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
+      <canvas id="chart" aria-label="ADC reading versus angle"></canvas>
+      <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
     </div>
   </div>
 
-  <div class="grid2 mid-al" style="margin-top: 1.5rem;">
+  <!-- Fila 2: Texto explicativo a la izquierda, Gráficos de Resistencia/Tensión a la derecha -->
+  <div class="grid2 mid-al" style="margin-top: 2rem;">
     <div>
-      <p data-es="Para recalibrar un sensor es suficiente con cambiar esos dos valores. El sistema calcula de forma directa el ángulo de salida aplicando la fórmula:" data-en="To recalibrate a sensor it is enough to change those two values. The system directly calculates the output angle by applying the formula:">
-        Para recalibrar un sensor es suficiente con cambiar esos dos valores. El sistema calcula de forma directa el ángulo de salida aplicando la fórmula:
+      <h4 data-es="Evolución de la resistencia y la tensión" data-en="Evolution of resistance and voltage">Evolución de la resistencia y la tensión</h4>
+      <p data-es="Mediante las pestañas interactivas se puede comprobar cómo evoluciona directamente la resistencia interna del flex sensor (en ohmios) y la tensión resultante en el divisor frente al ángulo de flexión. Esto confirma que el comportamiento eléctrico acompaña de forma predecible el movimiento mecánico del dedo." data-en="Using the interactive tabs, you can check how the internal resistance of the flex sensor (in ohms) and the resulting voltage in the divider evolve against the bend angle. This confirms that the electrical behavior predictably tracks the mechanical movement of the finger.">
+        Mediante las pestañas interactivas se puede comprobar cómo evoluciona directamente la resistencia interna del flex sensor (en ohmios) y la tensión resultante en el divisor frente al ángulo de flexión. Esto confirma que el comportamiento eléctrico acompaña de forma predecible el movimiento mecánico del dedo.
       </p>
-      <p class="eq">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
     </div>
     <div class="card">
-      <h4 data-es="Pruébalo con el dedo índice" data-en="Try it with the index finger">Pruébalo con el dedo índice</h4>
-      <p class="mono">minFlex 1530 · maxFlex 2100</p>
-      <input type="range" id="adc" min="1530" max="2100" value="2100" aria-label="ADC reading">
-      <p class="mono"><span data-es="Lectura ADC:" data-en="ADC reading:">Lectura ADC:</span> <b id="adc-v"></b> &rarr; <span data-es="ángulo del servo:" data-en="servo angle:">ángulo del servo:</span> <b id="adc-a"></b>°</p>
+      <div class="tabs" id="ctabs">
+        <button class="tab on" data-k="r" data-es="Resistencia" data-en="Resistance">Resistencia</button>
+        <button class="tab" data-k="v" data-es="Tensión" data-en="Voltage">Tensión</button>
+      </div>
+      <canvas id="c-multi" aria-label="Resistance and voltage versus angle"></canvas>
+      <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
     </div>
+  </div>
+
+  <!-- Bloque Central: Explicación detallada de la función map() -->
+  <div class="card" style="margin-top: 2.5rem; background: var(--card-sub, var(--card));">
+    <h4 data-es="Conversión a ángulo: la función map()" data-en="Angle conversion: the map() function">Conversión a ángulo: la función map()</h4>
+    <p data-es="Gracias a que la respuesta del sensor se aproxima mediante una línea recta, el ángulo exacto que debe adoptar el servomotor se calcula de manera directa mediante interpolación lineal. Para ello se utiliza la función nativa <code>map()</code> de Arduino. El sistema toma la lectura ADC actual (afectada por los límites calibrados de extensión máxima <code>maxFlex</code> y flexión máxima <code>minFlex</code>) y la traduce al rango de grados del servo (de 180° a 0°). Para recalibrar un sensor ante cualquier cambio físico, basta con actualizar únicamente esos dos valores límite en el código." data-en="Since the sensor response is approximated by a straight line, the exact angle the servomotor should adopt is calculated directly via linear interpolation. This uses Arduino's native <code>map()</code> function. The system takes the current ADC reading (bounded by calibrated limits of maximum extension <code>maxFlex</code> and maximum flexion <code>minFlex</code>) and translates it to the servo degree range (from 180° to 0°). To recalibrate a sensor against any physical change, it is enough to update only those two limit values in the code.">
+      Gracias a que la respuesta del sensor se aproxima mediante una línea recta, el ángulo exacto que debe adoptar el servomotor se calcula de manera directa mediante interpolación lineal. Para ello se utiliza la función nativa <code>map()</code> de Arduino. El sistema toma la lectura ADC actual (afectada por los límites calibrados de extensión máxima <code>maxFlex</code> y flexión máxima <code>minFlex</code>) y la traduce al rango de grados del servo (de 180° a 0°). Para recalibrar un sensor ante cualquier cambio físico, basta con actualizar únicamente esos dos valores límite en el código.
+    </p>
+    <p class="eq" style="margin-top: 1rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
   </div>
 
   <h3 data-es="Calibración de los cinco sensores" data-en="Calibration of the five sensors">Calibración de los cinco sensores</h3>
