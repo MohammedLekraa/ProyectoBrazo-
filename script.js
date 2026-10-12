@@ -251,13 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 /* Trama Bluetooth */
-  const FN = [
-    ['thumb (flex1)', 'pulgar', 'Dedo pulgar: Mide la flexión del dedo pulgar mediante un divisor de tensión.'], 
-    ['index finger (flex2)', 'índice', 'Dedo índice: Controla el movimiento de flexión del dedo índice.'], 
-    ['middle finger (flex3)', 'corazón', 'Dedo corazón: Registra la flexión del dedo central.'], 
-    ['ring finger (flex4)', 'anular', 'Dedo anular: Captura el desplazamiento del dedo anular.'], 
-    ['little finger (flex5)', 'meñique', 'Dedo meñique: Monitorea la flexión del dedo meñique.']
-  ];
+ 
   
   const frame = $('#frame'); let fi = 0;
   frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
