@@ -332,24 +332,24 @@
     <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
   </div>
   
-  <h3 data-es="Filtrado, suavizado y seguridad" data-en="Filtering, smoothing and safety">Filtrado, suavizado y seguridad</h3>
+<h3 data-es="Filtrado, suavizado y seguridad" data-en="Filtering, smoothing and safety">Filtrado, suavizado y seguridad</h3>
   
-  <p data-es="Para lograr que el movimiento del brazo robótico sea natural, estable y libre de tirones, el sistema implementa capas de filtrado tanto en la adquisición de los datos como en el control del movimiento de los servos." data-en="To make the robotic arm's movement natural, stable, and jerk-free, the system implements filtering layers both during data acquisition and in servo motion control.">
-    Para lograr que el movimiento del brazo robótico sea natural, estable y libre de tirones, el sistema implementa capas de filtrado tanto en la adquisición de los datos como en el control del movimiento de los servos.
+  <p data-es="Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores." data-en="To make the robotic arm's movement natural and jerk-free, the system implements a dual protection mechanism: noise filtering in the reading and gradual approximation in the actuators." style="margin-bottom: 1.2rem;">
+    Para lograr que el movimiento del brazo robótico sea natural y libre de tirones, el sistema implementa un doble mecanismo de protección: filtrado de ruido en la lectura y aproximación gradual en los actuadores.
   </p>
 
-  <div class="grid2" style="margin-top: 1rem;">
-    <div class="card">
-      <h4 data-es="1. Filtrado de ruido y validación de rangos" data-en="1. Noise filtering and range validation">1. Filtrado de ruido y validación de rangos</h4>
-      <p data-es="Cada lectura analógica del sensor promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico de alta frecuencia. Además, se establecen límites de seguridad estrictos (valores válidos entre 1000 y 3000): cualquier lectura atípica o pico errático fuera de este rango se descarta automáticamente, manteniendo el último valor válido para evitar comportamientos extraños." data-en="Each analog sensor reading averages <b>8 consecutive samples</b> to remove high-frequency electrical noise. In addition, strict safety limits are set (valid values between 1000 and 3000): any atypical reading or erratic peak outside this range is automatically discarded, retaining the last valid value to prevent erratic behavior.">
-        Cada lectura analógica del sensor promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico de alta frecuencia. Además, se establecen límites de seguridad estrictos (valores válidos entre 1000 y 3000): cualquier lectura atípica o pico errático fuera de este rango se descarta automáticamente, manteniendo el último valor válido para evitar comportamientos extraños.
+  <div class="grid2" style="gap: 1.5rem;">
+    <div>
+      <h4 style="font-size: 0.95rem; margin-bottom: 0.4rem;" data-es="1. Filtrado de ruido y validación" data-en="1. Noise filtering and validation">1. Filtrado de ruido y validación</h4>
+      <p style="font-size: 0.88rem; line-height: 1.5;" data-es="Cada lectura promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico. Los valores fuera del rango seguro (1000 a 3000) se descartan, manteniendo el último valor válido para evitar picos erráticos." data-en="Each reading averages <b>8 consecutive samples</b> to remove electrical noise. Values outside the safe range (1000 to 3000) are discarded, keeping the last valid value to prevent erratic spikes.">
+        Cada lectura promedia <b>8 muestras consecutivas</b> para eliminar el ruido eléctrico. Los valores fuera del rango seguro (1000 a 3000) se descartan, manteniendo el último valor válido para evitar picos erráticos.
       </p>
     </div>
 
-    <div class="card">
-      <h4 data-es="2. Movimiento gradual y protección mecánica" data-en="2. Gradual movement and mechanical protection">2. Movimiento gradual y protección mecánica</h4>
-      <p data-es="Sin un control de inercia, al cambiar de posición bruscamente los servos se desplazarían a máxima velocidad y frenarían de golpe, generando un movimiento muy brusco y un desgaste mecánico severo. Para solucionarlo, <b>el servo nunca salta directamente a la posición objetivo</b>: en cada trama de comunicación avanza solo una fracción de la distancia restante (aproximadamente una cuarta parte), logrando una aproximación fluida, progresiva y natural al ángulo deseado." data-en="Without inertia control, changing position abruptly would cause servos to travel at maximum speed and brake hard, resulting in very jerky movement and severe mechanical wear. To solve this, <b>the servo never jumps directly to the target position</b>: in each communication frame it moves only a fraction of the remaining distance (roughly a quarter), achieving a smooth, progressive, and natural approach to the desired angle.">
-        Sin un control de inercia, al cambiar de posición bruscamente los servos se desplazarían a máxima velocidad y frenarían de golpe, generando un movimiento muy brusco y un desgaste mecánico severo. Para solucionarlo, <b>el servo nunca salta directamente a la posición objetivo</b>: en cada trama de comunicación avanza solo una fracción de la distancia restante (aproximadamente una cuarta parte), logrando una aproximación fluida, progresiva y natural al ángulo deseado.
+    <div>
+      <h4 style="font-size: 0.95rem; margin-bottom: 0.4rem;" data-es="2. Movimiento gradual del servo" data-en="2. Gradual servo movement">2. Movimiento gradual del servo</h4>
+      <p style="font-size: 0.88rem; line-height: 1.5;" data-es="Para evitar tirones e inercias bruscas que dañen la mecánica, <b>el servo nunca salta de golpe</b>: en cada ciclo avanza solo una fracción de la distancia restante hacia el objetivo, logrando una transición fluida." data-en="To prevent sudden jerks and inertia that could damage the mechanics, <b>the servo never jumps abruptly</b>: in each cycle it moves only a fraction of the remaining distance toward the target, achieving a smooth transition.">
+        Para evitar tirones e inercias bruscas que dañen la mecánica, <b>el servo nunca salta de golpe</b>: en cada ciclo avanza solo una fracción de la distancia restante hacia el objetivo, logrando una transición fluida.
       </p>
     </div>
   </div>
