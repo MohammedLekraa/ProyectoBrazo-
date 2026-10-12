@@ -150,13 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
   showMech(0);
     
-  
-
-  /* Guante con flechas */
- /* Guante con flechas corregido y bien posicionado */
-/* Guante con flechas ordenado: Caja a la izquierda, IMU en centro, Flex a la derecha */
-/* Guante con flechas: Flex sensors arriba-izquierda, Caja abajo-izquierda */
-/* Guante con flechas interactivo */
+  /* Guante con flechas interactivo y modo edición */
   const CO = [
     { k: 'flex',  b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 2,  y: 2,  w: 33, tx: 33, ty: 63 },
     { k: 'imu',   b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 28, tx: 46, ty: 54 },
@@ -209,7 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   g.addEventListener('pointerup', () => ed = null);
   const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
-  /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
+
+ /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
   let charts = [];
   const buildCharts = () => {
     if (!window.Chart) return; charts.forEach(c => c.destroy()); charts = [];
