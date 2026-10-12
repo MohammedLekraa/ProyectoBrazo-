@@ -89,15 +89,16 @@
       The complete system: the glove on the left and the arm with its box and power supply on the right.
     </figcaption>
   </figure>
-</section>
 
-<section id="planteamiento">
+  
+ <section id="planteamiento">
   <h2 data-es="02. Planteamiento general del sistema" data-en="02. System Architecture">02. Planteamiento general del sistema</h2>
   
   <p data-es="Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa." data-en="For the arm to copy my hand, we need sensors to capture motion, a wireless link to transmit data, and actuators to reproduce it. The system is divided into two nodes: the glove, which captures, and the arm, which acts.">
     Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.
   </p>
 
+  <!-- BARRA DE FLUJO SUPERIOR -->
   <div class="flow-bar">
     <span data-es="CAPTURAR" data-en="CAPTURE">CAPTURAR</span>
     <span class="arrow-sm">→</span>
@@ -106,7 +107,9 @@
     <span data-es="REPRODUCIR" data-en="REPRODUCE">REPRODUCIR</span>
   </div>
 
+  <!-- REJILLA DE TARJETAS -->
   <div class="pipe">
+    <!-- COLUMNA 1: CAPTURA -->
     <div class="col">
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
@@ -125,8 +128,10 @@
       </div>
     </div>
 
+    <!-- FLECHA 1 -->
     <div class="arrow">→</div>
 
+    <!-- COLUMNA 2: TRANSMISIÓN (TARJETA CENTRAL ALTA) -->
     <div class="col col-mid">
       <div class="card card-visual card-tall">
         <h3>BLUETOOTH</h3>
@@ -135,8 +140,10 @@
       </div>
     </div>
 
+    <!-- FLECHA 2 -->
     <div class="arrow">→</div>
 
+    <!-- COLUMNA 3: REPRODUCCIÓN -->
     <div class="col">
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
@@ -163,6 +170,7 @@
     Evolución del diseño mecánico: desde la estructura base hasta la integración híbrida final. Selecciona un hito para explorar sus especificaciones.
   </p>
   
+  <!-- Tarjetas de selección superior con diseño minimalista -->
   <div class="mech">
     <button class="mc on" data-i="0">
       <span class="pillt" data-es="Fase 01" data-en="Phase 01">Fase 01</span>
@@ -186,6 +194,7 @@
     </button>
   </div>
 
+  <!-- Panel inferior interactivo tipo Ficha de Ingeniería -->
   <div class="mdet card engineering-card" id="mdet" aria-live="polite"></div>
 </section>
 
