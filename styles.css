@@ -179,7 +179,7 @@ canvas{max-width:100%}
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 175px; /* <--- Altura fija idéntica para las 4 tarjetas laterales */
+  height: 205px; /* <--- Altura fija idéntica para las 4 tarjetas laterales */
   padding: 0.6rem 0.8rem;
   background: var(--card);
   border: 1px solid var(--line);
