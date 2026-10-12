@@ -668,45 +668,47 @@ section{padding:4rem 0 5rem}
 .co2.edit path { stroke-dashoffset: 0; transition: none; }
 #co-out { white-space: pre; font-size: .74rem; }
 
-/* --- OPTIMIZACIÓN Y COMPACTACIÓN DE LA SECCIÓN 05 --- */
+/* --- REDISEÑO COMPACTO DE LA SECCIÓN 05 --- */
 #flex {
-  padding: 2.5rem 0 3rem; /* Reduce el espacio general de la sección */
+  padding: 2.5rem 0;
+}
+
+.flex-block {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.4rem;
+  margin-bottom: 1.2rem;
 }
 
 #flex h3 {
-  font: 700 1.1rem var(--head);
+  font: 700 1rem var(--head);
   color: var(--ink);
-  border-left: 3px solid var(--ink); /* Destaca claramente cada subapartado */
-  padding-left: 0.7rem;
-  margin: 1.8rem 0 0.6rem;
+  border-left: 3px solid var(--ink);
+  padding-left: 0.6rem;
+  margin: 0 0 0.6rem 0;
 }
 
 #flex p {
-  font-size: 0.9rem; /* Texto un punto más compacto y legible */
-  margin-bottom: 0.7rem;
+  font-size: 0.88rem;
+  margin-bottom: 0.8rem;
 }
 
-#flex .grid2 {
-  gap: 1rem;
-  margin-bottom: 1rem;
+/* Control estricto de tamaño para todos los gráficos de la sección 5 */
+.chart-sm canvas {
+  max-height: 160px !important;
 }
 
-#flex .card {
-  padding: 1.1rem; /* Tarjetas más recogidas */
+.chart-med canvas {
+  max-height: 150px !important;
 }
 
-/* Reducción general de todos los gráficos de la sección 05 */
-#flex canvas {
-  max-height: 200px !important; 
+#flex .fig {
+  margin: 0.5rem auto !important;
+  padding: 0.5rem;
 }
 
-/* Control específico para que el gráfico gigante de calibración baje de tamaño */
-#flex section canvas#c-cal,
-#flex canvas#c-cal {
-  max-height: 180px !important;
-}
-
-#flex div:has(#c-cal) {
-  max-width: 750px;
-  margin: 0 auto;
+#flex .fig img {
+  max-height: 140px !important;
+  width: auto;
 }
