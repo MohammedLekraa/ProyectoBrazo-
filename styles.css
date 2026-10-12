@@ -171,22 +171,35 @@ canvas{max-width:100%}
   flex-direction: column;
   gap: 1rem;
 }
-
-/* Tarjetas laterales: pon aquí la altura exacta que quieras y te hará caso directo */
 .card-visual {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 245px; /* <--- Cambia esto libremente (ej: 250px, 300px...) */
-  padding: 0.8rem;
+  height: 320px !important; /* <--- Prova de pujar-ho aquí i t'farà cas al moment */
+  padding: 0.8rem !important; /* Evita que el padding general de .card ho trenqui */
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-sizing: border-box;
   justify-content: space-between;
   overflow: hidden;
+}
+
+.card-tall {
+  width: 100%;
+  height: 600px !important; /* <--- Dona-li aquí l'alçada lliure que vulguis */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--beige);
+  border: 1px solid var(--line);
+  text-align: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  border-radius: 12px;
 }
 
 .card-sub {
@@ -232,21 +245,6 @@ canvas{max-width:100%}
   justify-content: flex-start;
 }
 
-/* Tarjeta central de Bluetooth: Ponle la altura que te de la gana sin fórmulas ni sumas */
-.card-tall {
-  width: 100%;
-  height: 570px; /* <--- Pon aquí el valor exacto que tú quieras de manera totalmente independiente */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: var(--beige);
-  border: 1px solid var(--line);
-  text-align: center;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  border-radius: 12px;
-}
 
 .card-tall h3 {
   font: 800 1.2rem var(--head);
