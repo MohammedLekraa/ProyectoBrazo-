@@ -673,12 +673,9 @@ section{padding:4rem 0 5rem}
   padding: 2.5rem 0;
 }
 
-.flex-block {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 1.4rem;
-  margin-bottom: 1.2rem;
+/* --- TAMAÑO EQUILIBRADO PARA LOS GRÁFICOS DE LA SECCIÓN 05 --- */
+#flex canvas {
+  max-height: 190px !important;
 }
 
 #flex h3 {
