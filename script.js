@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-20% 0px -50% 0px' });
   $$('section[id]').forEach(s => io.observe(s));
 
+  const labelCO = () => { 
+    $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`); 
+    drawCO(); 
+  };
+  labelCO(); // <-- IMPORTANTE: Llama a esto para pintar los textos al arrancar
+  const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
+
   /* Aparición escalonada */
   $$('section > *').forEach(el => el.classList.add('rv'));
   const rv = new IntersectionObserver(es => es.forEach(e => {
