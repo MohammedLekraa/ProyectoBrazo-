@@ -351,6 +351,43 @@
   </div>
 </section>
 
+<section id="bluetooth">
+  <h2 data-es="08. Comunicación y protocolo Bluetooth">08. Bluetooth communication and protocol</h2>
+  <p class="lead" data-es="Los dos ESP32 establecen un enlace inalámbrico mediante Bluetooth clásico en perfil SPP (Serial Port Profile). Esta conexión serie transparente ofrece una latencia mínima y la velocidad justa para transmitir los datos de movimiento en tiempo real.">
+    The two ESP32 boards establish a wireless link using classic Bluetooth in SPP (Serial Port Profile) mode. This transparent serial connection provides minimal latency and the right speed to stream motion data in real time.
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 2rem 0;">
+    <div class="card" style="margin: 0; height: 100%;">
+      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;" data-es="Emisor">Sender</span>
+      <h4 data-es="ESP32 del guante (Cliente)" style="margin-top: 0.3rem;">Glove ESP32 (Client)</h4>
+      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.">
+        Periodically reads the analog sensors, packs the data frame and sends it wirelessly by connecting to the server MAC.
+      </p>
+    </div>
+    <div style="text-align: center; color: var(--mute); font-weight: bold; font-size: 1.5rem;" aria-hidden="true">&leftrightarrow;</div>
+    <div class="card" style="margin: 0; height: 100%;">
+      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;" data-es="Receptor">Receiver</span>
+      <h4 data-es="ESP32 del brazo (Servidor)" style="margin-top: 0.3rem;">Arm ESP32 (Server)</h4>
+      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.">
+        Listens for connections, accepts them, receives the incoming text frame, parses it and smoothly moves the servos.
+      </p>
+    </div>
+  </div>
+
+  <h3 data-es="Estructura de la trama de datos">Data frame structure</h3>
+  <p data-es="El guante transmite una línea de texto cada 100 ms (10 Hz), evitando saturar el canal y reduciendo pérdidas. Cada trama contiene seis valores separados por espacios y termina con un salto de línea. Haz clic en cada valor para ver su significado:">
+    The glove transmits a text line every 100 ms (10 Hz), avoiding channel saturation and reducing loss. Each frame contains six space-separated values and ends with a newline. Click each value to see its meaning:
+  </p>
+
+  <div class="frame" id="frame"></div>
+  <div class="card" id="fdet" aria-live="polite" style="margin-top: 1rem;"></div>
+
+  <p style="margin-top: 1.2rem;" data-es="Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo.">
+    This plain text format greatly simplifies debugging with the Arduino serial monitor and provides high robustness: if a line arrives incomplete or with errors, it is instantly discarded without affecting arm movement.
+  </p>
+</section>
+
 <section id="alimentacio">
   <h2 data-es="09. Alimentación del sistema">09. System power supply</h2>
   <p class="lead" data-es="El diseño eléctrico emplea fuentes de alimentación independientes para el microcontrolador y los actuadores, evitando caídas de tensión y reinicios en el ESP32 causados por los picos de consumo de los servomotores.">
