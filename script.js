@@ -250,19 +250,46 @@ document.addEventListener('DOMContentLoaded', () => {
     calc();
   }
 
-  /* Trama Bluetooth */
-  const FN = [['thumb', 'pulgar'], ['index finger', 'índice'], ['middle finger', 'corazón'], ['ring finger', 'anular'], ['little finger', 'meñique']];
+/* Trama Bluetooth */
+  const FN = [
+    ['thumb (flex1)', 'pulgar', 'Dedo pulgar: Mide la flexión del dedo pulgar mediante un divisor de tensión.'], 
+    ['index finger (flex2)', 'índice', 'Dedo índice: Controla el movimiento de flexión del dedo índice.'], 
+    ['middle finger (flex3)', 'corazón', 'Dedo corazón: Registra la flexión del dedo central.'], 
+    ['ring finger (flex4)', 'anular', 'Dedo anular: Captura el desplazamiento del dedo anular.'], 
+    ['little finger (flex5)', 'meñique', 'Dedo meñique: Monitorea la flexión del dedo meñique.']
+  ];
+  
   const frame = $('#frame'); let fi = 0;
   frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
+  
   const showF = i => {
-    fi = i; $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));$('#fdet').innerHTML = i < 5
-      ? (lang === 'es' ? `<h4>Dedo ${FN[i][1]}</h4><p>Lectura del ADC del sensor del ${FN[i][1]} (media de 8 muestras, válida entre 1000 y 3000; si no lo es se repite el último valor correcto). En el brazo se convierte en ángulo con los valores de calibración de ese dedo.</p>`
-        : `<h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p>ADC reading of the ${FN[i][0]} sensor (average of 8 samples, valid between 1000 and 3000; if not, the last valid value is repeated). At the arm it is converted into an angle with that finger's calibration values.</p>`)
-      : (lang === 'es' ? '<h4>Rotación de la muñeca</h4><p>Ángulo de la muñeca calculado con la IMU y el filtro complementario, con el unwrapping aplicado. Llega ya limitado y escalado al rango del servo (0–180°), así que el brazo solo tiene que aplicarlo.</p>'
-        : '<h4>Wrist rotation</h4><p>Wrist angle computed with the IMU and the complementary filter, with unwrapping applied. It arrives already limited and scaled to the servo range (0–180°), so the arm only has to apply it.</p>');
-  };
-  $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
+    fi = i; 
+    $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));
+    
+    // Construimos una vista previa visual de la trama completa resaltando el valor activo
+    const tokens = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((tok, idx) => 
+      idx === i ? `<strong style="color: var(--ink); text-decoration: underline;">&lt;${tok}&gt;</strong>` : `&lt;${tok}&gt;`
+    ).join(' ');
 
+    $('#fdet').innerHTML = i < 5
+      ? (lang === 'es' 
+          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div>
+             <h4>${FN[i][2].split(':')[0]}</h4>
+             <p style="margin:0; font-size: 0.9rem;">${FN[i][2].split(':')[1]}</p>`
+          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div>
+             <h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4>
+             <p style="margin:0; font-size: 0.9rem;">ADC reading of the finger sensor, filtered and mapped to servo angle.</p>`)
+      : (lang === 'es' 
+          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div>
+             <h4>Rotación de la muñeca (Angle Roll)</h4>
+             <p style="margin:0; font-size: 0.9rem;">Ángulo de la muñeca obtenido mediante la IMU filtrada y corregida (0–180°).</p>`
+          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div>
+             <h4>Wrist rotation</h4>
+             <p style="margin:0; font-size: 0.9rem;">Filtered and unwrapped IMU wrist angle scaled to servo range (0–180°).</p>`);
+  };
+  
+  $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
+  showF(0);
   /* Materiales: búsqueda, categorías y precios editables */
   const CAT = { el: ['Electronics', 'Electrónica'], ac: ['Actuation', 'Actuación'], pw: ['Power', 'Alimentación'], fa: ['Fabrication', 'Fabricación'] };
   const parts = [
