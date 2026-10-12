@@ -647,3 +647,21 @@ section{padding:4rem 0 5rem}
     gap: 1.2rem;
   }
 }
+
+.co2 .tg {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--hl);
+  border: 2px solid var(--ink);
+  display: none;
+  cursor: grab;
+  z-index: 3;
+  touch-action: none;
+}
+.co2.edit .tg { display: block; }
+.co2.edit .cb { cursor: move; outline: 2px dashed var(--mute); touch-action: none; }
+.co2.edit path { stroke-dashoffset: 0; transition: none; }
+#co-out { white-space: pre; font-size: .74rem; }
