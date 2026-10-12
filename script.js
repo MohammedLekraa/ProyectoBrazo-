@@ -342,15 +342,3 @@ document.addEventListener('DOMContentLoaded', () => {
   li.addEventListener('pointerup', () => drag = false);
 });
 
-/* Separación clara y diseño limpio para las secciones y títulos principales */
-section {
-  padding-top: 3.5rem !important;  /* Añade espacio limpio por encima del título */
-  padding-bottom: 3.5rem !important;
-}
-
-section h2 {
-  margin-top: 0 !important;
-  margin-bottom: 1.5rem !important;
-  padding-bottom: 0.8rem !important;
-  border-bottom: 2px solid var(--ink); /* Opcional: una línea un poco más marcada para el título principal */
-}
