@@ -667,3 +667,46 @@ section{padding:4rem 0 5rem}
 .co2.edit .cb { cursor: move; outline: 2px dashed var(--mute); touch-action: none; }
 .co2.edit path { stroke-dashoffset: 0; transition: none; }
 #co-out { white-space: pre; font-size: .74rem; }
+
+/* --- OPTIMIZACIÓN Y COMPACTACIÓN DE LA SECCIÓN 05 --- */
+#flex {
+  padding: 2.5rem 0 3rem; /* Reduce el espacio general de la sección */
+}
+
+#flex h3 {
+  font: 700 1.1rem var(--head);
+  color: var(--ink);
+  border-left: 3px solid var(--ink); /* Destaca claramente cada subapartado */
+  padding-left: 0.7rem;
+  margin: 1.8rem 0 0.6rem;
+}
+
+#flex p {
+  font-size: 0.9rem; /* Texto un punto más compacto y legible */
+  margin-bottom: 0.7rem;
+}
+
+#flex .grid2 {
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#flex .card {
+  padding: 1.1rem; /* Tarjetas más recogidas */
+}
+
+/* Reducción general de todos los gráficos de la sección 05 */
+#flex canvas {
+  max-height: 200px !important; 
+}
+
+/* Control específico para que el gráfico gigante de calibración baje de tamaño */
+#flex section canvas#c-cal,
+#flex canvas#c-cal {
+  max-height: 180px !important;
+}
+
+#flex div:has(#c-cal) {
+  max-width: 750px;
+  margin: 0 auto;
+}
