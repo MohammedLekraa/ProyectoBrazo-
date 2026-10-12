@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Guante con flechas */
  /* Guante con flechas corregido y bien posicionado */
   const CO = [
-    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 2, y: 83, w: 33, d: 'M190 428 C210 390 240 370 270 340' },
+    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 63, y: 2, w: 35, d: 'M190 98 C750 140 680 160 600 200' },
     { k: 'imu', b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 33, d: 'M590 428 C530 380 560 320 580 262' },
     { k: 'flex', b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 63, y: 2, w: 35, d: 'M815 98 C750 140 680 160 600 200' }
   ];
