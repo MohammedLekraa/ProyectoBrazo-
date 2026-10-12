@@ -6,11 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const T = (a) => a[lang === 'es' ? 1 : 0];
   const UI = { title: ['Robotic Arm Control Using a Sensor Glove | ML Portfolio', 'Control de un brazo robótico mediante un guante sensorizado | ML Portfolio'], night: ['Night view', 'Vista nocturna'], day: ['Day view', 'Vista diurna'], search: ['Search a component by name', 'Busca un componente por nombre'], all: ['All', 'Todos'], none: ['No component matches the search.', 'Ningún componente coincide con la búsqueda.'] };
 
-  /* Imágenes que faltan y vídeo */
   $$('img').forEach(i => { const m = () => i.setAttribute('data-missing', ''); i.addEventListener('error', m); if (i.complete && !i.naturalWidth && i.getAttribute('src')) m(); });
   const vs = $('.vwrap source'); if (vs) vs.addEventListener('error', () => { $('.vmiss').hidden = false; });
 
-  /* Progreso, flecha de scroll e índice */
   const bar = $('#progress'), hint = $('.scrollhint');
   const onScroll = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%'; hint.classList.toggle('gone', scrollY > 80); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -18,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-20% 0px -50% 0px' });
   $$('section[id]').forEach(s => io.observe(s));
 
-  /* Aparición escalonada */
   $$('section > *').forEach(el => el.classList.add('rv'));
   const rv = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return; rv.unobserve(e.target); e.target.classList.add('in');
@@ -26,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }), { threshold: .04 });
   $$('section').forEach(s => rv.observe(s));
 
-  /* Acordeones, pestañas y pasos */
   $$('.acc-h').forEach(b => b.addEventListener('click', () => b.parentElement.classList.toggle('open')));
   const tabs = root => {
     const bs = $$(':scope > .tabs .tab', root), ps = $$(':scope > .tp', root);
@@ -46,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   stepper($('#imu-st'));
 
-  /* PCB: del diseño a la placa soldada */
   const PCB = {
     g: [
       [['Connection diagram', 'Esquema de conexiones'], ['First the circuit was assembled on a breadboard and drawn in Fritzing: the five flex sensors, each with its 47 kΩ resistor, and the IMU wired to the Wemos.', 'Primero se montó el circuito en una protoboard y se dibujó en Fritzing: los cinco sensores de flexión, cada uno con su resistencia de 47 kΩ, y la IMU conectada a la Wemos.'], 'img/fritzing-guante.png'],
@@ -69,71 +64,39 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('img', r).forEach(i => i.addEventListener('error', () => i.setAttribute('data-missing', ''))); stepper(r);
   });
 
- 
-/* Diseño mecánico interactivo (Sección 03) - Orden corregido [Inglés, Español] y traducible */
   const MD = [
-    { 
-      t: ['InMoov Forearm Structure', 'Estructura del antebrazo InMoov'], 
-      h: [
-        'The open InMoov models were chosen for their robust forearm structure and internal tendon channels. While the forearm proved exceptional, the original hand design was discarded due to excessive mechanical complexity and wear over time.',
-        'Se partió de los modelos abiertos de InMoov por la solidez y los canales internos diseñados para los hilos. Aunque la estructura del antebrazo demostró ser sobresaliente, se descartó su diseño de mano original debido a su excesiva complejidad mecánica y fragilidad ante el uso continuado.'
-      ],
-      specs: [
-        [['Origin', 'Origen'], ['Thingiverse / Open Source', 'Thingiverse / Open Source']],
-        [['Base material', 'Material base'], ['Structural PLA', 'PLA Estructural']],
-        [['Key advantage', 'Ventaja'], ['Integrated internal channels', 'Canales internos integrados']]
-      ]
-    },
-    { 
-      t: ['FlexyHand Alternative Integration', 'Integración alternativa FlexyHand'], 
-      h: [
-        'As an alternative, a hand inspired by FlexyHand was selected, optimized to reduce part count and ease assembly using TPU living hinges. The main initial hurdle was its lack of direct compatibility with the forearm cylindrical base.',
-        'Como alternativa se seleccionó una mano inspirada en FlexyHand, optimizada para reducir el número de piezas y facilitar el ensamblaje mediante bisagras flexibles (living hinges) de TPU. El principal reto técnico inicial era su incompatibilidad directa con la base cilíndrica del antebrazo.'
-      ],
-      specs: [
-        [['Architecture', 'Arquitectura'], ['Living hinges', 'Bisagras flexibles (Living hinges)']],
-        [['Hinges material', 'Material bisagras'], ['Low-infill TPU', 'TPU de bajo relleno']],
-        [['Key advantage', 'Ventaja'], ['Simplified assembly', 'Montaje simplificado']]
-      ]
-    },
-    { 
-      t: ['Custom CAD Redesign in Fusion 360', 'Rediseño CAD a medida en Fusion 360'], 
-      h: [
-        'To merge both worlds, a custom hybrid coupling part was modelled in Fusion 360. Analyzing InMoov axis dimensions and the flat hand base, a robust anchor was designed to preserve wrist rotation without compromising ergonomics.',
-        'Para fusionar ambos mundos, se modeló en Fusion 360 una pieza de acoplamiento híbrida. Analizando las cotas del eje InMoov y la base plana de la mano, se diseñó un anclaje robusto que preserva intacta la rotación de la muñeca sin comprometer la ergonomía.'
-      ],
-      specs: [
-        [['Software', 'Software'], ['Autodesk Fusion 360', 'Autodesk Fusion 360']],
-        [['Key part', 'Pieza clave'], ['Hybrid wrist adapter', 'Adaptador de muñeca híbrido']],
-        [['Result', 'Resultado'], ['Firm joint without play', 'Unión firme sin holguras']]
-      ]
-    },
-    { 
-      t: ['Final Assembly & Servos Integration', 'Ensamblaje final e integración de servos'], 
-      h: [
-        'The final assembly combines PLA and TPU printed parts, actuated by six digital DM996 servos (15 kg·cm) controlled via high-strength nylon thread tendons. The result is a robust, precise arm ready for real-time gesture mirroring.',
-        'El sistema final combina componentes impresos en PLA y TPU, accionados por seis servos digitales DM996 de 15 kg·cm controlados mediante tendones de hilo de nailon de alta resistencia. El resultado es un brazo robusto, preciso y preparado para replicar los gestos en tiempo real.'
-      ],
-      specs: [
-        [['Actuators', 'Actuadores'], ['6 × DM996 Servos (15 kg·cm)', '6 × Servos DM996 (15 kg·cm)']],
-        [['Tendons', 'Tendones'], ['High-strength nylon thread', 'Hilo de nailon de alta resistencia']],
-        [['Structure', 'Estructura'], ['Hybridized PLA / TPU', 'PLA / TPU hibridado']]
-      ]
-    }
+    { t: ['InMoov Forearm Structure', 'Estructura del antebrazo InMoov'],
+      h: ['The open InMoov models were chosen for their robust forearm structure and internal tendon channels. While the forearm proved exceptional, the original hand design was discarded due to excessive mechanical complexity and wear over time.',
+          'Se partió de los modelos abiertos de InMoov por la solidez y los canales internos diseñados para los hilos. Aunque la estructura del antebrazo demostró ser sobresaliente, se descartó su diseño de mano original debido a su excesiva complejidad mecánica y fragilidad ante el uso continuado.'],
+      specs: [[['Origin','Origen'],['Thingiverse / Open Source','Thingiverse / Open Source']],[['Base material','Material base'],['Structural PLA','PLA Estructural']],[['Key advantage','Ventaja'],['Integrated internal channels','Canales internos integrados']]] },
+    { t: ['FlexyHand Alternative Integration', 'Integración alternativa FlexyHand'],
+      h: ['As an alternative, a hand inspired by FlexyHand was selected, optimized to reduce part count and ease assembly using TPU living hinges. The main initial hurdle was its lack of direct compatibility with the forearm cylindrical base.',
+          'Como alternativa se seleccionó una mano inspirada en FlexyHand, optimizada para reducir el número de piezas y facilitar el ensamblaje mediante bisagras flexibles (living hinges) de TPU. El principal reto técnico inicial era su incompatibilidad directa con la base cilíndrica del antebrazo.'],
+      specs: [[['Architecture','Arquitectura'],['Living hinges','Bisagras flexibles (Living hinges)']],[['Hinges material','Material bisagras'],['Low-infill TPU','TPU de bajo relleno']],[['Key advantage','Ventaja'],['Simplified assembly','Montaje simplificado']]] },
+    { t: ['Custom CAD Redesign in Fusion 360', 'Rediseño CAD a medida en Fusion 360'],
+      h: ['To merge both worlds, a custom hybrid coupling part was modelled in Fusion 360. Analyzing InMoov axis dimensions and the flat hand base, a robust anchor was designed to preserve wrist rotation without compromising ergonomics.',
+          'Para fusionar ambos mundos, se modeló en Fusion 360 una pieza de acoplamiento híbrida. Analizando las cotas del eje InMoov y la base plana de la mano, se diseñó un anclaje robusto que preserva intacta la rotación de la muñeca sin comprometer la ergonomía.'],
+      specs: [[['Software','Software'],['Autodesk Fusion 360','Autodesk Fusion 360']],[['Key part','Pieza clave'],['Hybrid wrist adapter','Adaptador de muñeca híbrido']],[['Result','Resultado'],['Firm joint without play','Unión firme sin holguras']]] },
+    { t: ['Final Assembly & Servos Integration', 'Ensamblaje final e integración de servos'],
+      h: ['The final assembly combines PLA and TPU printed parts, actuated by six digital DM996 servos (15 kg·cm) controlled via high-strength nylon thread tendons. The result is a robust, precise arm ready for real-time gesture mirroring.',
+          'El sistema final combina componentes impresos en PLA y TPU, accionados por seis servos digitales DM996 de 15 kg·cm controlados mediante tendones de hilo de nailon de alta resistencia. El resultado es un brazo robusto, preciso y preparado para replicar los gestos en tiempo real.'],
+      specs: [[['Actuators','Actuadores'],['6 × DM996 Servos (15 kg·cm)','6 × Servos DM996 (15 kg·cm)']],[['Tendons','Tendones'],['High-strength nylon thread','Hilo de nailon de alta resistencia']],[['Structure','Estructura'],['Hybridized PLA / TPU','PLA / TPU hibridado']]] }
   ];
 
-  let mi = 0; 
-  const mdet = $('#mdet');    const showMech = i => {      mi = i;      $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); 
+  let mi = 0;
+  const mdet = $('#mdet');
+  const showMech = i => {
+    mi = i;
+    $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i));
     const d = MD[i];
-    
     mdet.innerHTML = `
       <div class="mdet-text">
-        <span class="mono" style="color:var(--mute); text-transform:uppercase; letter-spacing:.1em; font-size:.65rem;">Hito 0${i+1} // Mechanical Milestone</span>
+        <span class="mono" style="color:var(--mute); text-transform:uppercase; letter-spacing:.1em; font-size:.65rem;">${lang==='es'?'Hito':'Milestone'} 0${i+1} // Mechanical Milestone</span>
         <h3>${T(d.t)}</h3>
         <p>${T(d.h)}</p>
       </div>
       <div class="mdet-specs">
-        <div class="specs-title" data-es="Especificaciones clave" data-en="Key Specifications">${lang === 'es' ? 'Especificaciones clave' : 'Key Specifications'}</div>
+        <div class="specs-title">${lang === 'es' ? 'Especificaciones clave' : 'Key Specifications'}</div>
         ${d.specs.map(spec => `
           <div class="spec-row">
             <span class="spec-k">${T(spec[0])}</span>
@@ -142,21 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('')}
       </div>
     `;
-    mdet.classList.remove('sw'); 
-    void mdet.offsetWidth; 
+    mdet.classList.remove('sw');
+    void mdet.offsetWidth;
     mdet.classList.add('sw');
-  }; 
-  
+  };
   $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
   showMech(0);
-    
-  
 
-  /* Guante con flechas */
- /* Guante con flechas corregido y bien posicionado */
-/* Guante con flechas ordenado: Caja a la izquierda, IMU en centro, Flex a la derecha */
-/* Guante con flechas: Flex sensors arriba-izquierda, Caja abajo-izquierda */
-/* Guante con flechas interactivo */
   const CO = [
     { k: 'flex',  b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 2,  y: 2,  w: 33, tx: 33, ty: 63 },
     { k: 'imu',   b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 28, tx: 46, ty: 54 },
@@ -188,7 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const labelCO = () => { $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`); drawCO(); };
   addEventListener('resize', drawCO);
-  const hl = (k, on) => $$('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));$$('.cb', g).forEach(b => {
+  const hl = (k, on) => $$('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));
+  $$('.cb', g).forEach(b => {
     b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));
     b.addEventListener('focus', () => hl(b.dataset.k, true)); b.addEventListener('blur', () => hl(b.dataset.k, false));
     b.addEventListener('click', () => { if (!g.classList.contains('edit')) tabGo[0](b.dataset.k); });
@@ -209,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   g.addEventListener('pointerup', () => ed = null);
   const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
-  /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
+
   let charts = [];
   const buildCharts = () => {
     if (!window.Chart) return; charts.forEach(c => c.destroy()); charts = [];
@@ -224,67 +180,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const extra = i => [`ADC: ${ADC[i[0].dataIndex]}`, `Vout: ${V[i[0].dataIndex]} V`, `Rflex: ${(R[i[0].dataIndex] / 1000).toFixed(1)} kΩ`];
     const lineCfg = (data, y, label) => ({ type: 'line', plugins: [cross], data: { labels: ang, datasets: [{ data, borderColor: c1, backgroundColor: c1 + '22', fill: true, tension: .25, pointRadius: 5, pointHoverRadius: 9, pointBackgroundColor: c1, pointHoverBackgroundColor: ink, pointBorderColor: v('--card'), pointBorderWidth: 2 }] },
       options: { interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, tooltip: tip({ title: ttl, label: i => label(i), afterBody: extra }) }, scales: { x: { title: { display: true, text: X } }, y: { title: { display: true, text: y } } } } });
-    const add = (el, cfg) => charts.push(new Chart($(el), cfg));
+    const add = (el, cfg) => { const n = $(el); if (n) charts.push(new Chart(n, cfg)); };
     add('#chart', lineCfg(ADC, T(['ADC reading', 'Lectura ADC']), i => `ADC: ${i.raw}`));
-    const act = $('#ctabs .tab.on').dataset.k;
-    add('#c-multi', lineCfg(act === 'r' ? R : V, act === 'r' ? 'Rflex (Ω)' : 'Vout (V)', i => act === 'r' ? `Rflex: ${i.raw} Ω` : `Vout: ${i.raw} V`));
+    const actBtn = $('#ctabs .tab.on'); const act = actBtn ? actBtn.dataset.k : null;
+    if (act !== null) add('#c-multi', lineCfg(act === 'r' ? R : V, act === 'r' ? 'Rflex (Ω)' : 'Vout (V)', i => act === 'r' ? `Rflex: ${i.raw} Ω` : `Vout: ${i.raw} V`));
     add('#c-rf', { type: 'bar', data: { labels: ['10 kΩ', '47 kΩ'], datasets: [{ data: [310, 700], backgroundColor: [c2, c1], hoverBackgroundColor: [mute, ink], borderRadius: 6 }] },
       options: { plugins: { legend: { display: false }, tooltip: tip({ title: i => T(['Fixed resistor ', 'Resistencia fija ']) + i[0].label, label: i => T(['Variation: ', 'Variación: ']) + i.raw + T([' ADC units', ' unidades ADC']), afterBody: i => [T(['Range: ', 'Rango: ']) + ['150 – 460', '1600 – 2300'][i[0].dataIndex]] }) },
         scales: { x: { title: { display: true, text: T(['Fixed resistor', 'Resistencia fija']) } }, y: { title: { display: true, text: T(['ADC reading variation', 'Variación de la lectura ADC']) } } } } });
     add('#c-cal', { type: 'bar', data: { labels: T([['Thumb', 'Index', 'Middle', 'Ring', 'Little'], ['Pulgar', 'Índice', 'Corazón', 'Anular', 'Meñique']]), datasets: [{ data: [[1530, 2100], [1530, 2100], [1700, 2300], [1650, 2100], [1730, 2000]], backgroundColor: c1, hoverBackgroundColor: ink, borderRadius: 6, borderSkipped: false }] },
       options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: tip({ title: i => i[0].label, label: i => `minFlex ${i.raw[0]} · maxFlex ${i.raw[1]}`, afterBody: i => [T(['Span: ', 'Recorrido: ']) + (i[0].raw[1] - i[0].raw[0]) + ' ADC'] }) }, scales: { x: { min: 1400, max: 2400, title: { display: true, text: T(['ADC reading (minFlex to maxFlex)', 'Lectura ADC (de minFlex a maxFlex)']) } } } } });
   };
-  $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$
-('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
-  // El control de calibración ADC no existe en el HTML actual.
-  // Inicializarlo solo si están presentes los tres elementos evita que un null
-  // detenga la ejecución del resto del script (idioma, tema y tabla de materiales).
+  $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
+
   const adc = $('#adc'), adcV = $('#adc-v'), adcA = $('#adc-a');
   if (adc && adcV && adcA) {
-    const calc = () => {
-      const x = Number(adc.value);
-      adcV.textContent = x;
-      adcA.textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180;
-    };
-    adc.addEventListener('input', calc);
-    calc();
+    const calc = () => { const x = Number(adc.value); adcV.textContent = x; adcA.textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180; };
+    adc.addEventListener('input', calc); calc();
   }
 
-/* Trama Bluetooth */
- 
-  
+  const FN = [
+    ['thumb (flex1)', 'pulgar', 'Dedo pulgar: Mide la flexión del dedo pulgar mediante un divisor de tensión.'],
+    ['index finger (flex2)', 'índice', 'Dedo índice: Controla el movimiento de flexión del dedo índice.'],
+    ['middle finger (flex3)', 'corazón', 'Dedo corazón: Registra la flexión del dedo central.'],
+    ['ring finger (flex4)', 'anular', 'Dedo anular: Captura el desplazamiento del dedo anular.'],
+    ['little finger (flex5)', 'meñique', 'Dedo meñique: Monitorea la flexión del dedo meñique.']
+  ];
   const frame = $('#frame'); let fi = 0;
   frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
-  
   const showF = i => {
-    fi = i; 
+    fi = i;
     $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));
-    
-    // Construimos una vista previa visual de la trama completa resaltando el valor activo
-    const tokens = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((tok, idx) => 
+    const tokens = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((tok, idx) =>
       idx === i ? `<strong style="color: var(--ink); text-decoration: underline;">&lt;${tok}&gt;</strong>` : `&lt;${tok}&gt;`
     ).join(' ');
-
     $('#fdet').innerHTML = i < 5
-      ? (lang === 'es' 
-          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div>
-             <h4>${FN[i][2].split(':')[0]}</h4>
-             <p style="margin:0; font-size: 0.9rem;">${FN[i][2].split(':')[1]}</p>`
-          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div>
-             <h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4>
-             <p style="margin:0; font-size: 0.9rem;">ADC reading of the finger sensor, filtered and mapped to servo angle.</p>`)
-      : (lang === 'es' 
-          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div>
-             <h4>Rotación de la muñeca (Angle Roll)</h4>
-             <p style="margin:0; font-size: 0.9rem;">Ángulo de la muñeca obtenido mediante la IMU filtrada y corregida (0–180°).</p>`
-          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div>
-             <h4>Wrist rotation</h4>
-             <p style="margin:0; font-size: 0.9rem;">Filtered and unwrapped IMU wrist angle scaled to servo range (0–180°).</p>`);
+      ? (lang === 'es'
+          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div><h4>${FN[i][2].split(':')[0]}</h4><p style="margin:0; font-size: 0.9rem;">${FN[i][2].split(':')[1]}</p>`
+          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div><h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p style="margin:0; font-size: 0.9rem;">ADC reading of the finger sensor, filtered and mapped to servo angle.</p>`)
+      : (lang === 'es'
+          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div><h4>Rotación de la muñeca (Angle Roll)</h4><p style="margin:0; font-size: 0.9rem;">Ángulo de la muñeca obtenido mediante la IMU filtrada y corregida (0–180°).</p>`
+          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div><h4>Wrist rotation</h4><p style="margin:0; font-size: 0.9rem;">Filtered and unwrapped IMU wrist angle scaled to servo range (0–180°).</p>`);
   };
-  
   $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
   showF(0);
-  /* Materiales: búsqueda, categorías y precios editables */
+
   const CAT = { el: ['Electronics', 'Electrónica'], ac: ['Actuation', 'Actuación'], pw: ['Power', 'Alimentación'], fa: ['Fabrication', 'Fabricación'] };
   const parts = [
     [['Wemos D1 R32 (ESP32)'], 'el', 2, 10.5], [['MPU6050 (GY-521)'], 'el', 1, 3.5], [['Flex sensor FS-L-0055-253-ST', 'Sensor de flexión FS-L-0055-253-ST'], 'el', 5, 14],
@@ -306,7 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
     upd();
   };
   function upd() {
-    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;     $$('tr[data-i]', tb).forEach(r => {
+    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;
+    $$('tr[data-i]', tb).forEach(r => {
       const i = +r.dataset.i, p = parts[i], sub = p[2] * (+prices[i] || 0); all += sub; $('.sb', r).textContent = eur(sub);
       const show = (cat === 'all' || p[1] === cat) && norm(parts[i][0].join(' ') + ' ' + T(CAT[p[1]])).includes(q);
       r.hidden = !show; if (show) { tot += sub; n++; }
@@ -318,14 +258,21 @@ document.addEventListener('DOMContentLoaded', () => {
   tb.addEventListener('input', e => { const r = e.target.closest('tr[data-i]'); if (!r) return; prices[+r.dataset.i] = e.target.value; store.set('prices', JSON.stringify(prices)); upd(); });
   addEventListener('keydown', e => { if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); } });
 
-  /* Idioma y tema */
-  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };   const applyLang = l => {     lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);     $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;     $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
-    $('#q').placeholder = T(UI.search); setTL(theme);     renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();   };   const applyTheme = t => {     theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts();   };   $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));$('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-  $('.scrollhint').addEventListener('click', e => { e.preventDefault();$('#start').scrollIntoView({ behavior: 'smooth' }); });
+  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };
+  const applyLang = l => {
+    lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);
+    $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;
+    $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
+    $('#q').placeholder = T(UI.search); setTL(theme);
+    renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();
+  };
+  const applyTheme = t => { theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts(); };
+  $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));
+  $('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+  $('.scrollhint').addEventListener('click', e => { e.preventDefault(); $('#start').scrollIntoView({ behavior: 'smooth' }); });
   document.documentElement.dataset.theme = theme;
   applyLang(lang);
 
-  /* Visor con zoom */
   const lb = $('#lb'), li = $('#lb-img'); let s = 1, x = 0, y = 0, drag = false, sx = 0, sy = 0;
   const draw = () => li.style.transform = `translate(${x}px,${y}px) scale(${s})`, close = () => lb.hidden = true;
   document.addEventListener('click', e => { const i = e.target.closest('img.zoom'); if (!i || i.hasAttribute('data-missing')) return; li.src = i.src; li.alt = i.alt; s = 1; x = y = 0; draw(); lb.hidden = false; });
@@ -335,4 +282,3 @@ document.addEventListener('DOMContentLoaded', () => {
   li.addEventListener('pointermove', e => { if (drag) { x = e.clientX - sx; y = e.clientY - sy; draw(); } });
   li.addEventListener('pointerup', () => drag = false);
 });
-
