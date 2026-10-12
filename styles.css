@@ -340,3 +340,17 @@ section{padding:4rem 0 5rem}
 .co2.edit .cb { cursor: move; outline: 2px dashed var(--mute); touch-action: none; }
 .co2.edit path { stroke-dashoffset: 0; transition: none; }
 #co-out { white-space: pre; font-size: .74rem; }
+/* --- CORREGIR TAMAÑO DE LOS ICONOS SVG EN EL HEADER --- */
+.trk svg {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px;
+  min-height: 14px;
+}
+
+.back svg {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px;
+  min-height: 14px;
+}
