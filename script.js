@@ -18,13 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-20% 0px -50% 0px' });
   $$('section[id]').forEach(s => io.observe(s));
 
-  const labelCO = () => { 
-    $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`); 
-    drawCO(); 
-  };
-  labelCO(); // <-- IMPORTANTE: Llama a esto para pintar los textos al arrancar
-  const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
-
   /* Aparición escalonada */
   $$('section > *').forEach(el => el.classList.add('rv'));
   const rv = new IntersectionObserver(es => es.forEach(e => {
@@ -76,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('img', r).forEach(i => i.addEventListener('error', () => i.setAttribute('data-missing', ''))); stepper(r);
   });
 
- 
-/* Diseño mecánico interactivo (Sección 03) - Orden corregido [Inglés, Español] y traducible */
+  /* Diseño mecánico interactivo */
   const MD = [
     { 
       t: ['InMoov Forearm Structure', 'Estructura del antebrazo InMoov'], 
@@ -130,9 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   let mi = 0; 
-  const mdet = $('#mdet');    const showMech = i => {      mi = i;      $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); 
+  const mdet = $('#mdet');   const showMech = i => {     mi = i;      $$('.mc').forEach((c, j) => c.classList.toggle('on', j === i)); 
     const d = MD[i];
-    
     mdet.innerHTML = `
       <div class="mdet-text">
         <span class="mono" style="color:var(--mute); text-transform:uppercase; letter-spacing:.1em; font-size:.65rem;">Hito 0${i+1} // Mechanical Milestone</span>
@@ -153,11 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
     void mdet.offsetWidth; 
     mdet.classList.add('sw');
   }; 
-  
   $$('.mc').forEach((c, i) => c.addEventListener('click', () => showMech(i)));
   showMech(0);
-    
-  /* Guante con flechas interactivo y modo edición */
+
+  /* Guante interactivo con flechas y modo edición */
   const CO = [
     { k: 'flex',  b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 2,  y: 2,  w: 33, tx: 33, ty: 63 },
     { k: 'imu',   b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 28, tx: 46, ty: 54 },
@@ -188,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     out.textContent = CO.map(c => `${c.k}:  x: ${c.x}, y: ${c.y}, w: ${c.w}, tx: ${c.tx}, ty: ${c.ty}`).join('\n');
   };
   const labelCO = () => { $$('.cb', g).forEach((b, i) => b.innerHTML = `<b>${T(CO[i].b)}</b>${T(CO[i].t)}`); drawCO(); };
+  labelCO(); // Restaura los textos del guante al cargar
   addEventListener('resize', drawCO);
   const hl = (k, on) => $$('[data-k]', g).forEach(e => e.classList.toggle('hl', on && e.dataset.k === k));$$('.cb', g).forEach(b => {
     b.addEventListener('mouseenter', () => hl(b.dataset.k, true)); b.addEventListener('mouseleave', () => hl(b.dataset.k, false));
@@ -211,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   g.addEventListener('pointerup', () => ed = null);
   const gio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { g.classList.add('in'); gio.disconnect(); } }), { threshold: .3 }); gio.observe(g);
 
- /* Gráficos (se reconstruyen al cambiar de tema o idioma) */
+  /* Gráficos */
   let charts = [];
   const buildCharts = () => {
     if (!window.Chart) return; charts.forEach(c => c.destroy()); charts = [];
@@ -239,22 +230,26 @@ document.addEventListener('DOMContentLoaded', () => {
   $$('#ctabs .tab').forEach(b => b.addEventListener('click', () => { $$
 ('#ctabs .tab').forEach(x => x.classList.toggle('on', x === b)); buildCharts(); }));
   const adc = $('#adc'), calc = () => { const x = +adc.value; $('#adc-v').textContent = x; $('#adc-a').textContent = Math.trunc((x - 1530) * (0 - 180) / (2100 - 1530)) + 180; };
-  adc.addEventListener('input', calc); calc();
+  if (adc) { adc.addEventListener('input', calc); calc(); }
 
   /* Trama Bluetooth */
   const FN = [['thumb', 'pulgar'], ['index finger', 'índice'], ['middle finger', 'corazón'], ['ring finger', 'anular'], ['little finger', 'meñique']];
-  const frame = $('#frame'); let fi = 0;
-  frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
-  const showF = i => {
-    fi = i; $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));$('#fdet').innerHTML = i < 5
-      ? (lang === 'es' ? `<h4>Dedo ${FN[i][1]}</h4><p>Lectura del ADC del sensor del ${FN[i][1]} (media de 8 muestras, válida entre 1000 y 3000; si no lo es se repite el último valor correcto). En el brazo se convierte en ángulo con los valores de calibración de ese dedo.</p>`
-        : `<h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p>ADC reading of the ${FN[i][0]} sensor (average of 8 samples, valid between 1000 and 3000; if not, the last valid value is repeated). At the arm it is converted into an angle with that finger's calibration values.</p>`)
-      : (lang === 'es' ? '<h4>Rotación de la muñeca</h4><p>Ángulo de la muñeca calculado con la IMU y el filtro complementario, con el unwrapping aplicado. Llega ya limitado y escalado al rango del servo (0–180°), así que el brazo solo tiene que aplicarlo.</p>'
-        : '<h4>Wrist rotation</h4><p>Wrist angle computed with the IMU and the complementary filter, with unwrapping applied. It arrives already limited and scaled to the servo range (0–180°), so the arm only has to apply it.</p>');
-  };
-  $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
+  const frame = $('#frame'); 
+  if (frame) {
+    let fi = 0;
+    frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
+    const showF = i => {
+      fi = i; $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));$('#fdet').innerHTML = i < 5
+        ? (lang === 'es' ? `<h4>Dedo ${FN[i][1]}</h4><p>Lectura del ADC del sensor del ${FN[i][1]} (media de 8 muestras, válida entre 1000 y 3000; si no lo es se repite el último valor correcto). En el brazo se convierte en ángulo con los valores de calibración de ese dedo.</p>`
+          : `<h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p>ADC reading of the ${FN[i][0]} sensor (average of 8 samples, valid between 1000 and 3000; if not, the last valid value is repeated). At the arm it is converted into an angle with that finger's calibration values.</p>`)
+        : (lang === 'es' ? '<h4>Rotación de la muñeca</h4><p>Ángulo de la muñeca calculado con la IMU y el filtro complementario, con el unwrapping aplicado. Llega ya limitado y escalado al rango del servo (0–180°), así que el brazo solo tiene que aplicarlo.</p>'
+          : '<h4>Wrist rotation</h4><p>Wrist angle computed with the IMU and the complementary filter, with unwrapping applied. It arrives already limited and scaled to the servo range (0–180°), so the arm only has to apply it.</p>');
+    };
+    $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
+    showF(0);
+  }
 
-  /* Materiales: búsqueda, categorías y precios editables */
+  /* Materiales y presupuesto */
   const CAT = { el: ['Electronics', 'Electrónica'], ac: ['Actuation', 'Actuación'], pw: ['Power', 'Alimentación'], fa: ['Fabrication', 'Fabricación'] };
   const parts = [
     [['Wemos D1 R32 (ESP32)'], 'el', 2, 10.5], [['MPU6050 (GY-521)'], 'el', 1, 3.5], [['Flex sensor FS-L-0055-253-ST', 'Sensor de flexión FS-L-0055-253-ST'], 'el', 5, 14],
@@ -271,27 +266,28 @@ document.addEventListener('DOMContentLoaded', () => {
   let cat = 'all';
   const tb = $('#mt tbody');
   const renderParts = () => {
+    if (!$('#chips')) return;
     $('#chips').innerHTML = [['all', T(UI.all)], ...Object.entries(CAT).map(([k, v]) => [k, T(v)])].map(([k, l]) => `<button class="chip${k === cat ? ' on' : ''}" data-c="${k}">${l}</button>`).join('');
     tb.innerHTML = parts.map((p, i) => `<tr data-i="${i}"><td>${nm(p)}</td><td><span class="pill">${T(CAT[p[1]])}</span></td><td>${p[2]}</td><td><input type="number" min="0" step="0.01" value="${prices[i]}" aria-label="${nm(p)}"></td><td class="sb"></td></tr>`).join('') + `<tr id="none" hidden><td colspan="5">${T(UI.none)}</td></tr>`;
     upd();
   };
   function upd() {
-    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;     $$('tr[data-i]', tb).forEach(r => {
+    if (!tb) return;
+    const q = norm($('#q').value); let tot = 0, n = 0, all = 0;      $$('tr[data-i]', tb).forEach(r => {
       const i = +r.dataset.i, p = parts[i], sub = p[2] * (+prices[i] || 0); all += sub; $('.sb', r).textContent = eur(sub);
       const show = (cat === 'all' || p[1] === cat) && norm(parts[i][0].join(' ') + ' ' + T(CAT[p[1]])).includes(q);
       r.hidden = !show; if (show) { tot += sub; n++; }
     });
     $('#none').hidden = n > 0; $('#tot').textContent = eur(tot); $('#grand').textContent = eur(all);
   }
-  $('#q').addEventListener('input', upd);
-  $('#chips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; cat = c.dataset.c; $$('.chip').forEach(x => x.classList.toggle('on', x === c)); upd(); });
-  tb.addEventListener('input', e => { const r = e.target.closest('tr[data-i]'); if (!r) return; prices[+r.dataset.i] = e.target.value; store.set('prices', JSON.stringify(prices)); upd(); });
-  addEventListener('keydown', e => { if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); } });
+  if ($('#q')) $('#q').addEventListener('input', upd);
+  if ($('#chips')) $('#chips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (!c) return; cat = c.dataset.c; $$('.chip').forEach(x => x.classList.toggle('on', x === c)); upd(); });
+  if (tb) tb.addEventListener('input', e => { const r = e.target.closest('tr[data-i]'); if (!r) return; prices[+r.dataset.i] = e.target.value; store.set('prices', JSON.stringify(prices)); upd(); });
 
   /* Idioma y tema */
-  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };   const applyLang = l => {     lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);     $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;     $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
-    $('#q').placeholder = T(UI.search); setTL(theme);     renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();   };   const applyTheme = t => {     theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts();   };   $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));$('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-  $('.scrollhint').addEventListener('click', e => { e.preventDefault();$('#start').scrollIntoView({ behavior: 'smooth' }); });
+  const setTL = t => { const s = T(t === 'dark' ? UI.day : UI.night); $('#theme .tl').textContent = s; $('#theme').setAttribute('aria-label', s); };    const applyLang = l => {      lang = l; store.set('lang', l); document.documentElement.lang = l; document.title = T(UI.title);      $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;      $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
+    if ($('#q')) $('#q').placeholder = T(UI.search);      setTL(theme);      renderPCB(); showMech(mi); labelCO(); if(typeof showF === 'function') showF(fi); renderParts(); buildCharts();    };    const applyTheme = t => {      theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts();    };    $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));$('#theme').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+  if ($('.scrollhint')) $('.scrollhint').addEventListener('click', e => { e.preventDefault();$('#start').scrollIntoView({ behavior: 'smooth' }); });
   document.documentElement.dataset.theme = theme;
   applyLang(lang);
 
