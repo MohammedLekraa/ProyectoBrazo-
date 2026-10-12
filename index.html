@@ -84,7 +84,7 @@
     Beyond just making things move, the real challenge was tackling real-world engineering hurdles: handling analog sensor calibration, filtering IMU drift, and designing custom PCBs to keep wiring clean.
   </p>
 
-  <figure class="card fig" style="max-width: 90%; margin: 2rem auto;">
+  <figure class="card fig" style="max-width: 90%; margin: 1.5rem auto;">
     <img class="zoom" src="sistema.png" alt="Glove, robotic arm and power supply" style="width: 100%; height: auto;">
     <figcaption class="mono" data-es="El sistema completo: el guante a la izquierda y el brazo con su caja y la fuente a la derecha.">
       The complete system: the glove on the left and the arm with its box and power supply on the right.
@@ -194,7 +194,7 @@
   <h2 data-es="04. Diseño e integración del guante de control">04. Control glove design and integration</h2>
   <p class="lead" data-es="El guante es la parte que capta el movimiento. Pasa el ratón o haz clic sobre cada etiqueta para ver qué hace cada elemento.">The glove is the part that captures the movement. Hover or click each label to see what every element does.</p>
   <div class="co2" id="glove"><img class="zoom" src="img/guante.png" alt="Sensor glove with the electronics box"></div>
-  <div class="card" data-tabs style="margin-top:1.4rem">
+  <div class="card" data-tabs style="margin-top:1rem">
     <div class="tabs">
       <button class="tab on" data-k="flex" data-es="Sensores de flexión">Flex sensors</button>
       <button class="tab" data-k="imu">IMU MPU6050</button>
@@ -216,7 +216,7 @@
         El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial.
       </p>
 
-      <div class="tbl" style="margin-top: 1rem;">
+      <div class="tbl" style="margin-top: 0.8rem;">
         <table style="font-size: 0.82rem;">
           <thead>
             <tr>
@@ -244,52 +244,48 @@
   </div>
 
   <h3 data-es="De resistencia a número: el divisor de tensión y el ADC" data-en="From resistance to number: voltage divider and ADC">De resistencia a número: el divisor de tensión y el ADC</h3>
-  <div class="grid2 mid-al" >
+  <div class="grid2 mid-al">
     <div>
-      <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor (the sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint). When the finger bends, Rflex rises and Vout drops." style="margin-bottom: 0.8rem;">
+      <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor (the sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint). When the finger bends, Rflex rises and Vout drops." style="margin-bottom: 0.6rem;">
         El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja.
       </p>
-      <p class="eq" style="margin: 0.6rem 0;">Vout = Vin &middot; Rfix / (Rfix + Rflex)</p>
+      <p class="eq" style="margin: 0.4rem 0;">Vout = Vin &middot; Rfix / (Rfix + Rflex)</p>
       
-      <p data-es="A continuación, el conversor analógico-digital (ADC) de 12 bits del microcontrolador transforma dicha tensión en un valor numérico discreto entre 0 y 4095. Estos números digitales son los datos reales que el programa lee, procesa, transmite de forma inalámbrica y sobre los que trabaja el sistema para calcular el movimiento." data-en="Next, the microcontroller's 12-bit analog-to-digital converter (ADC) transforms that voltage into a discrete numerical value between 0 and 4095. These digital numbers are the actual data that the program reads, processes, transmits wirelessly, and works with to compute movement." style="margin-top: 1rem; margin-bottom: 0.8rem;">
+      <p data-es="A continuación, el conversor analógico-digital (ADC) de 12 bits del microcontrolador transforma dicha tensión en un valor numérico discreto entre 0 y 4095. Estos números digitales son los datos reales que el programa lee, procesa, transmite de forma inalámbrica y sobre los que trabaja el sistema para calcular el movimiento." data-en="Next, the microcontroller's 12-bit analog-to-digital converter (ADC) transforms that voltage into a discrete numerical value between 0 and 4095. These digital numbers are the actual data that the program reads, processes, transmits wirelessly, and works with to compute movement." style="margin-top: 0.8rem; margin-bottom: 0.6rem;">
         A continuación, el conversor analógico-digital (ADC) de 12 bits del microcontrolador transforma dicha tensión en un valor numérico discreto entre 0 y 4095. Estos números digitales son los datos reales que el programa lee, procesa, transmite de forma inalámbrica y sobre los que trabaja el sistema para calcular el movimiento.
       </p>
-      <p class="eq" style="margin: 0.6rem 0;">ADC = Vout / 3.3 &middot; 4095</p>
+      <p class="eq" style="margin: 0.4rem 0;">ADC = Vout / 3.3 &middot; 4095</p>
     </div>
     <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisortension.png" alt="Voltage divider with the flex sensor"></figure>
   </div>
 
-  <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose" style="margin-top: -2rem;">Qué resistencia fija elegir</h3>
-  
-  <div class="grid2" style="align-items: flex-start; margin-top: 1rem;">
+  <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
+  <div class="grid2" style="align-items: flex-start; margin-top: 0.6rem;">
     <div>
       <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
         Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
       </p>
     </div>
-    
     <div class="card" style="margin-top: 0;">
       <canvas id="c-rf" aria-label="ADC range with 10 kΩ and 47 kΩ"></canvas>
       <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
     </div>
   </div>
   
-  <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function" style="margin-top: 2.5rem;">Caracterización y conversión a ángulo: la función map()</h3>
-  
-  <div class="grid2" style="align-items: flex-start; margin-top: 1rem;">
+  <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
+  <div class="grid2" style="align-items: flex-start; margin-top: 0.6rem;">
     <div>
       <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
         Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
       </p>
-      <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range." style="margin-top: 1rem;">
+      <p data-es="Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil." data-en="The recorded points line up roughly in a straight line, with no sudden jumps or saturation. Although physically the resistive material of the sensor does not have a perfectly linear response, the scatter is small enough to approximate it reliably with a straight line across its useful working range." style="margin-top: 0.8rem;">
         Los puntos registrados se alinean aproximadamente en una línea recta, sin saltos bruscos ni saturaciones. Aunque físicamente el material resistivo del sensor no es de respuesta perfectamente lineal, la dispersión es lo suficientemente pequeña como para aproximarlo de forma fiable mediante una recta en todo su rango de trabajo útil.
       </p>
-      <p data-es="Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°)." data-en="To translate this reading to servo movement, Arduino's native <code>map()</code> function is used, which linearly maps the experimentally obtained ADC range to motor degrees (from 180° to 0°)." style="margin-top: 1rem;">
+      <p data-es="Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°)." data-en="To translate this reading to servo movement, Arduino's native <code>map()</code> function is used, which linearly maps the experimentally obtained ADC range to motor degrees (from 180° to 0°)." style="margin-top: 0.8rem;">
         Para traducir esta lectura al movimiento del servo se utiliza la función nativa <code>map()</code> de Arduino, que mapea de forma lineal el rango del ADC obtenido experimentalmente a los grados del motor (de 180° a 0°).
       </p>
-      <p class="eq" style="margin-top: 0.8rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
+      <p class="eq" style="margin-top: 0.6rem;">angle = map(flex, minFlex, maxFlex, 180, 0)</p>
     </div>
-    
     <div class="card" style="margin-top: 0;">
       <canvas id="chart" aria-label="ADC reading versus angle"></canvas>
       <p class="mono hint" data-es="Pasa el cursor por el gráfico para ver los valores." data-en="Hover over the chart to see the values.">Pasa el cursor por el gráfico para ver los valores.</p>
@@ -298,17 +294,16 @@
 </section>
 
 <section id="imu">
-  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. IMU MPU6050: wrist rotation">06. IMU MPU6050: wrist rotation</h2>
+  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. IMU MPU6050: wrist rotation">06. IMU MPU6050: rotación de la muñeca</h2>
   <div class="grid2 mid-al">
     <div>
-      <p class="lead" style="margin-bottom:.8rem" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes." data-en="Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.">
+      <p class="lead" style="margin-bottom:0.6rem" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes." data-en="Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.">
         La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes.
       </p>
       <p data-es="El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones." data-en="The path to a reliable angle had five stages. Follow them one by one with the buttons.">
         El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones.
       </p>
     </div>
-
     <figure class="card fig" style="margin: 0 auto;">
       <img class="zoom" src="img/modulompu.png" alt="GY-521 module with MPU6050">
       <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C." data-en="GY-521 module with MPU6050, connected to the ESP32 over I2C.">
@@ -317,7 +312,7 @@
     </figure>
   </div>
 
-  <div class="stepper card" id="imu-st">
+  <div class="stepper card" id="imu-st" style="margin-top: 1rem;">
     <div class="st-nav"><button data-es="1 Grados con el giroscopio">1 Degrees from the gyroscope</button><button data-es="2 La deriva">2 Drift</button><button data-es="3 Filtro complementario">3 Complementary filter</button><button data-es="4 El salto de 180°">4 The 180° jump</button><button data-es="5 Unwrapping">5 Unwrapping</button></div>
     <div class="st-bar"><i></i></div>
 
@@ -363,7 +358,7 @@
 </section>
 
 <section id="pcb">
-  <h2 data-es="07. Diseño y fabricación de las placas" data-en="07. PCB design and fabrication">07. PCB design and fabrication</h2>
+  <h2 data-es="07. Diseño y fabricación de las placas" data-en="07. PCB design and fabrication">07. Diseño y fabricación de las placas</h2>
   
   <p class="lead" data-es="Para organizar el cableado se diseñaron dos PCB a medida en KiCad: una para el guante (acondicionamiento de señales y divisores de tensión) y otra para el brazo (interfaz de potencia y conexión de los servos)." data-en="To organise the wiring, two custom PCBs were designed in KiCad: one for the glove (signal conditioning and voltage dividers) and another for the arm (power interface and servo connection).">
     Para organizar el cableado se diseñaron dos PCB a medida en KiCad: una para el guante (acondicionamiento de señales y divisores de tensión) y otra para el brazo (interfaz de potencia y conexión de los servos).
@@ -374,7 +369,7 @@
     Cada placa pasó por el mismo proceso: se dibuja el esquema de conexiones, se pasa a KiCad, se trazan las pistas y, por último, se fabrica la placa y se sueldan los componentes a mano. Elige la placa y avanza paso a paso.
   </p>
   
-  <div class="card" data-tabs>
+  <div class="card" data-tabs style="margin-top: 1rem;">
     <div class="tabs">
       <button class="tab on" data-k="g" data-es="PCB del guante">Glove PCB</button>
       <button class="tab" data-k="b" data-es="PCB del brazo">Arm PCB</button>
@@ -391,11 +386,11 @@
     Los dos ESP32 establecen un enlace inalámbrico mediante Bluetooth clásico en perfil SPP (Serial Port Profile). Esta conexión serie transparente ofrece una latencia mínima y la velocidad justa para transmitir los datos de movimiento en tiempo real.
   </p>
 
-  <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 2rem 0;">
+  <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 1.5rem 0;">
     <div class="card" style="margin: 0; height: 100%;">
       <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Emisor</span>
       <h4 data-es="ESP32 del guante (Cliente)" style="margin-top: 0.3rem;">ESP32 del guante (Cliente)</h4>
-      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.">
+      <p style="margin-top: 0.6rem; font-size: 0.95rem;" data-es="Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.">
         Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.
       </p>
     </div>
@@ -405,7 +400,7 @@
     <div class="card" style="margin: 0; height: 100%;">
       <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Receptor</span>
       <h4 data-es="ESP32 del brazo (Servidor)" style="margin-top: 0.3rem;">ESP32 del brazo (Servidor)</h4>
-      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.">
+      <p style="margin-top: 0.6rem; font-size: 0.95rem;" data-es="Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.">
         Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.
       </p>
     </div>
@@ -420,8 +415,8 @@
   <div class="frame" id="frame"></div>
   <div class="card" id="fdet" aria-live="polite" style="margin-top: 1rem;"></div>
   
-  <p style="margin-top: 1.2rem;" data-es="Este formato de texto plano simplifica enormemente la depuración mediante el monitor serie de Arduino y dota al sistema de una gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo." data-en="This plain text format greatly simplifies debugging via the Arduino serial monitor and provides high robustness: if a line arrives incomplete or with errors, it is instantly discarded without affecting arm movement.">
-    Este formato de texto plano simplifica enormemente la depuración mediante el monitor serie de Arduino y dota al sistema de una gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo.
+  <p style="margin-top: 1rem;" data-es="Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo." data-en="This plain text format greatly simplifies debugging with the Arduino serial monitor and provides high robustness: if a line arrives incomplete or with errors, it is instantly discarded without affecting arm movement.">
+    Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo.
   </p>
 </section>
 
@@ -436,46 +431,43 @@
     En las primeras pruebas, al mover varios servos a la vez, la placa sufría reseteos. Para solucionarlo, todas las masas (GND) se mantienen estrictamente conectadas, ya que las señales PWM requieren una referencia eléctrica común.
   </p>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-    <!-- Tarjeta 1 -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.2rem;">
     <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
-      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+      <div style="width: 100%; height: 150px; overflow: hidden; border-radius: 6px; background: var(--line);">
         <img class="zoom" src="img/alim-guant.jpg" alt="Placa del guante" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
-      <div style="margin-top: 1rem;">
+      <div style="margin-top: 0.8rem;">
         <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Placa del guante">Glove board</h4>
         <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V.">Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V.</p>
       </div>
     </div>
 
-    <!-- Tarjeta 2 -->
     <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
-      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+      <div style="width: 100%; height: 150px; overflow: hidden; border-radius: 6px; background: var(--line);">
         <img class="zoom" src="img/alim-brac.jpg" alt="Placa del brazo" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
-      <div style="margin-top: 1rem;">
+      <div style="margin-top: 0.8rem;">
         <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Placa del brazo">Arm board</h4>
         <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales).">Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales).</p>
       </div>
     </div>
 
-    <!-- Tarjeta 3 -->
     <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
-      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+      <div style="width: 100%; height: 150px; overflow: hidden; border-radius: 6px; background: var(--line);">
         <img class="zoom" src="img/alim-servos.jpg" alt="Servomotores" style="width: 100%; height: 100%; object-fit: cover;">
       </div>
-      <div style="margin-top: 1rem;">
+      <div style="margin-top: 0.8rem;">
         <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Servomotores">Servomotors</h4>
         <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A).">Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A).</p>
       </div>
     </div>
   </div>
   
-  <p class="gnd mono" style="text-align: center; margin-top: 1.5rem;" data-es="GND común entre las tres partes del sistema" data-en="Common GND across the three system parts">GND común entre las tres partes del sistema</p>
+  <p class="gnd mono" style="text-align: center; margin-top: 1rem;" data-es="GND común entre las tres partes del sistema" data-en="Common GND across the three system parts">GND común entre las tres partes del sistema</p>
 </section>
 
 <section id="material">
-  <h2 data-es="10. Lista de materiales y presupuesto">10. Bill of materials and budget</h2>
+  <h2 data-es="10. Lista de materiales y presupuesto" data-en="10. Bill of materials and budget">10. Lista de materiales y presupuesto</h2>
   <p class="lead" data-es="Componentes y materiales utilizados en el proyecto. Se pueden buscar por nombre y los precios se pueden editar; el coste total se actualiza solo.">Components and materials used in the project. You can search them by name and edit the prices; the total cost updates by itself.</p>
   <div class="total"><span class="mono" data-es="Coste estimado del proyecto">Estimated project cost</span><b id="grand"></b></div>
   <div class="mat-bar">
