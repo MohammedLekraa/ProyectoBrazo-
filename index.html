@@ -397,7 +397,6 @@
     <div class="tp on" data-p="g"><div class="stepper" id="pcb-g"></div></div>
     <div class="tp" data-p="b"><div class="stepper" id="pcb-b"></div></div>
   </div>
-
 <section id="bluetooth">
   <h2 data-es="08. Comunicación y protocolo Bluetooth" data-en="08. Bluetooth communication and protocol">08. Comunicación y protocolo Bluetooth</h2>
   
@@ -405,71 +404,85 @@
     Los dos ESP32 establecen un enlace inalámbrico mediante Bluetooth clásico en perfil SPP (Serial Port Profile). Esta conexión serie transparente ofrece una latencia mínima y la velocidad justa para transmitir los datos de movimiento en tiempo real.
   </p>
 
-  <div class="bt" style="margin: 1.5rem 0;">
-    <div class="card">
-      <h4 data-es="ESP32 del guante (Cliente)">ESP32 del guante (Cliente)</h4>
-      <p data-es="Se encarga de leer periódicamente los sensores, empaquetar la trama de datos y enviarla de forma inalámbrica conectándose a la dirección MAC del servidor." data-en="Responsible for periodically reading sensors, packaging the data frame, and wirelessly sending it by connecting to the server's MAC address.">
-        Se encarga de leer periódicamente los sensores, empaquetar la trama de datos y enviarla de forma inalámbrica conectándose a la dirección MAC del servidor.
+  <!-- Estructura mejorada para Cliente y Servidor -->
+  <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 2rem 0;">
+    <div class="card" style="margin: 0; height: 100%;">
+      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Emisor</span>
+      <h4 data-es="ESP32 del guante (Cliente)" style="margin-top: 0.3rem;">ESP32 del guante (Cliente)</h4>
+      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.">
+        Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.
       </p>
     </div>
     
-    <div class="arrow" aria-hidden="true">&rarr;</div>
+    <div style="text-align: center; color: var(--mute); font-weight: bold; font-size: 1.5rem;" aria-hidden="true">&leftrightarrow;</div>
     
-    <div class="card">
-      <h4 data-es="ESP32 del brazo (Servidor)">ESP32 del brazo (Servidor)</h4>
-      <p data-es="Permanece a la escucha esperando la conexión, recibe la trama de texto entrante, la desglosa y mueve los servomotores con suavidad." data-en="Listens for incoming connections, receives the incoming text frame, parses it, and smoothly moves the servomotors.">
-        Permanece a la escucha esperando la conexión, recibe la trama de texto entrante, la desglosa y mueve los servomotores con suavidad.
+    <div class="card" style="margin: 0; height: 100%;">
+      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Receptor</span>
+      <h4 data-es="ESP32 del brazo (Servidor)" style="margin-top: 0.3rem;">ESP32 del brazo (Servidor)</h4>
+      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.">
+        Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.
       </p>
     </div>
   </div>
 
   <h3 data-es="Estructura de la trama de datos" data-en="Data frame structure">Estructura de la trama de datos</h3>
   
-  <p data-es="El guante transmite una línea de texto cada 100 ms (a una frecuencia de 10 Hz), un valor óptimo para evitar saturar el canal inalámbrico y minimizar la pérdida de paquetes. Cada trama contiene seis valores separados por espacios y finaliza con un salto de línea. Haz clic en cada valor para consultar su significado:" data-en="The glove transmits a text line every 100 ms (at 10 Hz), an optimal value to avoid saturating the wireless channel and minimize packet loss. Each frame contains six space-separated values and ends with a line break. Click each value to see its meaning:">
-    El guante transmite una línea de texto cada 100 ms (a una frecuencia de 10 Hz), un valor óptimo para evitar saturar el canal inalámbrico y minimizar la pérdida de paquetes. Cada trama contiene seis valores separados por espacios y finaliza con un salto de línea. Haz clic en cada valor para consultar su significado:
+  <p data-es="El guante transmite una línea de texto cada 100 ms (10 Hz), evitando saturar el canal y reduciendo pérdidas. Cada trama contiene seis valores separados por espacios y termina con un salto de línea. Haz clic en cada valor para ver su significado:" data-en="The glove transmits a text line every 100 ms (10 Hz), avoiding channel saturation and reducing loss. Each frame contains six space-separated values and ends with a newline. Click each value to see its meaning:">
+    El guante transmite una línea de texto cada 100 ms (10 Hz), evitando saturar el canal y reduciendo pérdidas. Cada trama contiene seis valores separados por espacios y termina con un salto de línea. Haz clic en cada valor para ver su significado:
   </p>
 
   <div class="frame" id="frame"></div>
   <div class="card" id="fdet" aria-live="polite" style="margin-top: 1rem;"></div>
   
-  <p style="margin-top:1.2rem" data-es="Este formato de texto plano simplifica enormemente la depuración mediante el monitor serie de Arduino y dota al sistema de una gran robustez: si una trama llega corrupta o incompleta, el receptor la descarta de inmediato sin comprometer el movimiento de los servos." data-en="This plain text format greatly simplifies debugging via the Arduino serial monitor and gives the system high robustness: if a frame arrives corrupted or incomplete, the receiver immediately discards it without compromising servo movement.">
-    Este formato de texto plano simplifica enormemente la depuración mediante el monitor serie de Arduino y dota al sistema de una gran robustez: si una trama llega corrupta o incompleta, el receptor la descarta de inmediato sin comprometer el movimiento de los servos.
+  <p style="margin-top: 1.2rem;" data-es="Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo." data-en="This plain text format greatly simplifies debugging with the Arduino serial monitor and provides high robustness: if a line arrives incomplete or with errors, it is instantly discarded without affecting arm movement.">
+    Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo.
   </p>
 </section>
 
-
-  <section id="alimentacio">
+<section id="alimentacio">
   <h2 data-es="09. Alimentación del sistema" data-en="09. System power supply">09. Alimentación del sistema</h2>
   
-  <p class="lead" data-es="El diseño eléctrico emplea fuentes de alimentación completamente independientes para el microcontrolador y los actuadores. De este modo se evitan caídas de tensión y reinicios inesperados en el ESP32 causados por los picos de consumo de los servomotores." data-en="The electrical design uses completely independent power supplies for the microcontroller and the actuators. This prevents voltage drops and unexpected reboots in the ESP32 caused by current peaks from the servomotors.">
-    El diseño eléctrico emplea fuentes de alimentación completamente independientes para el microcontrolador y los actuadores. De este modo se evitan caídas de tensión y reinicios inesperados en el ESP32 causados por los picos de consumo de los servomotores.
+  <p class="lead" data-es="El diseño eléctrico emplea fuentes de alimentación independientes para el microcontrolador y los actuadores, evitando caídas de tensión y reinicios en el ESP32 causados por los picos de consumo de los servomotores." data-en="The electrical design uses independent power supplies for the microcontroller and actuators, preventing voltage drops and ESP32 reboots caused by servo current peaks.">
+    El diseño eléctrico emplea fuentes de alimentación independientes para el microcontrolador y los actuadores, evitando caídas de tensión y reinicios en el ESP32 causados por los picos de consumo de los servomotores.
   </p>
   
-  <p data-es="En las primeras pruebas, al mover varios servos simultáneamente, la placa sufría reseteos por bajadas de tensión. Para solucionarlo, todas las masas (GND) se mantienen estrictamente conectadas entre sí, ya que las señales de control PWM requieren una referencia eléctrica común." data-en="During initial tests, moving multiple servos simultaneously caused board reboots due to voltage sags. To solve this, all grounds (GND) are strictly interconnected, as PWM control signals require a common electrical reference.">
-    En las primeras pruebas, al mover varios servos simultáneamente, la placa sufría reseteos por bajadas de tensión. Para solucionarlo, todas las masas (GND) se mantienen estrictamente conectadas entre sí, ya que las señales de control PWM requieren una referencia eléctrica común.
+  <p data-es="En las primeras pruebas, al mover varios servos a la vez, la placa sufría reseteos. Para solucionarlo, todas las masas (GND) se mantienen estrictamente conectadas, ya que las señales PWM requieren una referencia eléctrica común." data-en="During early tests, moving multiple servos simultaneously caused reboots. To solve this, all grounds (GND) remain strictly connected, as PWM signals require a common electrical reference.">
+    En las primeras pruebas, al mover varios servos a la vez, la placa sufría reseteos. Para solucionarlo, todas las masas (GND) se mantienen estrictamente conectadas, ya que las señales PWM requieren una referencia eléctrica común.
   </p>
 
-  <div class="pow" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-    <figure class="card fig" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0;">
-      <img class="zoom" src="img/alim-guant.jpg" alt="Placa del guante" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-      <figcaption data-es="<b>Placa del guante</b><br>Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V." data-en="<b>Glove board</b><br>5500 mAh rechargeable Li-ion battery acting as a 9V source." style="margin-top: 1rem;">
-        <b>Placa del guante</b><br>Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V.
-      </figcaption>
-    </figure>
-    
-    <figure class="card fig" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0;">
-      <img class="zoom" src="img/alim-brac.jpg" alt="Placa del brazo" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-      <figcaption data-es="<b>Placa del brazo</b><br>Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales)." data-en="<b>Arm board</b><br>Two 3.2 V 18650 Li-ion cells in series (~6.4 V nominal)." style="margin-top: 1rem;">
-        <b>Placa del brazo</b><br>Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales).
-      </figcaption>
-    </figure>
-    
-    <figure class="card fig" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0;">
-      <img class="zoom" src="img/alim-servos.jpg" alt="Servomotores" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px;">
-      <figcaption data-es="<b>Servomotores</b><br>Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A)." data-en="<b>Servomotors</b><br>Promax FAC-363B lab supply at 6.5 V (peak consumption ~1.6 A)." style="margin-top: 1rem;">
-        <b>Servomotores</b><br>Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A).
-      </figcaption>
-    </figure>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+    <!-- Tarjeta 1 -->
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
+      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+        <img class="zoom" src="img/alim-guant.jpg" alt="Placa del guante" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="margin-top: 1rem;">
+        <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Placa del guante">Glove board</h4>
+        <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V.">Pila recargable de Li-ion de 5500 mAh, actuando como fuente de 9 V.</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2 -->
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
+      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+        <img class="zoom" src="img/alim-brac.jpg" alt="Placa del brazo" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="margin-top: 1rem;">
+        <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Placa del brazo">Arm board</h4>
+        <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales).">Dos pilas Li-ion 18650 de 3.2 V en serie (~6.4 V nominales).</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; margin: 0; padding: 1rem;">
+      <div style="width: 100%; height: 160px; overflow: hidden; border-radius: 6px; background: var(--line);">
+        <img class="zoom" src="img/alim-servos.jpg" alt="Servomotores" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+      <div style="margin-top: 1rem;">
+        <h4 style="font-size: 1rem; margin-bottom: 0.3rem;" data-es="Servomotores">Servomotors</h4>
+        <p style="font-size: 0.9rem; margin: 0; color: var(--mute);" data-es="Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A).">Fuente de laboratorio Promax FAC-363B a 6.5 V (consumo pico de ~1.6 A).</p>
+      </div>
+    </div>
   </div>
   
   <p class="gnd mono" style="text-align: center; margin-top: 1.5rem;" data-es="GND común entre las tres partes del sistema" data-en="Common GND across the three system parts">GND común entre las tres partes del sistema</p>
