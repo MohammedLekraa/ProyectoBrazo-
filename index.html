@@ -62,7 +62,8 @@
     <a href="#imu"><i>06</i><span data-es="IMU MPU6050: rotación de la muñeca">MPU6050 IMU: wrist rotation</span></a>
     <a href="#pcb"><i>07</i><span data-es="Diseño y fabricación de las placas">PCB design and fabrication</span></a>
     <a href="#bluetooth"><i>08</i><span data-es="Comunicación y protocolo Bluetooth">Bluetooth communication and protocol</span></a>
-    <a href="#material"><i>09</i><span data-es="Lista de materiales y presupuesto">Bill of materials and budget</span></a>
+    <a href="#alimentacio"><i>09</i><span data-es="Alimentación del sistema">System power supply</span></a>
+    <a href="#material"><i>10</i><span data-es="Lista de materiales y presupuesto">Bill of materials and budget</span></a>
   </nav>
 </aside>
 
@@ -84,11 +85,11 @@
   </p>
 
   <figure class="card fig" style="max-width: 90%; margin: 2rem auto;">
-  <img class="zoom" src="sistema.png" alt="Glove, robotic arm and power supply" style="width: 100%; height: auto;">
-  <figcaption class="mono" data-es="El sistema completo: el guante a la izquierda y el brazo con su caja y la fuente a la derecha.">
-    The complete system: the glove on the left and the arm with its box and power supply on the right.
-  </figcaption>
-</figure>
+    <img class="zoom" src="sistema.png" alt="Glove, robotic arm and power supply" style="width: 100%; height: auto;">
+    <figcaption class="mono" data-es="El sistema completo: el guante a la izquierda y el brazo con su caja y la fuente a la derecha.">
+      The complete system: the glove on the left and the arm with its box and power supply on the right.
+    </figcaption>
+  </figure>
 </section>
 
 <section id="sistema">
@@ -98,7 +99,6 @@
     Para que el brazo copie mi mano hacen falta sensores que capten los movimientos, un enlace inalámbrico que envíe los datos y unos actuadores que los reproduzcan. El sistema se divide en dos nodos: el guante, que capta, y el brazo, que actúa.
   </p>
 
-  <!-- BARRA DE FLUJO SUPERIOR -->
   <div class="flow-bar">
     <span data-es="CAPTURAR" data-en="CAPTURE">CAPTURAR</span>
     <span class="arrow-sm">&rarr;</span>
@@ -107,9 +107,7 @@
     <span data-es="REPRODUCIR" data-en="REPRODUCE">REPRODUCIR</span>
   </div>
 
-  <!-- REJILLA DE TARJETAS -->
   <div class="pipe">
-    <!-- COLUMNA 1: CAPTURA -->
     <div class="col">
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
@@ -128,10 +126,8 @@
       </div>
     </div>
 
-    <!-- FLECHA 1 -->
     <div class="arrow">&rarr;</div>
 
-    <!-- COLUMNA 2: TRANSMISIÓN (TARJETA CENTRAL ALTA) -->
     <div class="col col-mid">
       <div class="card card-visual card-tall">
         <h3>BLUETOOTH</h3>
@@ -140,10 +136,8 @@
       </div>
     </div>
 
-    <!-- FLECHA 2 -->
     <div class="arrow">&rarr;</div>
 
-    <!-- COLUMNA 3: REPRODUCCIÓN -->
     <div class="col">
       <div class="card card-visual">
         <span class="card-sub" data-es="FLEXIÓN DE LOS DEDOS" data-en="FINGER FLEXION">FLEXIÓN DE LOS DEDOS</span>
@@ -170,7 +164,6 @@
     Evolución del diseño mecánico: desde la estructura base hasta la integración híbrida final. Selecciona un hito para explorar sus especificaciones.
   </p>
   
-  <!-- Tarjetas de selección superior con diseño minimalista -->
   <div class="mech">
     <button class="mc on" data-i="0">
       <span class="pillt" data-es="Fase 01" data-en="Phase 01">Fase 01</span>
@@ -194,7 +187,6 @@
     </button>
   </div>
 
-  <!-- Panel inferior interactivo tipo Ficha de Ingeniería -->
   <div class="mdet card engineering-card" id="mdet" aria-live="polite"></div>
 </section>
 
@@ -224,7 +216,6 @@
         El sensor contiene una resistencia interna que aumenta a medida que se dobla. En posición plana, su resistencia se encuentra dentro del rango de 17,5 kΩ a 32,5 kΩ. Al doblarlo al máximo (180°), su resistencia se duplica como mínimo respecto al valor inicial.
       </p>
 
-      <!-- Tabla resumida y compacta de especificaciones -->
       <div class="tbl" style="margin-top: 1rem;">
         <table style="font-size: 0.82rem;">
           <thead>
@@ -246,7 +237,6 @@
         </table>
       </div>
     </div>
-
     <figure class="card fig" style="margin: 0 auto;">
       <img class="zoom" src="img/flextension.png" alt="Flex sensor resistance when bent">
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
@@ -269,7 +259,7 @@
     <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisortension.png" alt="Voltage divider with the flex sensor"></figure>
   </div>
 
- <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose" style="margin-top: -2rem;">Qué resistencia fija elegir</h3>
+  <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose" style="margin-top: -2rem;">Qué resistencia fija elegir</h3>
   
   <div class="grid2" style="align-items: flex-start; margin-top: 1rem;">
     <div>
@@ -284,7 +274,7 @@
     </div>
   </div>
   
-<h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function" style="margin-top: 2.5rem;">Caracterización y conversión a ángulo: la función map()</h3>
+  <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function" style="margin-top: 2.5rem;">Caracterización y conversión a ángulo: la función map()</h3>
   
   <div class="grid2" style="align-items: flex-start; margin-top: 1rem;">
     <div>
@@ -306,13 +296,10 @@
     </div>
   </div>
 </section>
-  
-
 
 <section id="imu">
-  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. IMU MPU6050: wrist rotation" style="margin-top: -1.5rem;">06. IMU MPU6050: wrist rotation</h2>
+  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. IMU MPU6050: wrist rotation">06. IMU MPU6050: wrist rotation</h2>
   <div class="grid2 mid-al">
-    <!-- Columna Izquierda: Texto explicativo -->
     <div>
       <p class="lead" style="margin-bottom:.8rem" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes." data-en="Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.">
         La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes.
@@ -322,7 +309,6 @@
       </p>
     </div>
 
-    <!-- Columna Derecha: Imagen del módulo GY-521 -->
     <figure class="card fig" style="margin: 0 auto;">
       <img class="zoom" src="img/modulompu.png" alt="GY-521 module with MPU6050">
       <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C." data-en="GY-521 module with MPU6050, connected to the ESP32 over I2C.">
@@ -330,7 +316,6 @@
       </figcaption>
     </figure>
   </div>
-
 
   <div class="stepper card" id="imu-st">
     <div class="st-nav"><button data-es="1 Grados con el giroscopio">1 Degrees from the gyroscope</button><button data-es="2 La deriva">2 Drift</button><button data-es="3 Filtro complementario">3 Complementary filter</button><button data-es="4 El salto de 180°">4 The 180° jump</button><button data-es="5 Unwrapping">5 Unwrapping</button></div>
@@ -397,6 +382,8 @@
     <div class="tp on" data-p="g"><div class="stepper" id="pcb-g"></div></div>
     <div class="tp" data-p="b"><div class="stepper" id="pcb-b"></div></div>
   </div>
+</section>
+
 <section id="bluetooth">
   <h2 data-es="08. Comunicación y protocolo Bluetooth" data-en="08. Bluetooth communication and protocol">08. Comunicación y protocolo Bluetooth</h2>
   
@@ -404,7 +391,6 @@
     Los dos ESP32 establecen un enlace inalámbrico mediante Bluetooth clásico en perfil SPP (Serial Port Profile). Esta conexión serie transparente ofrece una latencia mínima y la velocidad justa para transmitir los datos de movimiento en tiempo real.
   </p>
 
-  <!-- Estructura mejorada para Cliente y Servidor -->
   <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 2rem 0;">
     <div class="card" style="margin: 0; height: 100%;">
       <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">Emisor</span>
@@ -488,10 +474,8 @@
   <p class="gnd mono" style="text-align: center; margin-top: 1.5rem;" data-es="GND común entre las tres partes del sistema" data-en="Common GND across the three system parts">GND común entre las tres partes del sistema</p>
 </section>
 
-  
-
 <section id="material">
-  <h2 data-es="10. Lista de materiales y presupuesto">09. Bill of materials and budget</h2>
+  <h2 data-es="10. Lista de materiales y presupuesto">10. Bill of materials and budget</h2>
   <p class="lead" data-es="Componentes y materiales utilizados en el proyecto. Se pueden buscar por nombre y los precios se pueden editar; el coste total se actualiza solo.">Components and materials used in the project. You can search them by name and edit the prices; the total cost updates by itself.</p>
   <div class="total"><span class="mono" data-es="Coste estimado del proyecto">Estimated project cost</span><b id="grand"></b></div>
   <div class="mat-bar">
