@@ -183,7 +183,7 @@ canvas{max-width:100%}
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 240px; /* <--- Una altura amplia pero controlada para que quepa en pantalla */
+  height: 200px; /* <--- Una altura amplia pero controlada para que quepa en pantalla */
   padding: 0.8rem;
   background: var(--card);
   border: 1px solid var(--line);
@@ -211,7 +211,7 @@ canvas{max-width:100%}
 /* Contenidor de la imagen adaptado a la nueva altura para que no se salga */
 .card-visual .card-img-wrap {
   width: 100%;
-  height: 130px; /* <--- Aumentado para que la foto crezca dentro de la tarjeta sin desbordarse */
+  height: 100px; /* <--- Aumentado para que la foto crezca dentro de la tarjeta sin desbordarse */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +228,7 @@ canvas{max-width:100%}
 /* Tarjeta central de Bluetooth adaptada exactamente a la altura de las dos laterales juntas */
 .card-tall {
   width: 100%;
-  height: 498px; /* <--- 240px + 240px + 18px de espacio (gap) para que cuadre perfecto */
+  height: 478px; /* <--- 240px + 240px + 18px de espacio (gap) para que cuadre perfecto */
   display: flex;
   flex-direction: column;
   justify-content: center;
