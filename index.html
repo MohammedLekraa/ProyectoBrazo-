@@ -252,24 +252,21 @@
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
     </figure>
   </div>
-  
-  <h3 data-es="De resistencia a tensión: el divisor de tensión" data-en="From resistance to voltage: the voltage divider" style="margin-top: 1.5rem;">De resistencia a tensión: el divisor de tensión</h3>
+  <h3 data-es="De resistencia a número: el divisor de tensión y el ADC" data-en="From resistance to number: voltage divider and ADC">De resistencia a número: el divisor de tensión y el ADC</h3>
   <div class="grid2 mid-al">
     <div>
-      <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor. The sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint." style="margin-bottom: 0.8rem;">
-        El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ. El sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central.
+      <p data-es="El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="The microcontroller measures voltages between 0 and 3.3 V, not resistances. So each sensor forms a voltage divider with a 47 kΩ fixed resistor (the sensor is on top and the fixed resistor at the bottom; the voltage is taken at the midpoint). When the finger bends, Rflex rises and Vout drops." style="margin-bottom: 0.8rem;">
+        El microcontrolador mide tensiones entre 0 y 3,3 V, no resistencias. Por eso cada sensor forma un divisor de tensión con una resistencia fija de 47 kΩ (el sensor va arriba y la resistencia fija abajo; la tensión se toma en el punto central). Cuando el dedo se pliega, Rflex sube y Vout baja.
       </p>
       <p class="eq" style="margin: 0.6rem 0;">Vout = Vin · Rfix / (Rfix + Rflex)</p>
-      <p data-es="Cuando el dedo se pliega, Rflex sube y Vout baja." data-en="When the finger bends, Rflex rises and Vout drops." style="margin-top: 0.8rem; margin-bottom: 0;">
-        Cuando el dedo se pliega, Rflex sube y Vout baja.
+      
+      <p data-es="A continuación, el conversor analógico-digital (ADC) de 12 bits del microcontrolador transforma dicha tensión en un valor numérico discreto entre 0 y 4095. Estos números digitales son los datos reales que el programa lee, procesa, transmite de forma inalámbrica y sobre los que trabaja el sistema para calcular el movimiento." data-en="Next, the microcontroller's 12-bit analog-to-digital converter (ADC) transforms that voltage into a discrete numerical value between 0 and 4095. These digital numbers are the actual data that the program reads, processes, transmits wirelessly, and works with to compute movement." style="margin-top: 1rem; margin-bottom: 0.8rem;">
+        A continuación, el conversor analógico-digital (ADC) de 12 bits del microcontrolador transforma dicha tensión en un valor numérico discreto entre 0 y 4095. Estos números digitales son los datos reales que el programa lee, procesa, transmite de forma inalámbrica y sobre los que trabaja el sistema para calcular el movimiento.
       </p>
+      <p class="eq" style="margin: 0.6rem 0;">ADC = Vout / 3.3 · 4095</p>
     </div>
-    <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisortension.png" alt="Voltage divider with the flex sensor"></figure>
+    <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider with the flex sensor"></figure>
   </div>
-
-  <h3 data-es="De tensión a número: el ADC">From voltage to number: the ADC</h3>
-  <p data-es="El ESP32 tiene un conversor analógico-digital (ADC) de 12 bits que transforma cada tensión entre 0 y 3,3 V en un número entre 0 y 4095. Ese número es el que lee el programa.">The ESP32 has a 12-bit analog-to-digital converter (ADC) that turns each voltage between 0 and 3.3 V into a number between 0 and 4095. That number is what the program reads.</p>
-  <p class="eq">ADC = Vout / 3.3 · 4095</p>
 
   <h3 data-es="Qué resistencia fija elegir">Which fixed resistor to choose</h3>
   <div class="grid2 mid-al">
