@@ -324,7 +324,7 @@
 
     <!-- Columna Derecha: Imagen del módulo GY-521 -->
     <figure class="card fig" style="margin: 0 auto;">
-      <img class="zoom" src="img/mpu.png" alt="GY-521 module with MPU6050">
+      <img class="zoom" src="img/modulompu.png" alt="GY-521 module with MPU6050">
       <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C." data-en="GY-521 module with MPU6050, connected to the ESP32 over I2C.">
         Módulo GY-521 con MPU6050, conectado al ESP32 por I2C.
       </figcaption>
@@ -378,28 +378,30 @@
 </section>
 
 <section id="pcb">
-  <h2 data-es="07. Diseño y fabricación de las placas">07. PCB design and fabrication</h2>
-  <p class="lead" data-es="Para organizar las conexiones se diseñaron y fabricaron dos placas de circuito impreso (PCB) a medida, una para el guante y otra para el brazo. El diseño se hizo con KiCad.">To organise the connections, two custom printed circuit boards (PCBs) were designed and built, one for the glove and one for the arm. The design was done with KiCad.</p>
-  <h3 data-es="Qué hace cada placa">What each board does</h3>
-  <div class="grid2">
-    <div class="card"><h4 data-es="PCB del guante: acondicionamiento de señales">Glove PCB: signal conditioning</h4><p data-es="Agrupa las conexiones de los cinco sensores de flexión y las cinco resistencias de 47 k de los divisores de tensión, que adaptan la resistencia variable del sensor a la entrada analógica de la Wemos. Lleva un conector por sensor y uno de nueve pines hacia la Wemos D1 R32, con dos pines de GND y dos de 3,3 V.">It groups the connections of the five flex sensors and the five 47 k resistors of the voltage dividers, which adapt the variable resistance of the sensor to the analog input of the Wemos. It has one connector per sensor and a nine-pin connector to the Wemos D1 R32, with two GND and two 3.3 V pins.</p></div>
-    <div class="card"><h4 data-es="PCB del brazo: interfaz de potencia">Arm PCB: power interface</h4><p data-es="Centraliza en un solo punto las conexiones de los seis servomotores con la Wemos. Los servos comparten alimentación y masa, y la señal PWM de cada uno va a una salida de la Wemos. Incluye un condensador de desacoplo en la línea de alimentación para absorber los picos de corriente de los servos.">It centralises in one place the connections of the six servomotors with the Wemos. The servos share power and ground, and each one's PWM signal goes to a Wemos output. It includes a decoupling capacitor on the supply line to absorb the current peaks of the servos.</p></div>
-  </div>
+  <h2 data-es="07. Diseño y fabricación de las placas" data-en="07. PCB design and fabrication">07. PCB design and fabrication</h2>
+  
+  <p class="lead" data-es="Para organizar el cableado se diseñaron dos PCB a medida en KiCad: una para el guante (acondicionamiento de señales y divisores de tensión) y otra para el brazo (interfaz de potencia y conexión de los servos)." data-en="To organise the wiring, two custom PCBs were designed in KiCad: one for the glove (signal conditioning and voltage dividers) and another for the arm (power interface and servo connection).">
+    Para organizar el cableado se diseñaron dos PCB a medida en KiCad: una para el guante (acondicionamiento de señales y divisores de tensión) y otra para el brazo (interfaz de potencia y conexión de los servos).
+  </p>
 
-  <h3 data-es="Del diseño a la placa soldada">From design to the soldered board</h3>
-  <p data-es="Cada placa pasó por el mismo proceso: se dibuja el esquema de conexiones, se pasa a KiCad, se trazan las pistas y, por último, se fabrica la placa y se sueldan los componentes a mano. Elige la placa y avanza paso a paso.">Each board went through the same process: the connection diagram is drawn, moved to KiCad, the tracks are routed and, finally, the board is made and the components are hand-soldered. Pick a board and go step by step.</p>
+  <h3 data-es="Del diseño a la placa soldada" data-en="From design to the soldered board">Del diseño a la placa soldada</h3>
+  <p data-es="Cada placa pasó por el mismo proceso: se dibuja el esquema de conexiones, se pasa a KiCad, se trazan las pistas y, por último, se fabrica la placa y se sueldan los componentes a mano. Elige la placa y avanza paso a paso." data-en="Each board went through the same process: the connection diagram is drawn, moved to KiCad, the tracks are routed and, finally, the board is made and the components are hand-soldered. Pick a board and go step by step.">
+    Cada placa pasó por el mismo proceso: se dibuja el esquema de conexiones, se pasa a KiCad, se trazan las pistas y, por último, se fabrica la placa y se sueldan los componentes a mano. Elige la placa y avanza paso a paso.
+  </p>
+  
   <div class="card" data-tabs>
-    <div class="tabs"><button class="tab on" data-k="g" data-es="PCB del guante">Glove PCB</button><button class="tab" data-k="b" data-es="PCB del brazo">Arm PCB</button></div>
+    <div class="tabs">
+      <button class="tab on" data-k="g" data-es="PCB del guante">Glove PCB</button>
+      <button class="tab" data-k="b" data-es="PCB del brazo">Arm PCB</button>
+    </div>
     <div class="tp on" data-p="g"><div class="stepper" id="pcb-g"></div></div>
     <div class="tp" data-p="b"><div class="stepper" id="pcb-b"></div></div>
   </div>
 
-  <h3 data-es="Problemas y mejoras">Problems and improvements</h3>
-  <div class="acc"><button class="acc-h" data-es="Pistas demasiado finas y plano de masa">Tracks too thin and the ground plane</button><div class="acc-b"><div><p data-es="En la primera versión algunas pistas eran demasiado finas y el plano de masa de la cara superior no se imprimió. Se hizo una segunda versión con pistas más anchas. El plano de masa también dificultó la soldadura: el cobre repartía el calor y el estaño, y costaba lograr un acabado limpio.">In the first version some tracks were too thin and the ground plane on the top face did not print. A second version was made with wider tracks. The ground plane also made soldering harder: the copper spread the heat and the tin, and a clean finish was difficult.</p></div></div></div>
-  <div class="acc"><button class="acc-h" data-es="Mejoras previstas">Planned improvements</button><div class="acc-b"><div><p data-es="Diseñar la placa para montarla desde una sola cara, con vías para pasar determinadas conexiones a la otra capa. En la PCB del brazo, lograr que las interferencias de los servos no afecten al microcontrolador permitiría usar una sola alimentación.">Design the board to be assembled from a single side, with vias to move some connections to the other layer. On the arm PCB, keeping the servo interference away from the microcontroller would allow a single power supply.</p></div></div></div>
 
   <h3 data-es="Alimentación del sistema">System power</h3>
   <p data-es="El sistema usa fuentes de alimentación separadas para el microcontrolador y para los actuadores, para evitar caídas de tensión e interferencias causadas por el alto consumo de los servomotores. En las primeras pruebas, al mover varios servos a la vez, la Wemos se reiniciaba. Las masas (GND) de todas las partes se mantienen conectadas, porque las señales PWM necesitan una referencia eléctrica común.">The system uses separate power supplies for the microcontroller and for the actuators, to avoid voltage drops and interference caused by the high consumption of the servomotors. In the first tests, when several servos moved at once, the Wemos restarted. The grounds (GND) of all parts stay connected, because the PWM signals need a common electrical reference.</p>
+  
   <div class="pow">
     <figure class="card fig"><img class="zoom" src="img/alim-guant.jpg" alt="Photo pending: glove power (img/alim-guant.jpg)"><figcaption data-es="<b>Placa del guante</b><br>Pila recargable de Li-ion de 5500 mAh, como fuente de 9 V."><b>Glove board</b><br>5500 mAh rechargeable Li-ion battery, as a 9 V source.</figcaption></figure>
     <figure class="card fig"><img class="zoom" src="img/alim-brac.jpg" alt="Photo pending: arm board power (img/alim-brac.jpg)"><figcaption data-es="<b>Placa del brazo</b><br>Dos pilas Li-ion 18650 de 3,2 V en serie, unos 6,4 V nominales."><b>Arm board</b><br>Two 3.2 V 18650 Li-ion cells in series, about 6.4 V nominal.</figcaption></figure>
