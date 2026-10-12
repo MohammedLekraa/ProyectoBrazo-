@@ -248,7 +248,7 @@
     </div>
 
     <figure class="card fig" style="margin: 0 auto;">
-      <img class="zoom" src="img/feextension.png" alt="Flex sensor resistance when bent">
+      <img class="zoom" src="img/fleextension.png" alt="Flex sensor resistance when bent">
       <figcaption class="mono" data-es="Comportamiento de la resistencia según la flexión." data-en="Resistance behavior according to bend.">Comportamiento de la resistencia según la flexión.</figcaption>
     </figure>
   </div>
@@ -270,7 +270,7 @@
   </div>
 
   <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
-  <div class="grid2 mid-al" style="margin-top: -0.1rem;">
+  <div class="grid2 mid-al">
     <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
       Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
     </p>
@@ -279,7 +279,7 @@
   
   <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
   
-  <div class="grid2 mid-al" style="margin-top: 1.5rem;">
+  <div class="grid2 mid-al" style="margin-top: -1.5rem;">
     <div>
       <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
         Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
@@ -300,15 +300,32 @@
 </section>
   
 
+
+
 <section id="imu">
-  <h2 data-es="06. IMU MPU6050: rotación de la muñeca">06. MPU6050 IMU: wrist rotation</h2>
+  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. MPU6050 IMU: wrist rotation">06. MPU6050 IMU: wrist rotation</h2>
+  
   <div class="grid2 mid-al">
-    <figure class="card fig"><img class="zoom" src="img/imu.jpg" alt="GY-521 module with MPU6050"><figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C.">GY-521 module with MPU6050, connected to the ESP32 over I2C.</figcaption></figure>
+    <!-- Columna Izquierda: Texto explicativo -->
     <div>
-      <p class="lead" style="margin-bottom:.8rem" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes.">Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.</p>
-      <p data-es="El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones.">The path to a reliable angle had five stages. Follow them one by one with the buttons.</p>
+      <p class="lead" style="margin-bottom:.8rem" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes." data-en="Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.">
+        La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes.
+      </p>
+      <p data-es="El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones." data-en="The path to a reliable angle had five stages. Follow them one by one with the buttons.">
+        El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones.
+      </p>
     </div>
+
+    <!-- Columna Derecha: Imagen del módulo GY-521 -->
+    <figure class="card fig" style="margin: 0 auto;">
+      <img class="zoom" src="img/imu.jpg" alt="GY-521 module with MPU6050">
+      <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C." data-en="GY-521 module with MPU6050, connected to the ESP32 over I2C.">
+        Módulo GY-521 con MPU6050, conectado al ESP32 por I2C.
+      </figcaption>
+    </figure>
   </div>
+
+
   <div class="stepper card" id="imu-st">
     <div class="st-nav"><button data-es="1 Grados con el giroscopio">1 Degrees from the gyroscope</button><button data-es="2 La deriva">2 Drift</button><button data-es="3 Filtro complementario">3 Complementary filter</button><button data-es="4 El salto de 180°">4 The 180° jump</button><button data-es="5 Unwrapping">5 Unwrapping</button></div>
     <div class="st-bar"><i></i></div>
