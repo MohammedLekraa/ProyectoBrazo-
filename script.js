@@ -153,10 +153,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   /* Guante con flechas */
+ /* Guante con flechas corregido y bien posicionado */
   const CO = [
-    { k: 'flex', b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 63, y: 2, w: 35, d: 'M815 98 C850 140 825 180 790 212' },
-    { k: 'imu', b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 40, y: 83, w: 33, d: 'M590 428 C530 380 560 320 580 262' },
-    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 2, y: 83, w: 33, d: 'M190 428 C190 395 225 360 262 336' }
+    { k: 'caixa', b: ['Electronics box', 'Caja de electrónica'], t: ['Microcontroller, battery and PCB.', 'Microcontrolador, pila y PCB.'], x: 2, y: 83, w: 33, d: 'M190 428 C210 390 240 370 270 340' },
+    { k: 'imu', b: ['MPU6050 IMU', 'IMU MPU6050'], t: ['Measures the wrist rotation.', 'Mide la rotación de la muñeca.'], x: 38, y: 83, w: 33, d: 'M590 428 C530 380 560 320 580 262' },
+    { k: 'flex', b: ['Flex sensors', 'Sensores de flexión'], t: ['Measure how much each finger bends.', 'Miden el grado de flexión de los dedos.'], x: 63, y: 2, w: 35, d: 'M815 98 C750 140 680 160 600 200' }
   ];
   const g = $('#glove');
   g.insertAdjacentHTML('beforeend', `<svg viewBox="0 0 1000 520" aria-hidden="true"><defs><marker id="ah" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L12,6 L0,12 z" fill="#a8a49a"/></marker></defs>${CO.map(c => `<path data-k="${c.k}" d="${c.d}" marker-end="url(#ah)"/>`).join('')}</svg>`);
