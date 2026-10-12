@@ -266,11 +266,11 @@
       </p>
       <p class="eq" style="margin: 0.6rem 0;">ADC = Vout / 3.3 &middot; 4095</p>
     </div>
-    <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisor.jpg" alt="Voltage divider with the flex sensor"></figure>
+    <figure class="card fig" style="margin: 0 auto;"><img class="zoom" src="img/divisor.png" alt="Voltage divider with the flex sensor"></figure>
   </div>
 
   <h3 data-es="Qué resistencia fija elegir" data-en="Which fixed resistor to choose">Qué resistencia fija elegir</h3>
-  <div class="grid2 mid-al">
+  <div class="grid2 mid-al" style="margin-top: 1.5rem;">
     <p data-es="Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ." data-en="At first a 10 kΩ resistor was used. It worked, but the signal covered a small range: 150 to 460 ADC units, a variation of about 310 points. SparkFun recommends 47 kΩ for these sensors. With that value the reading goes from about 1600 to 2300, a variation of about 700 points. A wider range tells small changes apart better and gives smoother servo control, so 47 kΩ was chosen.">
       Primero se usó una resistencia de 10 kΩ. Funcionaba, pero la señal ocupaba un rango pequeño: entre 150 y 460 unidades del ADC, una variación de unos 310 puntos. SparkFun recomienda 47 kΩ para estos sensores. Con ese valor la lectura va de unas 1600 a 2300, una variación de unos 700 puntos. Un rango mayor distingue mejor los cambios pequeños y da un control más progresivo del servo, por eso se eligió 47 kΩ.
     </p>
@@ -279,7 +279,7 @@
   
   <h3 data-es="Caracterización y conversión a ángulo: la función map()" data-en="Characterisation & angle mapping: the map() function">Caracterización y conversión a ángulo: la función map()</h3>
   
-  <div class="grid2 mid-al" style="margin-top: -1.5rem;">
+  <div class="grid2 mid-al" style="margin-top: 1.5rem;">
     <div>
       <p data-es="Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600)." data-en="To understand sensor behavior, each one was characterised by fixing the finger at various angles (0°, 45°, 90°, 135° and 180°) and recording the ADC reading. With the sensor completely flat and extended, the ADC readings are around maximum values (close to 2300), while bending it to the maximum reduces them down to the minimum range (around 1600).">
         Para entender el comportamiento de los sensores, cada uno se caracterizó fijando el dedo a distintos ángulos (0°, 45°, 90°, 135° y 180°) y registrando la lectura del conversor analógico-digital (ADC). Con el sensor completamente plano y estirado, las lecturas del ADC se sitúan alrededor de los valores máximos (cerca de 2300), mientras que al doblarlo al máximo se reducen hasta el rango mínimo (alrededor de 1600).
