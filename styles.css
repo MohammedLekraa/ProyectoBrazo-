@@ -384,18 +384,34 @@ body,.nav,.card,.main section,.tbl,.mc{transition:background-color .35s,color .3
   justify-items: center;
 }
 
-/* Añade una línea separadora automática a cada subapartado (h3) a partir del segundo en #flex */
-#flex h3:not(:first-of-type) {
-  margin-top: 2.5rem;
-  padding-top: 1.8rem;
-  border-top: 1px solid var(--line);
+/* Flex Sensors: separar subapartados sin crear grandes huecos */
+#flex .flex-subsection {
+  position: relative;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
 }
 
-/* Opcional: si prefieres una línea discontinua (tipo guiones) más sutil */
-/*
-#flex h3:not(:first-of-type) {
-  margin-top: 2.5rem;
-  padding-top: 1.8rem;
-  border-top: 1px dashed var(--line);
+#flex .flex-subsection + .flex-subsection {
+  margin-top: 1.25rem;
 }
-*/
+
+#flex .flex-subsection h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 0.85rem;
+  border-left: 3px solid var(--chart);
+}
+
+#flex .flex-subsection p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  #flex .flex-subsection {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+}
