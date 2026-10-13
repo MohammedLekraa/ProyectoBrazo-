@@ -265,21 +265,32 @@
   </div>
 </section>
 
+  
 <section id="imu">
-  <h2 data-es="06. IMU MPU6050: rotación de la muñeca">06. IMU MPU6050: wrist rotation</h2>
-  <div class="grid2 mid-al">
+  <h2 data-es="06. IMU MPU6050: rotación de la muñeca" data-en="06. IMU MPU6050: wrist rotation">06. IMU MPU6050: wrist rotation</h2>
+  
+  <div class="grid2 mid-al" style="align-items: center; margin-bottom: 1.5rem;">
+    <!-- Columna Izquierda: Explicación mejorada -->
     <div>
-      <p class="lead" data-es="La rotación de la muñeca se mide con una IMU, que combina un giroscopio y un acelerómetro de tres ejes.">
-        Wrist rotation is measured with an IMU, which combines a three-axis gyroscope and accelerometer.
+      <p class="lead" data-es="La rotación de la muñeca se mide con una IMU MPU6050, un sensor que combina un giroscopio de 3 ejes y un acelerómetro de 3 ejes." data-en="Wrist rotation is measured with an MPU6050 IMU, a sensor combining a 3-axis gyroscope and a 3-axis accelerometer.">
+        La rotación de la muñeca se mide con una IMU MPU6050, un sensor que combina un giroscopio de 3 ejes y un acelerómetro de 3 ejes.
       </p>
-      <p data-es="El camino hasta un ángulo fiable tuvo cinco etapas. Síguelas una a una con los botones.">
-        The path to a reliable angle had five stages. Follow them one by one with the buttons.
+      <p data-es="Obtener una lectura estable y sin saltos requirió superar varios desafíos técnicos. El camino completo se divide en cinco etapas interactivas que puedes explorar paso a paso:" data-en="Obtaining a stable, jump-free reading required overcoming several technical challenges. The complete path is divided into five interactive stages that you can explore step by step:">
+        Obtener una lectura estable y sin saltos requirió superar varios desafíos técnicos. El camino completo se divide en cinco etapas interactivas que puedes explorar paso a paso:
       </p>
+      
+      <!-- Pequeños puntos clave para rellenar visualmente el espacio -->
+      <ul style="list-style: none; padding: 0; margin-top: 0.8rem; font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.4rem;">
+        <li><span style="font-family: var(--mono); color: var(--ink); font-weight: 600;">// Interfaz I2C:</span> Comunicación rápida y directa con el ESP32.</li>
+        <li><span style="font-family: var(--mono); color: var(--ink); font-weight: 600;">// Fusión de datos:</span> Combinación de giroscopio y acelerómetro mediante filtros.</li>
+      </ul>
     </div>
+
+    <!-- Columna Derecha: Imagen del módulo GY-521 -->
     <figure class="card fig" style="margin: 0 auto;">
       <img class="zoom" src="img/modulompu.png" alt="GY-521 module with MPU6050">
-      <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C.">
-        GY-521 module with MPU6050, connected to the ESP32 over I2C.
+      <figcaption class="mono" data-es="Módulo GY-521 con MPU6050, conectado al ESP32 por I2C." data-en="GY-521 module with MPU6050, connected to the ESP32 over I2C.">
+        Módulo GY-521 con MPU6050, conectado al ESP32 por I2C.
       </figcaption>
     </figure>
   </div>
