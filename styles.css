@@ -384,13 +384,14 @@ body,.nav,.card,.main section,.tbl,.mc{transition:background-color .35s,color .3
   justify-items: center;
 }
 
-#flex h3:not(:first-of-type) {
+#flex h3 {
   margin-top: 2.8rem;
   padding-bottom: 0.6rem;
   border: none;
   position: relative;
 }
-#flex h3:not(:first-of-type)::after {
+
+#flex h3::after {
   content: "";
   position: absolute;
   bottom: 0;
