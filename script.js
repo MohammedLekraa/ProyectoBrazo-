@@ -198,32 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     adc.addEventListener('input', calc); calc();
   }
 
-  const FN = [
-    ['thumb (flex1)', 'pulgar', 'Dedo pulgar: Mide la flexión del dedo pulgar mediante un divisor de tensión.'],
-    ['index finger (flex2)', 'índice', 'Dedo índice: Controla el movimiento de flexión del dedo índice.'],
-    ['middle finger (flex3)', 'corazón', 'Dedo corazón: Registra la flexión del dedo central.'],
-    ['ring finger (flex4)', 'anular', 'Dedo anular: Captura el desplazamiento del dedo anular.'],
-    ['little finger (flex5)', 'meñique', 'Dedo meñique: Monitorea la flexión del dedo meñique.']
-  ];
-  const frame = $('#frame'); let fi = 0;
-  frame.innerHTML = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((f, i) => `<button data-i="${i}">&lt;${f}&gt;</button>`).join('');
-  const showF = i => {
-    fi = i;
-    $$('button', frame).forEach((b, j) => b.classList.toggle('on', j === i));
-    const tokens = ['flex1', 'flex2', 'flex3', 'flex4', 'flex5', 'angle roll'].map((tok, idx) =>
-      idx === i ? `<strong style="color: var(--ink); text-decoration: underline;">&lt;${tok}&gt;</strong>` : `&lt;${tok}&gt;`
-    ).join(' ');
-    $('#fdet').innerHTML = i < 5
-      ? (lang === 'es'
-          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div><h4>${FN[i][2].split(':')[0]}</h4><p style="margin:0; font-size: 0.9rem;">${FN[i][2].split(':')[1]}</p>`
-          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div><h4>${FN[i][0][0].toUpperCase() + FN[i][0].slice(1)}</h4><p style="margin:0; font-size: 0.9rem;">ADC reading of the finger sensor, filtered and mapped to servo angle.</p>`)
-      : (lang === 'es'
-          ? `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Trama: ${tokens}</div><h4>Rotación de la muñeca (Angle Roll)</h4><p style="margin:0; font-size: 0.9rem;">Ángulo de la muñeca obtenido mediante la IMU filtrada y corregida (0–180°).</p>`
-          : `<div style="font-family: var(--mono); font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--mute);">Frame: ${tokens}</div><h4>Wrist rotation</h4><p style="margin:0; font-size: 0.9rem;">Filtered and unwrapped IMU wrist angle scaled to servo range (0–180°).</p>`);
-  };
-  $$('button', frame).forEach((b, i) => b.addEventListener('click', () => showF(i)));
-  showF(0);
-
   const CAT = { el: ['Electronics', 'Electrónica'], ac: ['Actuation', 'Actuación'], pw: ['Power', 'Alimentación'], fa: ['Fabrication', 'Fabricación'] };
   const parts = [
     [['Wemos D1 R32 (ESP32)'], 'el', 2, 10.5], [['MPU6050 (GY-521)'], 'el', 1, 3.5], [['Flex sensor FS-L-0055-253-ST', 'Sensor de flexión FS-L-0055-253-ST'], 'el', 5, 14],
