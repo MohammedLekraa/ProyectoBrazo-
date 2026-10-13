@@ -384,34 +384,19 @@ body,.nav,.card,.main section,.tbl,.mc{transition:background-color .35s,color .3
   justify-items: center;
 }
 
-/* Flex Sensors: separar subapartados sin crear grandes huecos */
-#flex .flex-subsection {
+#flex h3:not(:first-of-type) {
+  margin-top: 2.8rem;
+  padding-top: 1rem;
   position: relative;
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--card);
+  border: none;
 }
-
-#flex .flex-subsection + .flex-subsection {
-  margin-top: 1.25rem;
-}
-
-#flex .flex-subsection h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding-left: 0.85rem;
-  border-left: 3px solid var(--chart);
-}
-
-#flex .flex-subsection p:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 640px) {
-  #flex .flex-subsection {
-    padding: 1rem;
-    margin-top: 1rem;
-  }
+#flex h3:not(:first-of-type)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--ink);
+  border-radius: 99px;
 }
