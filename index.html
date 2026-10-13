@@ -45,7 +45,7 @@
   </div>
   <a class="scrollhint" href="#start"><span data-es="Desliza para más información">Scroll for more info</span><b class="sh-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></b></a>
 </header>
-
+  
 <div class="layout" id="start">
 <aside class="side">
   <nav class="side-in" aria-label="Index">
@@ -57,9 +57,8 @@
     <a href="#flex"><i>05</i><span data-es="Sensor de flexión: flexión-extensión de los dedos">Flex sensor: finger flexion-extension</span></a>
     <a href="#imu"><i>06</i><span data-es="IMU MPU6050: rotación de la muñeca">MPU6050 IMU: wrist rotation</span></a>
     <a href="#pcb"><i>07</i><span data-es="Diseño y fabricación de las placas">PCB design and fabrication</span></a>
-    <a href="#bluetooth"><i>08</i><span data-es="Comunicación y protocolo Bluetooth">Bluetooth communication and protocol</span></a>
-    <a href="#alimentacio"><i>09</i><span data-es="Alimentación del sistema">System power supply</span></a>
-    <a href="#material"><i>10</i><span data-es="Lista de materiales y presupuesto">Bill of materials and budget</span></a>
+    <a href="#alimentacio"><i>08</i><span data-es="Alimentación del sistema">System power supply</span></a>
+    <a href="#material"><i>09</i><span data-es="Lista de materiales y presupuesto">Bill of materials and budget</span></a>
   </nav>
 </aside>
 
@@ -351,45 +350,8 @@
   </div>
 </section>
 
-<section id="bluetooth">
-  <h2 data-es="08. Comunicación y protocolo Bluetooth">08. Bluetooth communication and protocol</h2>
-  <p class="lead" data-es="Los dos ESP32 establecen un enlace inalámbrico mediante Bluetooth clásico en perfil SPP (Serial Port Profile). Esta conexión serie transparente ofrece una latencia mínima y la velocidad justa para transmitir los datos de movimiento en tiempo real.">
-    The two ESP32 boards establish a wireless link using classic Bluetooth in SPP (Serial Port Profile) mode. This transparent serial connection provides minimal latency and the right speed to stream motion data in real time.
-  </p>
-
-  <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; align-items: center; margin: 2rem 0;">
-    <div class="card" style="margin: 0; height: 100%;">
-      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;" data-es="Emisor">Sender</span>
-      <h4 data-es="ESP32 del guante (Cliente)" style="margin-top: 0.3rem;">Glove ESP32 (Client)</h4>
-      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Lee periódicamente los sensores analógicos, empaqueta la trama de datos y la envía de forma inalámbrica conectándose a la MAC del servidor.">
-        Periodically reads the analog sensors, packs the data frame and sends it wirelessly by connecting to the server MAC.
-      </p>
-    </div>
-    <div style="text-align: center; color: var(--mute); font-weight: bold; font-size: 1.5rem;" aria-hidden="true">&leftrightarrow;</div>
-    <div class="card" style="margin: 0; height: 100%;">
-      <span class="mono" style="color: var(--mute); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;" data-es="Receptor">Receiver</span>
-      <h4 data-es="ESP32 del brazo (Servidor)" style="margin-top: 0.3rem;">Arm ESP32 (Server)</h4>
-      <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-es="Permanece a la escucha, acepta la conexión, recibe la trama de texto entrante, la desglosa y mueve los servos con suavidad.">
-        Listens for connections, accepts them, receives the incoming text frame, parses it and smoothly moves the servos.
-      </p>
-    </div>
-  </div>
-
-  <h3 data-es="Estructura de la trama de datos">Data frame structure</h3>
-  <p data-es="El guante transmite una línea de texto cada 100 ms (10 Hz), evitando saturar el canal y reduciendo pérdidas. Cada trama contiene seis valores separados por espacios y termina con un salto de línea. Haz clic en cada valor para ver su significado:">
-    The glove transmits a text line every 100 ms (10 Hz), avoiding channel saturation and reducing loss. Each frame contains six space-separated values and ends with a newline. Click each value to see its meaning:
-  </p>
-
-  <div class="frame" id="frame"></div>
-  <div class="card" id="fdet" aria-live="polite" style="margin-top: 1rem;"></div>
-
-  <p style="margin-top: 1.2rem;" data-es="Este formato de texto plano simplifica enormemente la depuración con el monitor serie de Arduino y aporta gran robustez: si una línea llega incompleta o con errores, se descarta al instante sin afectar al movimiento del brazo.">
-    This plain text format greatly simplifies debugging with the Arduino serial monitor and provides high robustness: if a line arrives incomplete or with errors, it is instantly discarded without affecting arm movement.
-  </p>
-</section>
-
 <section id="alimentacio">
-  <h2 data-es="09. Alimentación del sistema">09. System power supply</h2>
+  <h2 data-es="08. Alimentación del sistema">08. System power supply</h2>
   <p class="lead" data-es="El diseño eléctrico emplea fuentes de alimentación independientes para el microcontrolador y los actuadores, evitando caídas de tensión y reinicios en el ESP32 causados por los picos de consumo de los servomotores.">
     The electrical design uses independent power supplies for the microcontroller and actuators, preventing voltage drops and ESP32 reboots caused by servo current peaks.
   </p>
@@ -431,7 +393,7 @@
 </section>
 
 <section id="material">
-  <h2 data-es="10. Lista de materiales y presupuesto">10. Bill of materials and budget</h2>
+  <h2 data-es="09. Lista de materiales y presupuesto">09. Bill of materials and budget</h2>
   <p class="lead" data-es="Componentes y materiales utilizados en el proyecto. Se pueden buscar por nombre y los precios se pueden editar; el coste total se actualiza solo.">Components and materials used in the project. You can search them by name and edit the prices; the total cost updates by itself.</p>
   <div class="total"><span class="mono" data-es="Coste estimado del proyecto">Estimated project cost</span><b id="grand"></b></div>
   <div class="mat-bar">
