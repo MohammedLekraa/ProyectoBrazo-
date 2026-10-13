@@ -368,3 +368,34 @@ body,.nav,.card,.main section,.tbl,.mc{transition:background-color .35s,color .3
 
 /* El h3 queda pegado también a su contenido */
 #flex > h3 + .grid2{margin-top:.6rem}
+
+
+/* Centrar todas las figuras y gráficas dentro del stepper de la IMU */
+#imu-st .fig {
+  margin: 1rem auto !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Asegurar que el contenedor de 3 columnas del paso 1 también centre su contenido */
+#imu-st .gal {
+  justify-items: center;
+}
+
+/* Añade una línea separadora automática a cada subapartado (h3) a partir del segundo en #flex */
+#flex h3:not(:first-of-type) {
+  margin-top: 2.5rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+}
+
+/* Opcional: si prefieres una línea discontinua (tipo guiones) más sutil */
+/*
+#flex h3:not(:first-of-type) {
+  margin-top: 2.5rem;
+  padding-top: 1.8rem;
+  border-top: 1px dashed var(--line);
+}
+*/
