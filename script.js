@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.l === l)); $('.seg').dataset.l = l;
     $$('[data-es]').forEach(e => { if (e.dataset.en === undefined) e.dataset.en = e.innerHTML; e.innerHTML = l === 'es' ? e.dataset.es : e.dataset.en; });
     $('#q').placeholder = T(UI.search); setTL(theme);
-    renderPCB(); showMech(mi); labelCO(); showF(fi); renderParts(); buildCharts();
+    renderPCB(); showMech(mi); labelCO(); renderParts(); buildCharts();
   };
   const applyTheme = t => { theme = t; store.set('theme', t); document.documentElement.dataset.theme = t; setTL(t); buildCharts(); };
   $$('.seg button').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.l)));
